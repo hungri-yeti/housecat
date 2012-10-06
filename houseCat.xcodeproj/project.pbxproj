@@ -24,6 +24,8 @@
 		3BAF8BB6161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
 		3BAF8BBE161E8D5900B23848 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BBC161E8D5900B23848 /* InfoPlist.strings */; };
 		3BAF8BC1161E8D5900B23848 /* houseCatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BC0161E8D5900B23848 /* houseCatTests.m */; };
+		3BAF8BCC161E8D8800B23848 /* MIRRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */; };
+		3BAF8BCF161EA32800B23848 /* MIRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		3BAF8BBD161E8D5900B23848 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3BAF8BBF161E8D5900B23848 /* houseCatTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = houseCatTests.h; sourceTree = "<group>"; };
 		3BAF8BC0161E8D5900B23848 /* houseCatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = houseCatTests.m; sourceTree = "<group>"; };
+		3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRRoomsViewController.h; sourceTree = "<group>"; };
+		3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRRoomsViewController.m; sourceTree = "<group>"; };
+		3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRItemsViewController.h; sourceTree = "<group>"; };
+		3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,10 @@
 			children = (
 				3BAF8B9B161E8D5900B23848 /* MIRAppDelegate.h */,
 				3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */,
+				3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */,
+				3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */,
+				3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */,
+				3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */,
 				3BAF8BA4161E8D5900B23848 /* MainStoryboard_iPhone.storyboard */,
 				3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */,
 				3BAF8BAA161E8D5900B23848 /* MIRViewController.h */,
@@ -278,6 +288,8 @@
 				3BAF8B99161E8D5900B23848 /* main.m in Sources */,
 				3BAF8B9D161E8D5900B23848 /* MIRAppDelegate.m in Sources */,
 				3BAF8BAC161E8D5900B23848 /* MIRViewController.m in Sources */,
+				3BAF8BCC161E8D8800B23848 /* MIRRoomsViewController.m in Sources */,
+				3BAF8BCF161EA32800B23848 /* MIRItemsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
