@@ -7,11 +7,15 @@
 //
 
 #import "MIRRoomsViewController.h"
+// for segue:
+#import "MIRitemsViewController.h"
 
 @interface MIRRoomsViewController ()
 {
-   NSArray *rooms;
+   NSArray *roomsItems;
+   NSMutableArray *rooms;
 }
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 
 @end
 
@@ -29,17 +33,33 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-   rooms = [NSArray arrayWithObjects:
-            @"living room",
-            @"family room",
-            @"master bedroom",
-            @"bedroom #2",
-            @"kitchen",
-            @"office",
-            @"basement",
-            @"garage",
-            @"car",
-            nil];
+   
+   // TODO: implement CoreData model
+   // placeholder array until coredata model implemented
+   roomsItems = [NSArray arrayWithObjects:
+                 [NSArray arrayWithObjects: @"living room",@"item1",@"item2",@"item3",@"item4",nil],
+                 [NSArray arrayWithObjects: @"family room",@"item5",@"item6",@"item7",@"item8",@"item9",nil],
+                 [NSArray arrayWithObjects: @"master bedroom",@"item10",@"item11",nil],
+                 [NSArray arrayWithObjects: @"bedroom #2",@"item15",@"item16",@"item17",nil],
+                 [NSArray arrayWithObjects: @"kitchen",@"item20",@"item21",@"item22",@"item23",nil],
+                 [NSArray arrayWithObjects: @"office",@"item25",@"item26",@"item27",@"item28",@"item29",nil],
+                 [NSArray arrayWithObjects: @"basement",@"item30",@"item31",@"item32",@"item33",@"item34",nil],
+                 [NSArray arrayWithObjects: @"garage",@"item35",@"item36",@"item37",@"item38",@"item39",@"item40",@"item41",@"item42",@"item43",@"item44",@"item45",@"item46",@"item47",@"item48",@"item49",nil],
+                 [NSArray arrayWithObjects: @"car",@"item50",@"item51",nil],
+                 nil];
+   
+   // load the room names into an array:
+   NSMutableArray *table = [[NSMutableArray alloc] init];
+   rooms = table;
+//   for(NSString *roomName in roomsItems)
+//   {
+//      [rooms addObject:roomName];
+//   }
+   for (int i = 0; i < [roomsItems count]; i++)
+   {
+      [rooms addObject:roomsItems[i][0]];
+      // NSLog(@"roomsItems[i][0]: %@", roomsItems[i][0]);
+   }
 
 
    // Uncomment the following line to preserve selection between presentations.
@@ -54,6 +74,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - Segue
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+   NSUInteger row = [indexPath row];
+   
+   NSLog(@"prepareForSegue: %@, row: %u", segue.identifier, row );
+
+   if ([segue.identifier isEqualToString:@"roomsToItems"])
+   {
+      // extract all of the selected room's items into an array that
+      // will be passed to the Items view controller:
+      NSMutableArray *roomItems = [[NSMutableArray alloc] init];
+      NSRange theRange;
+      
+      theRange.location = 1;
+      theRange.length = [roomsItems[row] count]-1;
+      [roomItems addObjectsFromArray:[roomsItems[row] subarrayWithRange:theRange]];
+
+      MIRItemsViewController *itemsViewController = [segue destinationViewController];
+      itemsViewController.items = roomItems;
+   }
+}
+
 
 #pragma mark - Table view data source
 
@@ -128,13 +174,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+//   NSUInteger row = [indexPath row];
+//   NSLog(@"didSelectRowAtIndexPath: row: %u", row );
+   
+   // Navigation logic may go here. Create and push another view controller.
+   /*
+   ￼ *detailViewController = [[￼ alloc] initWithNibName:@"￼" bundle:nil];
+   // ...
+   // Pass the selected object to the new view controller.
+   [self.navigationController pushViewController:detailViewController animated:YES];
+   */
+}
+
+
+-(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+   // Do something here
 }
 
 @end
+
+
+
+

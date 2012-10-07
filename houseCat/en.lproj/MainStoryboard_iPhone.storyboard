@@ -13,17 +13,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roomsCell" id="K5J-2W-8Og">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roomsCell" id="K5J-2W-8Og">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="KJY-oH-eDV" kind="push" identifier="pushSelection" id="nm0-fG-c1B"/>
-                                    <segue destination="KJY-oH-eDV" kind="push" identifier="pushAccessory" trigger="accessoryAction" id="eeI-wO-HaL"/>
+                                    <segue destination="KJY-oH-eDV" kind="push" identifier="roomsToItems" id="nm0-fG-c1B"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,18 +52,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="di4-ZJ-xI0">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="di4-ZJ-xI0">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="OtP-iz-ePn" kind="push" id="SYp-Ne-SeU"/>
-                                    <segue destination="OtP-iz-ePn" kind="push" trigger="accessoryAction" id="069-Ec-FA7"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -73,10 +68,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="tHT-vn-cR0"/>
+                    <connections>
+                        <segue destination="OtP-iz-ePn" kind="push" identifier="itemsToDetail" id="2lb-hB-SBp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Cp-2Z-d0R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014" y="130"/>
+            <point key="canvasLocation" x="1044" y="50"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="3Du-sY-dGz">
@@ -204,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO9-5H-lRg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1482" y="130"/>
+            <point key="canvasLocation" x="1530" y="50"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="lZ1-tx-EvK">
@@ -307,8 +305,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="eeI-wO-HaL"/>
-        <segue reference="SYp-Ne-SeU"/>
-    </inferredMetricsTieBreakers>
 </document>

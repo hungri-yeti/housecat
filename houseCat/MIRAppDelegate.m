@@ -9,11 +9,15 @@
 #import "MIRAppDelegate.h"
 
 @implementation MIRAppDelegate
+{
+   NSArray *roomsItems;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    return YES;
+   // Override point for customization after application launch.
+   
+   return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
