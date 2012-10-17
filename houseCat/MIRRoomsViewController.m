@@ -51,10 +51,6 @@
    // load the room names into an array:
    NSMutableArray *table = [[NSMutableArray alloc] init];
    rooms = table;
-//   for(NSString *roomName in roomsItems)
-//   {
-//      [rooms addObject:roomName];
-//   }
    for (int i = 0; i < [roomsItems count]; i++)
    {
       [rooms addObject:roomsItems[i][0]];

@@ -8,7 +8,9 @@
 @implementation CoreDataHelper
  
 #pragma mark - Retrieve objects
- 
+
+
+// TODO: probably need to add 'sortOrder' attr to Rooms & Items table (unique unsigned int that specifies the list order)
 // Fetch objects with a predicate
 +(NSMutableArray *)searchObjectsForEntity:(NSString*)entityName withPredicate:(NSPredicate *)predicate andSortKey:(NSString*)sortKey andSortAscending:(BOOL)sortAscending andContext:(NSManagedObjectContext *)managedObjectContext
 {
