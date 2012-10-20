@@ -34,7 +34,7 @@
                     <navigationItem key="navigationItem" title="Rooms" id="584-cg-cAo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bBt-nR-fbg">
                             <connections>
-                                <segue destination="qhe-Ta-4pV" kind="modal" id="aYc-1G-9ql"/>
+                                <segue destination="qhe-Ta-4pV" kind="modal" identifier="addRoomName" id="aYc-1G-9ql"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -204,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="1530" y="50"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Room View Controller-->
         <scene sceneID="lZ1-tx-EvK">
             <objects>
-                <viewController id="rW4-s0-5so" sceneMemberID="viewController">
+                <viewController id="rW4-s0-5so" customClass="MIRAddRoomViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qrR-BJ-d8m">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -219,7 +219,11 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rKr-xP-xRN">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="endEditing:" destination="rW4-s0-5so" eventType="editingDidEndOnExit" id="V0X-T2-OEe"/>
+                                    <outlet property="delegate" destination="qrR-BJ-d8m" id="dww-tc-s3C"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -232,9 +236,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wYY-wp-rVs">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4OY-89-CDw"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="t1E-SV-cCY"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4OY-89-CDw">
+                            <connections>
+                                <action selector="cancel:" destination="rW4-s0-5so" id="czQ-Tr-fAl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="t1E-SV-cCY">
+                            <connections>
+                                <action selector="save:" destination="rW4-s0-5so" id="o4M-QT-q5I"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="roomNameField" destination="rKr-xP-xRN" id="gcO-ke-akc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtT-DU-P18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -278,6 +293,15 @@
         </scene>
     </scenes>
     <classes>
+        <class className="MIRAddRoomViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRAddRoomViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="endEditing:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="roomNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="MIRItemsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsViewController.h"/>
         </class>

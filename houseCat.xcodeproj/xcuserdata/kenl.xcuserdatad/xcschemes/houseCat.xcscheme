@@ -79,7 +79,7 @@
             isEnabled = "YES">
          </AdditionalOption>
          <AdditionalOption
-            key = "NSDOLoggingEnabled"
+            key = "OBJC_PRINT_EXCEPTIONS"
             value = "YES"
             isEnabled = "YES">
          </AdditionalOption>

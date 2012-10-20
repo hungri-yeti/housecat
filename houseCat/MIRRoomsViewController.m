@@ -7,8 +7,9 @@
 //
 
 #import "MIRRoomsViewController.h"
-// for segue:
+// for segues:
 #import "MIRitemsViewController.h"
+#import "MIRAddRoomViewController.h"
 
 @interface MIRRoomsViewController ()
 {
@@ -20,6 +21,8 @@
 @end
 
 @implementation MIRRoomsViewController
+@synthesize managedObjectContext;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -75,13 +78,14 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-   NSUInteger row = [indexPath row];
-   
-   NSLog(@"prepareForSegue: %@, row: %u", segue.identifier, row );
+   NSLog(@"prepareForSegue: segue: id: %@, moc: %@", segue.identifier, self.managedObjectContext );
 
    if ([segue.identifier isEqualToString:@"roomsToItems"])
    {
+      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+      NSUInteger row = [indexPath row];
+      NSLog(@"   row: %u", row );
+      
       // extract all of the selected room's items into an array that
       // will be passed to the Items view controller:
       NSMutableArray *roomItems = [[NSMutableArray alloc] init];
@@ -91,8 +95,17 @@
       theRange.length = [roomsItems[row] count]-1;
       [roomItems addObjectsFromArray:[roomsItems[row] subarrayWithRange:theRange]];
 
-      MIRItemsViewController *itemsViewController = [segue destinationViewController];
-      itemsViewController.items = roomItems;
+      // pass the moc to the child view:
+      UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
+      MIRItemsViewController *vc = (MIRItemsViewController *)[[navController viewControllers] lastObject];
+      vc.managedObjectContext = self.managedObjectContext;
+   }
+   else if ([segue.identifier isEqualToString:@"addRoomName"])
+   {
+      // pass the moc to the child view:
+      UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
+      MIRAddRoomViewController *vc = (MIRAddRoomViewController *)[[navController viewControllers] lastObject];
+      vc.managedObjectContext = self.managedObjectContext;
    }
 }
 

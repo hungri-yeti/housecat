@@ -10,6 +10,6 @@
 
 @interface MIRRoomsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

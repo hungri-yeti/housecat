@@ -22,6 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    // Override point for customization after application launch.
+   UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+   MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;
+   controller.managedObjectContext = self.managedObjectContext;
    
    // Get a reference to the stardard user defaults
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -34,23 +37,11 @@
       [prefs setBool:YES forKey:@"hasRunBefore"];
       [prefs synchronize];
       
-      NSLog(@"-application:didFinishLaunchingWithOptions: moc: %@", self.managedObjectContext);
-      
-      
-      NSError *error;
-      // this doesn't crash, but does it really exercise the moc?
-      [[self managedObjectContext] save:&error];
-      NSLog(@" save: error: %@", [error domain]);
-      
       // Add our default Room list in Core Data
-      // TODO: fix crash here:
-      Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
-      [room setName:@"Kitchen"];
+//      Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
+//      [room setName:@"Kitchen"];
       
-      // this crashes with basically the same issue(?)
       //Get all the projects in the data store
-      //Create a new AppModel instance
-//      AppModel *dataModel = [[AppModel alloc] init];
       NSFetchRequest *request = [[NSFetchRequest alloc] init];
       NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms"
                                                 inManagedObjectContext:[self managedObjectContext]];
@@ -59,20 +50,17 @@
       //List out contents of each project
       if([listOfRooms count] == 0)
          NSLog(@"There are no Rooms in the data store yet");
-//      else {
-//         NSLog(@"HERE ARE THE PROJECTS IN THE DATA STORE");
-//         [listOfProjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            NSLog(@"-----");
-//            NSLog(@"project.name = %@", [obj name]);
-//            NSLog(@"project.descrip = %@", [obj descrip]);
-//            NSLog(@"project.dueDate = %@\n", [obj dueDate]);
-//         }];
-//      }
+      else {
+         NSLog(@"Rooms contents:");
+         [listOfRooms enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSLog(@"   room.name = %@", [obj name]);
+         }];
+      }
       
       // Commit to core data
-//      NSError *error;
+      NSError *error;
       if (![self.managedObjectContext save:&error])
-         NSLog(@"Failed to add default user with error: %@", [error domain]);
+         NSLog(@"ERROR: didFinishLaunchingWithOptions: save default Rooms: error: %@", [error domain]);
    }
    return YES;
 }
@@ -126,7 +114,6 @@
 - (NSManagedObjectContext *)managedObjectContext
 {
    if (_managedObjectContext != nil) {
-      NSLog(@" moc init (!=nil): %@", _managedObjectContext );
       return _managedObjectContext;
    }
    
@@ -135,12 +122,11 @@
       _managedObjectContext = [[NSManagedObjectContext alloc] init];
       [_managedObjectContext setPersistentStoreCoordinator:coordinator];
    }
-   NSLog(@" moc init: %@", _managedObjectContext );
+   //NSLog(@" moc init: %@", _managedObjectContext );
    return _managedObjectContext;
 }
 
 
-// TODO: also check here:
 // Returns the managed object model for the application.
 // If the model doesn't already exist, it is created from the application's model.
 - (NSManagedObjectModel *)managedObjectModel
@@ -158,11 +144,12 @@
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
    if (_persistentStoreCoordinator != nil) {
-      NSLog(@"psc init (!= nil): %@", _persistentStoreCoordinator );
+      //NSLog(@"psc init (!= nil): %@", _persistentStoreCoordinator );
       return _persistentStoreCoordinator;
    }
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"houseCat"];
+   NSLog(@"psc: storeURL: %@", storeURL);
    
    NSError *error = nil;
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -193,7 +180,7 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
    }
-   NSLog(@"psc init: %@, storeURL: %@", _persistentStoreCoordinator, [storeURL path] );
+   //NSLog(@"psc init: %@, storeURL: %@", _persistentStoreCoordinator, [storeURL path] );
    return _persistentStoreCoordinator;
 }
 

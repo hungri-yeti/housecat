@@ -10,6 +10,7 @@
 
 @interface MIRItemsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong ) NSArray *items;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+//@property (nonatomic, strong ) NSArray *items;
 
 @end

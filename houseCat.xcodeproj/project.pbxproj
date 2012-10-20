@@ -22,7 +22,6 @@
 		3BAF8BA3161E8D5900B23848 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA2161E8D5900B23848 /* Default-568h@2x.png */; };
 		3BAF8BA6161E8D5900B23848 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA4161E8D5900B23848 /* MainStoryboard_iPhone.storyboard */; };
 		3BAF8BA9161E8D5900B23848 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */; };
-		3BAF8BAC161E8D5900B23848 /* MIRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BAB161E8D5900B23848 /* MIRViewController.m */; };
 		3BAF8BB4161E8D5900B23848 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8BB3161E8D5900B23848 /* SenTestingKit.framework */; };
 		3BAF8BB5161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8BB6161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
@@ -30,6 +29,7 @@
 		3BAF8BC1161E8D5900B23848 /* houseCatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BC0161E8D5900B23848 /* houseCatTests.m */; };
 		3BAF8BCC161E8D8800B23848 /* MIRRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */; };
 		3BAF8BCF161EA32800B23848 /* MIRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */; };
+		3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +64,6 @@
 		3BAF8BA2161E8D5900B23848 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3BAF8BA5161E8D5900B23848 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		3BAF8BA8161E8D5900B23848 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		3BAF8BAA161E8D5900B23848 /* MIRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIRViewController.h; sourceTree = "<group>"; };
-		3BAF8BAB161E8D5900B23848 /* MIRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIRViewController.m; sourceTree = "<group>"; };
 		3BAF8BB2161E8D5900B23848 /* houseCatTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = houseCatTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8BB3161E8D5900B23848 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3BAF8BBB161E8D5900B23848 /* houseCatTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "houseCatTests-Info.plist"; sourceTree = "<group>"; };
@@ -76,6 +74,8 @@
 		3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRRoomsViewController.m; sourceTree = "<group>"; };
 		3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRItemsViewController.h; sourceTree = "<group>"; };
 		3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsViewController.m; sourceTree = "<group>"; };
+		3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRAddRoomViewController.h; sourceTree = "<group>"; };
+		3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRAddRoomViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,10 +156,10 @@
 				3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */,
 				3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */,
 				3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */,
+				3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */,
+				3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */,
 				3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */,
 				3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */,
-				3BAF8BAA161E8D5900B23848 /* MIRViewController.h */,
-				3BAF8BAB161E8D5900B23848 /* MIRViewController.m */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -326,12 +326,12 @@
 			files = (
 				3BAF8B99161E8D5900B23848 /* main.m in Sources */,
 				3BAF8B9D161E8D5900B23848 /* MIRAppDelegate.m in Sources */,
-				3BAF8BAC161E8D5900B23848 /* MIRViewController.m in Sources */,
 				3BAF8BCC161E8D8800B23848 /* MIRRoomsViewController.m in Sources */,
 				3BAF8BCF161EA32800B23848 /* MIRItemsViewController.m in Sources */,
 				3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */,
 				3B702FFA162D192100EE6C36 /* Rooms.m in Sources */,
 				3B70300C162D2A4000EE6C36 /* CoreDataHelper.m in Sources */,
+				3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

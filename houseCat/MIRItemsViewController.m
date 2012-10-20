@@ -14,7 +14,8 @@
 @end
 
 @implementation MIRItemsViewController
-@synthesize items;
+@synthesize managedObjectContext;
+//@synthesize items;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -54,7 +55,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [items count];
+//    return [items count];
+   return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,7 +69,7 @@
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
    }
    
-   cell.textLabel.text = [items objectAtIndex:indexPath.row];
+//   cell.textLabel.text = [items objectAtIndex:indexPath.row];
    return cell;
 }
 
