@@ -15,7 +15,6 @@
 @end
 
 @implementation MIRAddRoomViewController
-@synthesize managedObjectContext;
 
 
 
@@ -26,8 +25,8 @@
    [room setName:self.roomNameField.text];
    
    NSError *error = nil;
-   if (managedObjectContext != nil) {
-      if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+   if (self.managedObjectContext != nil) {
+      if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
          NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -49,11 +48,11 @@
 {
    if([self.roomNameField.text length]<=0)
    {
-      NSLog(@"MIRAddRoomViewController: you have not entered a Room name %@",self.roomNameField.text);
+      DebugLog(@"MIRAddRoomViewController: you have not entered a Room name %@",self.roomNameField.text);
    }
    else
    {
-      NSLog(@"MIRAddRoomViewController: roomNameField: %@", self.roomNameField.text);
+      DebugLog(@"MIRAddRoomViewController: roomNameField: %@", self.roomNameField.text);
       [self saveRoomName:self.roomNameField.text];
   }
    
@@ -67,7 +66,7 @@
    [self saveRoomName:roomName.text];
 
    
-   NSLog(@"endEditing: text: %@", roomName.text );
+   DebugLog(@"endEditing: text: %@", roomName.text );
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 

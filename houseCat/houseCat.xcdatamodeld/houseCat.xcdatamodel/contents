@@ -4,7 +4,7 @@
         <attribute name="thumb" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Items" inverseName="images" inverseEntity="Items" syncable="YES"/>
     </entity>
-    <entity name="Items" syncable="YES">
+    <entity name="Items" representedClassName="Items" syncable="YES">
         <attribute name="cost" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +20,6 @@
     <elements>
         <element name="Images" positionX="-2115" positionY="-3216" width="128" height="75"/>
         <element name="Items" positionX="-2216" positionY="-3438" width="128" height="150"/>
-        <element name="Rooms" positionX="-2394" positionY="-3366" width="128" height="75"/>
+        <element name="Rooms" positionX="-2250" positionY="-3594" width="128" height="75"/>
     </elements>
 </model>

@@ -10,6 +10,8 @@
 // for segues:
 #import "MIRitemsViewController.h"
 #import "MIRAddRoomViewController.h"
+#import "Rooms.h"
+
 
 @interface MIRRoomsViewController ()
 {
@@ -19,7 +21,6 @@
 @end
 
 @implementation MIRRoomsViewController
-@synthesize managedObjectContext;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -38,6 +39,7 @@
    // Uncomment the following line to preserve selection between presentations.
    // self.clearsSelectionOnViewWillAppear = NO;
 
+   // TODO: implement swipe to delete
    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
@@ -52,22 +54,25 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   NSLog(@"prepareForSegue: segue: id: %@", segue.identifier );
+   DebugLog(@"segue.id: %@", segue.identifier );
 
    if ([segue.identifier isEqualToString:@"roomsToItems"])
    {
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
       NSUInteger row = [indexPath row];
-      NSLog(@"   row: %u", row );
+      DebugLog(@"   row: %u", row );
       
       // pass the moc to the child view:
-      UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
-      MIRItemsViewController *vc = (MIRItemsViewController *)[[navController viewControllers] lastObject];
+      MIRItemsViewController *vc = [segue destinationViewController];
       vc.managedObjectContext = self.managedObjectContext;
+      
+      // pass the Room obj to the child view:
+      Rooms *room = [self.fetchedResultsController objectAtIndexPath:indexPath];
+      vc.parent = room;
    }
    else if ([segue.identifier isEqualToString:@"addRoomName"])
    {
-      // pass the moc to the child view:
+      // pass the moc to the child view: (destination is embeded in NavigationController)
       UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
       MIRAddRoomViewController *vc = (MIRAddRoomViewController *)[[navController viewControllers] lastObject];
       vc.managedObjectContext = self.managedObjectContext;
@@ -185,14 +190,17 @@
    [fetchRequest setFetchBatchSize:20];
    
    // Edit the sort key as appropriate.
-   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"name"
+                                       ascending:YES
+                                       selector:@selector(localizedCaseInsensitiveCompare:)];
    NSArray *sortDescriptors = @[sortDescriptor];
    
    [fetchRequest setSortDescriptors:sortDescriptors];
    
    // Edit the section name key path and cache name if appropriate.
    // nil for section name key path means "no sections".
-   NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+   NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
    aFetchedResultsController.delegate = self;
    self.fetchedResultsController = aFetchedResultsController;
    
@@ -258,8 +266,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-   NSLog(@"controllerDidChangeContent");
-   
    [self.tableView endUpdates];
 }
 

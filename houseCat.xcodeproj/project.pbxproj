@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B4D0B44163600790049C8D4 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4D0B43163600790049C8D4 /* Items.m */; };
 		3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B702FEC162D187A00EE6C36 /* CoreData.framework */; };
 		3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */; };
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
@@ -30,6 +31,7 @@
 		3BAF8BCC161E8D8800B23848 /* MIRRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */; };
 		3BAF8BCF161EA32800B23848 /* MIRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */; };
 		3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */; };
+		3BE3855316379F6F0023747A /* MIRItemsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B4D0B42163600790049C8D4 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
+		3B4D0B43163600790049C8D4 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
 		3B702FEC162D187A00EE6C36 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
 		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rooms.h; path = ../Rooms.h; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 		3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsViewController.m; sourceTree = "<group>"; };
 		3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRAddRoomViewController.h; sourceTree = "<group>"; };
 		3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRAddRoomViewController.m; sourceTree = "<group>"; };
+		3BE3855116379F6F0023747A /* MIRItemsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRItemsDetailViewController.h; sourceTree = "<group>"; };
+		3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,8 @@
 				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
 				3B702FF8162D192100EE6C36 /* Rooms.h */,
 				3B702FF9162D192100EE6C36 /* Rooms.m */,
+				3B4D0B42163600790049C8D4 /* Items.h */,
+				3B4D0B43163600790049C8D4 /* Items.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -152,14 +160,15 @@
 				3B702FF2162D18C400EE6C36 /* CoreData */,
 				3BAF8B9B161E8D5900B23848 /* MIRAppDelegate.h */,
 				3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */,
-				3BAF8BA4161E8D5900B23848 /* MainStoryboard_iPhone.storyboard */,
-				3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */,
+				3BE3854F16379EE90023747A /* Storyboards */,
 				3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */,
 				3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */,
 				3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */,
 				3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */,
 				3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */,
 				3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */,
+				3BE3855116379F6F0023747A /* MIRItemsDetailViewController.h */,
+				3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -196,6 +205,15 @@
 				3BAF8BBC161E8D5900B23848 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3BE3854F16379EE90023747A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3BAF8BA4161E8D5900B23848 /* MainStoryboard_iPhone.storyboard */,
+				3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +350,8 @@
 				3B702FFA162D192100EE6C36 /* Rooms.m in Sources */,
 				3B70300C162D2A4000EE6C36 /* CoreDataHelper.m in Sources */,
 				3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */,
+				3B4D0B44163600790049C8D4 /* Items.m in Sources */,
+				3BE3855316379F6F0023747A /* MIRItemsDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

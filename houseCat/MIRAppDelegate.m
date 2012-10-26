@@ -30,7 +30,7 @@
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
    
    // Check if the app has run before by checking a key in user defaults
-   NSLog(@"NOTE: hasRunBefore CHECK DISABLED");
+   DebugLog(@"NOTE: hasRunBefore CHECK DISABLED");
    //if ([prefs boolForKey:@"hasRunBefore"] != YES)
    {
       // Set flag so we know not to run this next time
@@ -49,9 +49,9 @@
       NSArray *listOfRooms = [[self managedObjectContext] executeFetchRequest:request error:nil];
       //List out contents of each project
       if([listOfRooms count] == 0)
-         NSLog(@"There are no Rooms in the data store yet");
+         DebugLog(@"There are no Rooms in the data store yet");
       else {
-         NSLog(@"Rooms contents:");
+         DebugLog(@"Rooms contents:");
          [listOfRooms enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"   room.name = %@", [obj name]);
          }];
@@ -122,7 +122,6 @@
       _managedObjectContext = [[NSManagedObjectContext alloc] init];
       [_managedObjectContext setPersistentStoreCoordinator:coordinator];
    }
-   //NSLog(@" moc init: %@", _managedObjectContext );
    return _managedObjectContext;
 }
 
@@ -144,16 +143,22 @@
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
    if (_persistentStoreCoordinator != nil) {
-      //NSLog(@"psc init (!= nil): %@", _persistentStoreCoordinator );
       return _persistentStoreCoordinator;
    }
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"houseCat"];
-   NSLog(@"psc: storeURL: %@", storeURL);
+   DebugLog(@"psc: storeURL: %@", storeURL);
    
    NSError *error = nil;
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-   if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+
+   // TODO: verify that automatic version migration works
+   NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+//   if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+   if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
+   {
       /*
        Replace this implementation with code to handle the error appropriately.
        
@@ -180,7 +185,6 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
    }
-   //NSLog(@"psc init: %@, storeURL: %@", _persistentStoreCoordinator, [storeURL path] );
    return _persistentStoreCoordinator;
 }
 
