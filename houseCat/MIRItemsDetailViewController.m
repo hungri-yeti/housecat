@@ -22,16 +22,25 @@
 
 - (IBAction)saveButton:(id)sender
 {
-   NSLog(@"saveButton, itemDesc: %@", self.itemDesc.text);
+   NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
 
    NSManagedObjectContext *context = self.managedObjectContext;
-   NSManagedObject *newItem;
-   newItem = [NSEntityDescription
-                 insertNewObjectForEntityForName:@"Items"
-                 inManagedObjectContext:context];
-   [newItem setValue:self.itemDesc.text forKey:@"name"];
-   [self.parent addItemsObject:newItem];
    
+   if( nil == self.item )
+   {
+      NSLog(@"saveButton: self.item == nil");
+      
+      Items *item = (Items *)[NSEntityDescription
+                              insertNewObjectForEntityForName:@"Items"
+                              inManagedObjectContext:self.managedObjectContext];
+      self.item = item;
+      [self.parent addItemsObject:item];
+   }
+   
+   // set attributes from view:
+   [self.item setValue:self.itemName.text forKey:@"name"];
+
+
    NSError *error;
    [context save:&error];
    
@@ -55,19 +64,25 @@
 {
    [super viewDidLoad];
    // Do any additional setup after loading the view.
-   // TODO: if this is an Edit action, this is where I will set the existing values for the fields
-   // e.g.:
-   // NSLog(@"In viewDidLoad - the title is: %@ and the info is: %@",self.locTitle,self.locInfo);
-   // detailTitle.text = locTitle;
-   // detailMainText.text = locInfo;
 
-   // This doesn't work here, it needs to be done in the previous view's viewDidLoad.
+   // This doesn't work here, it needs to be done in the previous view's viewDidLoad?
+   // It looks like this needs to be done _before_ pushViewController: is called
+   // (which will be done in the parent view controller)
    // change the back button to read Cancel
    //UIBarButtonItem* btnCancel = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:0 target:nil action:nil];
    //self.navigationItem.backBarButtonItem = btnCancel;
+   if( self.item == nil )
+   {
+      // TODO: is anything necessary here?
+   }
+   else
+   {
+      self.itemName.text = self.item.name;
+   }
    
    [self registerForKeyboardNotifications];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

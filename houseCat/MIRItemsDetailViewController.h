@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "Items.h"
+#import "Items.h"
 #import "Rooms.h"
 
 
@@ -15,14 +15,15 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-// Used to pass the parent (Room) in:
+// Used to pass objects in:
 @property( strong, nonatomic ) Rooms *parent;
+@property( strong, nonatomic ) Items *item;
 
 
-@property (weak, nonatomic) IBOutlet UITextField *itemDesc;
-@property (weak, nonatomic) IBOutlet UITextField *itemPurchased;
+@property (weak, nonatomic) IBOutlet UITextField *itemName;
+@property (weak, nonatomic) IBOutlet UITextField *itemPurchaseDate;
 @property (weak, nonatomic) IBOutlet UITextField *itemCost;
-@property (weak, nonatomic) IBOutlet UITextField *itemSerial;
+@property (weak, nonatomic) IBOutlet UITextField *itemSerialNumber;
 @property (weak, nonatomic) IBOutlet UITextView *itemNotes;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 

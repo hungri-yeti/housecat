@@ -11,7 +11,6 @@
 		3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B702FEC162D187A00EE6C36 /* CoreData.framework */; };
 		3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */; };
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
-		3B70300C162D2A4000EE6C36 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B70300B162D2A4000EE6C36 /* CoreDataHelper.m */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
 		3BAF8B91161E8D5900B23848 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B90161E8D5900B23848 /* CoreGraphics.framework */; };
@@ -51,8 +50,6 @@
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
 		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rooms.h; path = ../Rooms.h; sourceTree = "<group>"; };
 		3B702FF9162D192100EE6C36 /* Rooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rooms.m; path = ../Rooms.m; sourceTree = "<group>"; };
-		3B70300A162D2A4000EE6C36 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
-		3B70300B162D2A4000EE6C36 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B8C161E8D5900B23848 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BAF8B8E161E8D5900B23848 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -112,8 +109,6 @@
 		3B702FF2162D18C400EE6C36 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3B70300A162D2A4000EE6C36 /* CoreDataHelper.h */,
-				3B70300B162D2A4000EE6C36 /* CoreDataHelper.m */,
 				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
 				3B702FF8162D192100EE6C36 /* Rooms.h */,
 				3B702FF9162D192100EE6C36 /* Rooms.m */,
@@ -348,7 +343,6 @@
 				3BAF8BCF161EA32800B23848 /* MIRItemsViewController.m in Sources */,
 				3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */,
 				3B702FFA162D192100EE6C36 /* Rooms.m in Sources */,
-				3B70300C162D2A4000EE6C36 /* CoreDataHelper.m in Sources */,
 				3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */,
 				3B4D0B44163600790049C8D4 /* Items.m in Sources */,
 				3BE3855316379F6F0023747A /* MIRItemsDetailViewController.m in Sources */,

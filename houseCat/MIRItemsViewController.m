@@ -66,42 +66,23 @@
 {
    DebugLog(@"segue.id: %@", segue.identifier );
    
+   MIRItemsDetailViewController *vc = [segue destinationViewController];
    if ([segue.identifier isEqualToString:@"itemEdit"])
    {
-      //NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      //NSUInteger row = [indexPath row];
-      //DebugLog(@"   row: %u", row );
-      
-      // pass the moc to the child view:
-      //MIRItemsViewController *vc = [segue destinationViewController];
-      //vc.managedObjectContext = self.managedObjectContext;
-      
-//      // pass the moc to the child view:
-//      MIRItemsViewController *vc = [segue destinationViewController];
-//      vc.managedObjectContext = self.managedObjectContext;
-//      
-//      // pass the Room obj to the child view:
-//      //Rooms *room = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//      vc.parent = self.parent;
+      // pass the existing Item obj to the child view:
+      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+      Items *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+      vc.item = item;
    }
    else if ([segue.identifier isEqualToString:@"itemAdd"])
    {
-      // pass the moc to the child view: (destination is embeded in NavigationController)
-//      UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
-      // crash here:
-      // -[MIRItemsDetailViewController viewControllers]: unrecognized selector sent to instance
-//      MIRItemsDetailViewController *vc = (MIRItemsDetailViewController *)[[navController viewControllers] lastObject];
-//      
-//      vc.managedObjectContext = self.managedObjectContext;
-//      Items *item =
-//      vc.item = item;
+      vc.item = nil;
    }
-   // pass the moc to the child view:
-   MIRItemsViewController *vc = [segue destinationViewController];
-   vc.managedObjectContext = self.managedObjectContext;
    
+   // pass the moc to the child view:
+   vc.managedObjectContext = self.managedObjectContext;
+
    // pass the Room obj to the child view:
-   //Rooms *room = [self.fetchedResultsController objectAtIndexPath:indexPath];
    vc.parent = self.parent;
 }
 

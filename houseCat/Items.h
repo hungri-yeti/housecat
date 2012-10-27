@@ -13,11 +13,11 @@
 
 @interface Items : NSManagedObject
 
-@property (nonatomic, retain) NSDecimalNumber * cost;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * purchaseDate;
-@property (nonatomic, retain) NSString * serialNumber;
+@property (nonatomic, retain) NSDecimalNumber *cost;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *purchaseDate;
+@property (nonatomic, retain) NSString *serialNumber;
 @property (nonatomic, retain) NSSet *images;
 @property (nonatomic, retain) Rooms *room;
 @end
