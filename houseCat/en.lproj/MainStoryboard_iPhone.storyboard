@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="bfa-8Z-5rh" customClass="MIRRoomsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OI0-WU-QyK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -31,6 +31,11 @@
                             <outlet property="delegate" destination="bfa-8Z-5rh" id="g5I-ho-OLV"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="ktb-hh-eZB"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="uzk-Ss-RfD"/>
+                        <barButtonItem title="Item" id="1Ab-Av-gSE"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Rooms" id="584-cg-cAo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bBt-nR-fbg">
                             <connections>
@@ -38,6 +43,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mz3-P3-IoK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -48,7 +54,7 @@
             <objects>
                 <tableViewController id="KJY-oH-eDV" customClass="MIRItemsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qc6-9i-ZMl">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -87,7 +93,7 @@
             <objects>
                 <viewController id="OtP-iz-ePn" customClass="MIRItemsDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EeP-gP-uuk">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VtC-e6-IbT">
@@ -295,13 +301,18 @@
         <!--Navigation Controller-->
         <scene sceneID="ZJD-zs-VHw">
             <objects>
-                <navigationController id="7AN-Ko-20e" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="7AN-Ko-20e" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LHu-YO-ZUI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jJU-Nm-iKR">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="bfa-8Z-5rh" kind="relationship" relationship="rootViewController" id="rzT-CW-bcb"/>
                     </connections>
@@ -329,47 +340,6 @@
             <point key="canvasLocation" x="966" y="-641"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MIRAddRoomViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRAddRoomViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="endEditing:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="outlet" name="roomNameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MIRItemsDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="saveButton:"/>
-                <relationship kind="outlet" name="itemCost" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="itemDesc" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="itemNotes" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="itemPurchased" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="itemSerial" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MIRItemsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsViewController.h"/>
-        </class>
-        <class className="MIRRoomsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRRoomsViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
