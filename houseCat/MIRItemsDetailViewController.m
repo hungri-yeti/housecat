@@ -26,6 +26,7 @@
 
    NSManagedObjectContext *context = self.managedObjectContext;
    
+   // this will be the case for a new item being added:
    if( nil == self.item )
    {
       NSLog(@"saveButton: self.item == nil");
@@ -39,12 +40,22 @@
    
    // set attributes from view:
    [self.item setValue:self.itemName.text forKey:@"name"];
+   [self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
+   [self.item setValue:self.itemNotes.text forKey:@"notes"];
 
 
    NSError *error;
    [context save:&error];
    
    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (IBAction)doneButtonPressed:(id)sender
+{
+   NSLog(@"doneButtonPressed");
+   
+   [self.itemNotes resignFirstResponder];
 }
 
 
@@ -73,11 +84,13 @@
    //self.navigationItem.backBarButtonItem = btnCancel;
    if( self.item == nil )
    {
-      // TODO: is anything necessary here?
+      // TODO: is anything necessary here, or change the comparison operator?
    }
    else
    {
       self.itemName.text = self.item.name;
+      self.itemSerialNumber.text = self.item.serialNumber;
+      self.itemNotes.text = self.item.notes;
    }
    
    [self registerForKeyboardNotifications];
@@ -107,9 +120,39 @@
 
 #pragma mark - Edit actions
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
-   activeField = textField;
+   NSLog(@"textViewDidBeginEditing");
+   
+   // TODO: this comparison will cause a problem when localized:
+   // will probably need to use localizedCompare:.
+   // remove the placeholder text:
+   if( [textView.text isEqualToString:@"(enter notes here)"] )
+   {
+      textView.text = nil;
+   }
+   // change the Save button to Done:
+   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:0 target:nil action:@selector(doneButtonPressed:)];
+   self.navigationItem.rightBarButtonItem = btnDone;
+}
+
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+   NSLog(@"textViewShouldEndEditing");
+   
+   [textView resignFirstResponder];
+   return YES;
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+   NSLog(@"textViewDidEndEditing");
+   
+   // change the Done button to Save:
+   UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
+   self.navigationItem.rightBarButtonItem = btnSave;
 }
 
 
