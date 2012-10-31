@@ -19,7 +19,41 @@
 @implementation MIRItemsDetailViewController
 
 
+// This is used in a couple of different places, edit here to change globally (file scope)
+NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
+
+
+#pragma mark - picker field updates
+
+-(void)updatePurchaseDateField:(id)sender
+{
+   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+   [dateFormatter setDateStyle:kDateFormatStyle];
+   
+   // update the textfield:
+   UIDatePicker *picker = (UIDatePicker*)self.itemPurchaseDate.inputView;
+   self.itemPurchaseDate.text = [dateFormatter stringFromDate:picker.date];
+   // set this here, it won't be set in saveButton:
+   [self.item setValue:picker.date forKey:@"purchaseDate"];
+}
+
+
+-(void)setupPurchaseDateField:(id)sender
+{
+   NSLog(@"setupPurchaseDateField");
+   
+   //   Get the size of the keyboard.
+   //   Adjust the bottom content inset of your scroll view by the keyboard height.
+   //   Scroll the target text field into view.
+   
+   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:0 target:nil action:@selector(doneButtonPressed:)];
+   self.navigationItem.rightBarButtonItem = btnDone;
+}
+
+
+
+#pragma mark - buttons
 - (IBAction)saveButton:(id)sender
 {
    NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
@@ -40,9 +74,19 @@
    
    // set attributes from view:
    [self.item setValue:self.itemName.text forKey:@"name"];
+   
+   // this is actually set in updatePurchaseDateField
+   //[self.item setValue:self.itemPurchaseDate forKey:@"purchaseDate"]; // crash here
+
+   // this works only if they use the currency symbol at the begining of the number,
+   // so we need to check for it and, if necessary, add it in textFieldShouldEndEditing
+   NSNumberFormatter *costFmt = [[NSNumberFormatter alloc] init];
+   [costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+   NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:self.itemCost.text] floatValue]];
+   [self.item setValue:costNum forKey:@"cost"];
+   
    [self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
    [self.item setValue:self.itemNotes.text forKey:@"notes"];
-
 
    NSError *error;
    [context save:&error];
@@ -56,6 +100,7 @@
    NSLog(@"doneButtonPressed");
    
    [self.itemNotes resignFirstResponder];
+   [self.itemPurchaseDate resignFirstResponder];
 }
 
 
@@ -75,6 +120,15 @@
 {
    [super viewDidLoad];
    // Do any additional setup after loading the view.
+   
+   // setup date picker:
+   UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+   datePicker.datePickerMode = UIDatePickerModeDate;
+   [datePicker setDate:self.item.purchaseDate];
+   [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
+   [self.itemPurchaseDate addTarget:self action:@selector(setupPurchaseDateField:) forControlEvents:UIControlEventEditingDidBegin];
+   
+   [self.itemPurchaseDate setInputView:datePicker];
 
    // This doesn't work here, it needs to be done in the previous view's viewDidLoad?
    // It looks like this needs to be done _before_ pushViewController: is called
@@ -89,6 +143,16 @@
    else
    {
       self.itemName.text = self.item.name;
+      
+      [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      [dateFormatter setDateStyle:kDateFormatStyle];
+      [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+      self.itemPurchaseDate.text = [dateFormatter stringFromDate:self.item.purchaseDate];
+      
+      NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithFloat:[self.item.cost floatValue]]
+                                                             numberStyle:NSNumberFormatterCurrencyStyle];
+      self.itemCost.text = numberStr;
       self.itemSerialNumber.text = self.item.serialNumber;
       self.itemNotes.text = self.item.notes;
    }
@@ -158,7 +222,19 @@
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-   NSLog(@"textFieldShouldEndEditing, textField: %@", textField.text);
+   NSLog(@"textFieldShouldEndEditing, textField: %@", textField.text );
+   
+   if( self.itemCost == textField)
+   {
+      // There may or may not be a currency symbol included in the string.
+      // If not, add it:
+      if( [textField.text floatValue] != 0.0 )  // TODO: is there any better way to determine if the string starts with any arbitrary currency symbol?
+      {
+         NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithFloat:[textField.text floatValue]]
+                                                                numberStyle:NSNumberFormatterCurrencyStyle];
+         self.itemCost.text = numberStr;
+      }
+   }
    
    // activate the Save button:
    self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -168,10 +244,23 @@
 }
 
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+   NSLog(@"textFieldDidBeginEditing");
+   
+   activeField = textField;
+}
+
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-   activeField = nil;
    NSLog(@"textFieldDidEndEditing");
+   
+   activeField = nil;
+
+   // change the Done button to Save:
+   UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
+   self.navigationItem.rightBarButtonItem = btnSave;
 }
 
 
@@ -189,9 +278,15 @@
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
+   NSLog(@"keyboardWasShown");
+   
    float kToolBarHeight = 44;
+   
    NSDictionary* info = [aNotification userInfo];
    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+   
+   //NSLog(@"kbSize.height: %f", kbSize.height);
+   
    
    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
    self.scrollView.contentInset = contentInsets;
@@ -200,11 +295,19 @@
    // If active text field is hidden by keyboard, scroll it so it's visible
    // Your application might not need or want this behavior.
    CGRect aRect = self.view.frame;
+   
+   //NSLog(@"aRect.size.height: %f", aRect.size.height );
+   
    aRect.size.height -= kbSize.height;
    CGPoint origin = activeField.frame.origin;
+   
+   //NSLog(@"origin.y: %f, activeField.frame.size.height: %f", origin.y, activeField.frame.size.height );
+   
    origin.y += activeField.frame.size.height;
    if (!CGRectContainsPoint(aRect, origin) )
    {
+      //NSLog(@"!CGRectContainsPoint");
+      
       CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-(aRect.size.height) + kToolBarHeight);
       [self.scrollView setContentOffset:scrollPoint animated:YES];
    }
@@ -214,6 +317,8 @@
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
+   NSLog(@"keyboardWillBeHidden");
+   
    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
    self.scrollView.contentInset = contentInsets;
    self.scrollView.scrollIndicatorInsets = contentInsets;
