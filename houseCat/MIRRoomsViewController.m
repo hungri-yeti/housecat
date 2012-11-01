@@ -14,9 +14,6 @@
 
 
 @interface MIRRoomsViewController ()
-{
-}
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 
 @end
 
@@ -32,10 +29,12 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-   
+//   [self.navigationController setToolbarHidden:NO];
+
    // Uncomment the following line to preserve selection between presentations.
    // self.clearsSelectionOnViewWillAppear = NO;
 
@@ -44,11 +43,21 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+   DebugLog(@"viewWillAppear");
+   
+   [self.navigationController setToolbarHidden:NO];
+}
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 #pragma mark - Segue
@@ -58,6 +67,8 @@
 
    if ([segue.identifier isEqualToString:@"roomsToItems"])
    {
+      [self.navigationController setToolbarHidden:YES];
+      
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
       NSUInteger row = [indexPath row];
       DebugLog(@"   row: %u", row );

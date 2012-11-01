@@ -120,11 +120,21 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 {
    [super viewDidLoad];
    // Do any additional setup after loading the view.
+   [self.navigationController setToolbarHidden:YES];
    
    // setup date picker:
    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
    datePicker.datePickerMode = UIDatePickerModeDate;
-   [datePicker setDate:self.item.purchaseDate];
+   
+   if( NULL == self.item.purchaseDate )
+   {
+      // new item:
+      [datePicker setDate:[NSDate date]];
+   }
+   else
+   {
+      [datePicker setDate:self.item.purchaseDate];
+   }
    [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
    [self.itemPurchaseDate addTarget:self action:@selector(setupPurchaseDateField:) forControlEvents:UIControlEventEditingDidBegin];
    
