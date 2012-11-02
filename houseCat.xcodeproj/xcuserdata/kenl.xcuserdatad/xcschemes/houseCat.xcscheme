@@ -95,7 +95,7 @@
          </AdditionalOption>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "Moscow, Russia"
+         identifier = "San Francisco, CA, USA"
          referenceType = "1">
       </LocationScenarioReference>
    </LaunchAction>
