@@ -12,6 +12,7 @@
 {
    // used when scrolling above kb:
    UIView *activeField;
+   NSDate *purchaseDate;
 }
 
 @end
@@ -35,7 +36,9 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    UIDatePicker *picker = (UIDatePicker*)self.itemPurchaseDate.inputView;
    self.itemPurchaseDate.text = [dateFormatter stringFromDate:picker.date];
    // set this here, it won't be set in saveButton:
-   [self.item setValue:picker.date forKey:@"purchaseDate"];
+   // this won't work for a new Item becuase we wont have an item obj yet.
+   //[self.item setValue:picker.date forKey:@"purchaseDate"];
+   purchaseDate = picker.date;
 }
 
 
@@ -76,7 +79,8 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    [self.item setValue:self.itemName.text forKey:@"name"];
    
    // this is actually set in updatePurchaseDateField
-   //[self.item setValue:self.itemPurchaseDate forKey:@"purchaseDate"]; // crash here
+   //[self.item setValue:self.itemPurchaseDate forKey:@"purchaseDate"];
+   [self.item setValue:purchaseDate forKey:@"purchaseDate"];
 
    // this works only if they use the currency symbol at the begining of the number,
    // so we need to check for it and, if necessary, add it in textFieldShouldEndEditing
