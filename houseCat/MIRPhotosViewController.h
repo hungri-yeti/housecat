@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MIRPhotosViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface MIRPhotosViewController : UICollectionViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 
 -(IBAction)done:(id)sender;
