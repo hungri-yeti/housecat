@@ -35,21 +35,12 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    // update the textfield:
    UIDatePicker *picker = (UIDatePicker*)self.itemPurchaseDate.inputView;
    self.itemPurchaseDate.text = [dateFormatter stringFromDate:picker.date];
-   // set this here, it won't be set in saveButton:
-   // this won't work for a new Item becuase we wont have an item obj yet.
-   //[self.item setValue:picker.date forKey:@"purchaseDate"];
    purchaseDate = picker.date;
 }
 
 
 -(void)setupPurchaseDateField:(id)sender
 {
-   NSLog(@"setupPurchaseDateField");
-   
-   //   Get the size of the keyboard.
-   //   Adjust the bottom content inset of your scroll view by the keyboard height.
-   //   Scroll the target text field into view.
-   
    UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:0 target:nil action:@selector(doneButtonPressed:)];
    self.navigationItem.rightBarButtonItem = btnDone;
 }
@@ -57,29 +48,21 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 
 #pragma mark - buttons
+- (void)cancelButton:(id)sender
+{
+   // TODO: does Item need to be specifically deleted?
+   [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 - (IBAction)saveButton:(id)sender
 {
    NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
 
    NSManagedObjectContext *context = self.managedObjectContext;
    
-   // this will be the case for a new item being added:
-   if( nil == self.item )
-   {
-      NSLog(@"saveButton: self.item == nil");
-      
-      Items *item = (Items *)[NSEntityDescription
-                              insertNewObjectForEntityForName:@"Items"
-                              inManagedObjectContext:self.managedObjectContext];
-      self.item = item;
-      [self.parent addItemsObject:item];
-   }
-   
    // set attributes from view:
    [self.item setValue:self.itemName.text forKey:@"name"];
-   
-   // this is actually set in updatePurchaseDateField
-   //[self.item setValue:self.itemPurchaseDate forKey:@"purchaseDate"];
    [self.item setValue:purchaseDate forKey:@"purchaseDate"];
 
    // this works only if they use the currency symbol at the begining of the number,
@@ -92,8 +75,14 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    [self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
    [self.item setValue:self.itemNotes.text forKey:@"notes"];
 
+   [self.parent addItemsObject:self.item];
    NSError *error;
-   [context save:&error];
+   if (![context save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRItemsDetailViewController:saveButton: unresolved error %@, %@", error, [error userInfo]);
+   }
    
    [self.navigationController popViewControllerAnimated:YES];
 }
@@ -101,7 +90,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (IBAction)doneButtonPressed:(id)sender
 {
-   NSLog(@"doneButtonPressed");
+//   NSLog(@"doneButtonPressed");
    
    [self.itemNotes resignFirstResponder];
    [self.itemPurchaseDate resignFirstResponder];
@@ -129,35 +118,38 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    // setup date picker:
    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
    datePicker.datePickerMode = UIDatePickerModeDate;
-   
-   if( NULL == self.item.purchaseDate )
-   {
-      // new item:
-      [datePicker setDate:[NSDate date]];
-   }
-   else
-   {
-      [datePicker setDate:self.item.purchaseDate];
-   }
-   [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
-   [self.itemPurchaseDate addTarget:self action:@selector(setupPurchaseDateField:) forControlEvents:UIControlEventEditingDidBegin];
-   
-   [self.itemPurchaseDate setInputView:datePicker];
 
-   // This doesn't work here, it needs to be done in the previous view's viewDidLoad?
-   // It looks like this needs to be done _before_ pushViewController: is called
-   // (which will be done in the parent view controller)
-   // change the back button to read Cancel
-   //UIBarButtonItem* btnCancel = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:0 target:nil action:nil];
-   //self.navigationItem.backBarButtonItem = btnCancel;
+   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                             target:self 
+                                                                           action:@selector(cancelButton:)];
+
    if( self.item == nil )
    {
-      // TODO: is anything necessary here, or change the comparison operator?
+      NSLog(@"viewDidLoad: self.item == nil");
+      
+      Items *item = (Items *)[NSEntityDescription
+                              insertNewObjectForEntityForName:@"Items"
+                              inManagedObjectContext:self.managedObjectContext];
+      self.item = item;
+      
+      // new item so date isn't set yet:
+      [datePicker setDate:[NSDate date]];
+      
+      // TODO: there's duplication here in the following else clause where the date is also set:
+      [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      [dateFormatter setDateStyle:kDateFormatStyle];
+      [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+      self.itemPurchaseDate.text = [dateFormatter stringFromDate:[NSDate date]];
+      purchaseDate = [NSDate date];
    }
    else
    {
+      NSLog(@"viewDidLoad: self.item != nil");
+     
       self.itemName.text = self.item.name;
       
+      [datePicker setDate:self.item.purchaseDate];
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
       [dateFormatter setDateStyle:kDateFormatStyle];
@@ -170,6 +162,12 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
       self.itemSerialNumber.text = self.item.serialNumber;
       self.itemNotes.text = self.item.notes;
    }
+
+   [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
+   [self.itemPurchaseDate addTarget:self action:@selector(setupPurchaseDateField:) forControlEvents:UIControlEventEditingDidBegin];
+   
+   [self.itemPurchaseDate setInputView:datePicker];
+
    
    [self registerForKeyboardNotifications];
 }
@@ -200,7 +198,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-   NSLog(@"textViewDidBeginEditing");
+   //NSLog(@"textViewDidBeginEditing");
    
    // TODO: this comparison will cause a problem when localized:
    // will probably need to use localizedCompare:.
@@ -217,7 +215,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-   NSLog(@"textViewShouldEndEditing");
+   //NSLog(@"textViewShouldEndEditing");
    
    [textView resignFirstResponder];
    return YES;
@@ -226,7 +224,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-   NSLog(@"textViewDidEndEditing");
+   //NSLog(@"textViewDidEndEditing");
    
    // change the Done button to Save:
    UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
@@ -236,7 +234,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-   NSLog(@"textFieldShouldEndEditing, textField: %@", textField.text );
+   //NSLog(@"textFieldShouldEndEditing, textField: %@", textField.text );
    
    if( self.itemCost == textField)
    {
@@ -260,7 +258,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-   NSLog(@"textFieldDidBeginEditing");
+   //NSLog(@"textFieldDidBeginEditing");
    
    activeField = textField;
 }
@@ -268,7 +266,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-   NSLog(@"textFieldDidEndEditing");
+   //NSLog(@"textFieldDidEndEditing");
    
    activeField = nil;
 
@@ -280,7 +278,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-   NSLog(@"textFieldShouldReturn");
+   //NSLog(@"textFieldShouldReturn");
    
    [textField resignFirstResponder];
    return NO;
@@ -292,15 +290,12 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-   NSLog(@"keyboardWasShown");
+   //NSLog(@"keyboardWasShown");
    
    float kToolBarHeight = 44;
    
    NSDictionary* info = [aNotification userInfo];
    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-   
-   //NSLog(@"kbSize.height: %f", kbSize.height);
-   
    
    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
    self.scrollView.contentInset = contentInsets;
@@ -310,18 +305,12 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    // Your application might not need or want this behavior.
    CGRect aRect = self.view.frame;
    
-   //NSLog(@"aRect.size.height: %f", aRect.size.height );
-   
    aRect.size.height -= kbSize.height;
    CGPoint origin = activeField.frame.origin;
-   
-   //NSLog(@"origin.y: %f, activeField.frame.size.height: %f", origin.y, activeField.frame.size.height );
    
    origin.y += activeField.frame.size.height;
    if (!CGRectContainsPoint(aRect, origin) )
    {
-      //NSLog(@"!CGRectContainsPoint");
-      
       CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-(aRect.size.height) + kToolBarHeight);
       [self.scrollView setContentOffset:scrollPoint animated:YES];
    }
@@ -331,7 +320,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-   NSLog(@"keyboardWillBeHidden");
+   //NSLog(@"keyboardWillBeHidden");
    
    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
    self.scrollView.contentInset = contentInsets;

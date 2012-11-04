@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Items.h"
 
-@interface MIRPhotosViewController : UICollectionViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@interface MIRPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
+// Used to pass the parent (Item) in:
+@property( strong, nonatomic ) Items *parent;
 
 
 -(IBAction)done:(id)sender;

@@ -41,19 +41,9 @@
    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
    
-   // Even though this is the Items table view controller, the following changes the back button
-   // on the next view (Detail Add or Detail Edit).
-   // I don't understand why.
-   // change the back button to read Cancel
-   UIBarButtonItem* btnCancel = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:0 target:nil action:nil];
-   self.navigationItem.backBarButtonItem = btnCancel;
-   
    NSLog(@"parent: %@", [[self.parent valueForKey:@"name"] description]);
-   
-   // this is null, not what I'm looking for.
-   //UIViewController *pvc = self.presentingViewController;
-   //NSLog(@"segue: %@", pvc);
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -66,7 +56,7 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   DebugLog(@"segue.id: %@", segue.identifier );
+   //DebugLog(@"segue.id: %@", segue.identifier );
    
    MIRItemsDetailViewController *vc = [segue destinationViewController];
    if ([segue.identifier isEqualToString:@"itemEdit"])

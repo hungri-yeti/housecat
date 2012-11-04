@@ -30,32 +30,36 @@
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
    
    // Check if the app has run before by checking a key in user defaults
-   DebugLog(@"NOTE: hasRunBefore CHECK DISABLED");
-   //if ([prefs boolForKey:@"hasRunBefore"] != YES)
+   if ([prefs boolForKey:@"hasRunBefore"] != YES)
    {
       // Set flag so we know not to run this next time
       [prefs setBool:YES forKey:@"hasRunBefore"];
       [prefs synchronize];
       
       // Add our default Room list in Core Data
-//      Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
-//      [room setName:@"Kitchen"];
+      NSArray *defaultRooms = [NSArray arrayWithObjects:@"Kitchen",@"Dining Room",@"Living Room",@"Garage",@"Master Bedroom",@"Den/Office",nil];
+      // TODO: the room names should be easily localizeable
+      for(NSString *roomName in defaultRooms)
+      {
+         Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
+         [room setName:roomName];
+      }
       
       //Get all the projects in the data store
       NSFetchRequest *request = [[NSFetchRequest alloc] init];
       NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms"
                                                 inManagedObjectContext:[self managedObjectContext]];
       request.entity = entity;
-      NSArray *listOfRooms = [[self managedObjectContext] executeFetchRequest:request error:nil];
+      //NSArray *listOfRooms = [[self managedObjectContext] executeFetchRequest:request error:nil];
       //List out contents of each project
-      if([listOfRooms count] == 0)
-         DebugLog(@"There are no Rooms in the data store yet");
-      else {
-         DebugLog(@"Rooms contents:");
-         [listOfRooms enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSLog(@"   room.name = %@", [obj name]);
-         }];
-      }
+      //if([listOfRooms count] == 0)
+      //   DebugLog(@"There are no Rooms in the data store yet");
+      //else {
+      //   DebugLog(@"Rooms contents:");
+      //   [listOfRooms enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+      //      NSLog(@"   room.name = %@", [obj name]);
+      //   }];
+      //}
       
       // Commit to core data
       NSError *error;
@@ -147,7 +151,7 @@
    }
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"houseCat"];
-   DebugLog(@"psc: storeURL: %@", storeURL);
+   NSLog(@"MIRApDelegate: psc: storeURL: %@", storeURL);
    
    NSError *error = nil;
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

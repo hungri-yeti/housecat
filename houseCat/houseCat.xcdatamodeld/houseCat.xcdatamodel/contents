@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G56" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Images" syncable="YES">
-        <attribute name="thumb" optional="YES" attributeType="Binary" syncable="YES"/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Images" representedClassName="Images" syncable="YES">
+        <attribute name="image" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="sort" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thumb" attributeType="Binary" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Items" inverseName="images" inverseEntity="Items" syncable="YES"/>
     </entity>
     <entity name="Items" representedClassName="Items" syncable="YES">
@@ -10,15 +12,15 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="purchaseDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="serialNumber" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Images" inverseName="item" inverseEntity="Images" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Images" inverseName="item" inverseEntity="Images" syncable="YES"/>
         <relationship name="room" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rooms" inverseName="items" inverseEntity="Rooms" syncable="YES"/>
     </entity>
     <entity name="Rooms" representedClassName="Rooms" syncable="YES">
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Items" inverseName="room" inverseEntity="Items" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Items" inverseName="room" inverseEntity="Items" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Images" positionX="-2115" positionY="-3216" width="128" height="75"/>
+        <element name="Images" positionX="-2115" positionY="-3216" width="128" height="105"/>
         <element name="Items" positionX="-2216" positionY="-3438" width="128" height="150"/>
         <element name="Rooms" positionX="-2250" positionY="-3594" width="128" height="75"/>
     </elements>

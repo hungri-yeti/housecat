@@ -48,11 +48,11 @@
 {
    if([self.roomNameField.text length]<=0)
    {
-      DebugLog(@"MIRAddRoomViewController: you have not entered a Room name %@",self.roomNameField.text);
+      //DebugLog(@"MIRAddRoomViewController: you have not entered a Room name %@",self.roomNameField.text);
    }
    else
    {
-      DebugLog(@"MIRAddRoomViewController: roomNameField: %@", self.roomNameField.text);
+      //DebugLog(@"MIRAddRoomViewController: roomNameField: %@", self.roomNameField.text);
       [self saveRoomName:self.roomNameField.text];
   }
    
@@ -66,7 +66,7 @@
    [self saveRoomName:roomName.text];
 
    
-   DebugLog(@"endEditing: text: %@", roomName.text );
+   //DebugLog(@"endEditing: text: %@", roomName.text );
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -84,6 +84,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+   
+   //TODO: should automatically activate text field & kb
 }
 
 - (void)didReceiveMemoryWarning

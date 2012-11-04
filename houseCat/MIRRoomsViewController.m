@@ -45,7 +45,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-   DebugLog(@"viewWillAppear");
+   //DebugLog(@"viewWillAppear");
    
    [self.navigationController setToolbarHidden:NO];
 }
@@ -63,15 +63,15 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   DebugLog(@"segue.id: %@", segue.identifier );
+   //DebugLog(@"segue.id: %@", segue.identifier );
 
    if ([segue.identifier isEqualToString:@"roomsToItems"])
    {
       [self.navigationController setToolbarHidden:YES];
       
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      NSUInteger row = [indexPath row];
-      DebugLog(@"   row: %u", row );
+      //NSUInteger row = [indexPath row];
+      //DebugLog(@"   row: %u", row );
       
       // pass the moc to the child view:
       MIRItemsViewController *vc = [segue destinationViewController];
