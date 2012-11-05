@@ -183,7 +183,6 @@
    }
    
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"room == %@", [[self.parent valueForKey:@"name"] description]];
    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"room == %@", self.parent];
 
    // Edit the entity name as appropriate.

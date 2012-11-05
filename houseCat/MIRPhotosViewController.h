@@ -12,7 +12,8 @@
 
 
 
-@interface MIRPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface MIRPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate>
+
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -27,5 +28,9 @@
 -(NSString*)uniqueImagePath;
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
+
+- (void) dumpView: (UIView *) aView atIndent: (int) indent
+             into:(NSMutableString *) outstring;
+- (NSString *) displayViews: (UIView *) aView;
 
 @end

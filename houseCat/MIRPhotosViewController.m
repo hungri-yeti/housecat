@@ -9,6 +9,11 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MIRPhotosViewController.h"
+#import "MIRCell.h"
+
+
+NSString *kCellID = @"uicollection_cell";                          // UICollectionViewCell storyboard id
+
 
 @interface MIRPhotosViewController ()
 
@@ -52,27 +57,34 @@
 
 
 #pragma mark - Actions
+
 - (IBAction)addImage:(UIBarButtonItem *)sender
 {
+   UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
+   
    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if( ! cameraAvailable )
    {
       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera"
-                                                      message:@"The camera is not available"
+                                                      message:@"The camera is not available, using Photo Library"
                                                      delegate:self cancelButtonTitle:@"OK"
                                             otherButtonTitles:nil, nil];
       [alert show];
+      
+      // basically for developing in the simulator:
+      imagePickController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
    }
    else
    {
-      UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
       imagePickController.sourceType=UIImagePickerControllerSourceTypeCamera;
-      imagePickController.delegate=self;
-      imagePickController.allowsEditing=NO;
       imagePickController.showsCameraControls=YES;
-      //This method inherit from UIView,show imagePicker with animation
-      [self presentViewController:imagePickController animated:YES completion:nil];      
    }
+   imagePickController.delegate=self;
+   imagePickController.allowsEditing=NO;
+
+   //This method inherit from UIView,show imagePicker with animation
+   [self presentViewController:imagePickController animated:YES completion:nil];      
+
 }
 
 
@@ -95,12 +107,15 @@
    NSString *imagePath = [self uniqueImagePath];
    NSString *thumbPath = [self uniqueImagePath];
    
+   // TODO: refactor this out?
    // save the main image:
    NSData *pngBigData = UIImagePNGRepresentation(image);
    [pngBigData writeToFile:imagePath atomically:YES];
    
    // generate & save the thumb:
-   CGSize newSize = CGSizeMake(100, 100);
+   // TODO: this should query the cell size on the subview and set the size from that:
+   CGSize newSize = CGSizeMake(100, 100);   
+   
    UIImage* thumbImage = [self imageWithImage:image scaledToSize:newSize];
    NSData *pngThumbData = UIImagePNGRepresentation(thumbImage);
    [pngThumbData writeToFile:thumbPath atomically:YES];
@@ -113,6 +128,7 @@
    [imageObj setValue:imagePath forKey:@"imagePath"];
    [imageObj setValue:thumbPath forKey:@"thumbPath"] ;
    
+   // TODO: what happens here if the parent Item is a new item that hasn't been saved yet?
    [self.item addImagesObject:imageObj];
    NSError *error;
    if (![self.managedObjectContext save:&error])
@@ -124,18 +140,66 @@
 }
 
 
+
 #pragma mark - datasource
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   static NSString *identifier = @"uicollection_cell";
-   UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-   
-//   NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//   [cell setImage:[UIImage imageWithData:[object valueForKey:@"photoImageData"]]];
-   
+   MIRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
+	NSString *thumbPath = [[self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row] thumbPath];
+	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
+	
+	[cell.image setImage:thumbImage];
+	
+//   NSLog(@"thumbPath: %@, thumbImage: %@", thumbPath, thumbImage );
+//	NSLog(@"   cell.image.image: %@", cell.image.image );
+	
    return cell;
 }
+
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+   if (_fetchedResultsController != nil) {
+      return _fetchedResultsController;
+   }
+   
+   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+   fetchRequest.predicate = [NSPredicate predicateWithFormat:@"item == %@", self.item];
+   
+   // Edit the entity name as appropriate.
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" inManagedObjectContext:self.managedObjectContext];
+   [fetchRequest setEntity:entity];
+   
+   // Set the batch size to a suitable number.
+   [fetchRequest setFetchBatchSize:20];
+   
+   // Edit the sort key as appropriate.
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"thumbPath"
+                                       ascending:YES
+                                       selector:@selector(localizedCaseInsensitiveCompare:)];
+   NSArray *sortDescriptors = @[sortDescriptor];
+   
+   [fetchRequest setSortDescriptors:sortDescriptors];
+   
+   // Edit the section name key path and cache name if appropriate.
+   // nil for section name key path means "no sections".
+   NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+   aFetchedResultsController.delegate = self;
+   self.fetchedResultsController = aFetchedResultsController;
+   
+	NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+	}
+   
+   return _fetchedResultsController;
+}
+
 
 
 
@@ -143,19 +207,18 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-   return 4;
+   return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
 {
-   return 4;
+   id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+   
+   NSLog(@"# of items: %i, frc: %@", [sectionInfo numberOfObjects], self.fetchedResultsController );
+   
+   return [sectionInfo numberOfObjects];
 }
-
-
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//}
 
 
 
@@ -177,6 +240,8 @@
 	// Do any additional setup after loading the view.
    
    NSLog(@"item: %@", [[self.item valueForKey:@"name"] description]);
+   
+//   NSLog(@"%@", [self displayViews:self.view]);
 }
 
 
@@ -185,7 +250,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 @end

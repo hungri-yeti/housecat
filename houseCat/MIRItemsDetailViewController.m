@@ -59,7 +59,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (IBAction)saveButton:(id)sender
 {
-   NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
+   //NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
 
    NSManagedObjectContext *context = self.managedObjectContext;
    
@@ -92,31 +92,29 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (IBAction)doneButtonPressed:(id)sender
 {
-//   NSLog(@"doneButtonPressed");
-   
    [self.itemNotes resignFirstResponder];
    [self.itemPurchaseDate resignFirstResponder];
 }
 
 
 
+
+   // room > items: 
+   //// pass the moc to the child view:
+   //MIRItemsViewController *vc = [segue destinationViewController];
+   //vc.managedObjectContext = self.managedObjectContext;
+   //
+   //// pass the Room obj to the child view:
+   //Rooms *room = [self.fetchedResultsController objectAtIndexPath:indexPath];
+   //vc.parent = room;
+
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   //DebugLog(@"segue.id: %@", segue.identifier );
-   
+   // pass the moc & parent obj to the child view:
    MIRItemsDetailViewController *vc = [segue destinationViewController];
-//   if ([segue.identifier isEqualToString:@"showPhotos"])
-//   {
-      // pass the existing Item obj to the child view:
-      vc.item = self.item;
-//   }
-   
-   // pass the moc to the child view:
    vc.managedObjectContext = self.managedObjectContext;
-   
-   // pass the Item obj to the child view:
-   //vc.parent = self.parent;
+   vc.item = self.item;
 }
 
 
@@ -148,7 +146,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
    if( self.item == nil )
    {
-      NSLog(@"viewDidLoad: self.item == nil");
+      //NSLog(@"viewDidLoad: self.item == nil");
       
       Items *item = (Items *)[NSEntityDescription
                               insertNewObjectForEntityForName:@"Items"
@@ -168,11 +166,9 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    }
    else
    {
-      NSLog(@"viewDidLoad: self.item != nil");
+      //NSLog(@"viewDidLoad: self.item != nil");
      
       self.itemName.text = self.item.name;
-      
-      NSLog(@"date: %@", self.item.purchaseDate.description );
       
       [datePicker setDate:self.item.purchaseDate];
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];

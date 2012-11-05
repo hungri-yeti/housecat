@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BFD0D16480D3B00CEE99A /* MIRCell.m */; };
+		3B1BFD11164848A900CEE99A /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BFD10164848A900CEE99A /* Images.m */; };
 		3B4D0B44163600790049C8D4 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4D0B43163600790049C8D4 /* Items.m */; };
 		3B50B6AE16430F0E005BA6B8 /* MIRPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */; };
 		3B50B6B1164391A5005BA6B8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */; };
 		3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B702FEC162D187A00EE6C36 /* CoreData.framework */; };
 		3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */; };
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
-		3B744D3416459AD0003BBE83 /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B744D3316459AD0003BBE83 /* Images.m */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
 		3BAF8B91161E8D5900B23848 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B90161E8D5900B23848 /* CoreGraphics.framework */; };
@@ -47,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B1BFD0C16480D3B00CEE99A /* MIRCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRCell.h; sourceTree = "<group>"; };
+		3B1BFD0D16480D3B00CEE99A /* MIRCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRCell.m; sourceTree = "<group>"; };
+		3B1BFD0F164848A900CEE99A /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
+		3B1BFD10164848A900CEE99A /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
 		3B4D0B42163600790049C8D4 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
 		3B4D0B43163600790049C8D4 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
 		3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotosViewController.h; sourceTree = "<group>"; };
@@ -56,8 +61,6 @@
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
 		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rooms.h; path = ../Rooms.h; sourceTree = "<group>"; };
 		3B702FF9162D192100EE6C36 /* Rooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rooms.m; path = ../Rooms.m; sourceTree = "<group>"; };
-		3B744D3216459AD0003BBE83 /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
-		3B744D3316459AD0003BBE83 /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B8C161E8D5900B23848 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BAF8B8E161E8D5900B23848 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,9 +121,9 @@
 		3B702FF2162D18C400EE6C36 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				3B1BFD0F164848A900CEE99A /* Images.h */,
+				3B1BFD10164848A900CEE99A /* Images.m */,
 				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
-				3B744D3216459AD0003BBE83 /* Images.h */,
-				3B744D3316459AD0003BBE83 /* Images.m */,
 				3B702FF8162D192100EE6C36 /* Rooms.h */,
 				3B702FF9162D192100EE6C36 /* Rooms.m */,
 				3B4D0B42163600790049C8D4 /* Items.h */,
@@ -178,6 +181,8 @@
 				3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */,
 				3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */,
 				3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */,
+				3B1BFD0C16480D3B00CEE99A /* MIRCell.h */,
+				3B1BFD0D16480D3B00CEE99A /* MIRCell.m */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -361,7 +366,8 @@
 				3B4D0B44163600790049C8D4 /* Items.m in Sources */,
 				3BE3855316379F6F0023747A /* MIRItemsDetailViewController.m in Sources */,
 				3B50B6AE16430F0E005BA6B8 /* MIRPhotosViewController.m in Sources */,
-				3B744D3416459AD0003BBE83 /* Images.m in Sources */,
+				3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */,
+				3B1BFD11164848A900CEE99A /* Images.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
