@@ -182,7 +182,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="lO3-Fv-6p1" kind="modal" id="p41-Ef-ff2"/>
+                                            <segue destination="lO3-Fv-6p1" kind="modal" identifier="showPhotos" id="p41-Ef-ff2"/>
                                         </connections>
                                     </button>
                                 </subviews>

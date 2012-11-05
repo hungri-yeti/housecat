@@ -50,7 +50,9 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 #pragma mark - buttons
 - (void)cancelButton:(id)sender
 {
-   // TODO: does Item need to be specifically deleted?
+   // TODO: does Item need to be specifically deleted? what happens to the Images that may have been added as a relation?
+   // The delete rule is currently set to Cascade so the Images should be deleted 
+   // EXCEPT that this item may not have been saved into the store yet?
    [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -98,6 +100,27 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 
 
+#pragma mark - Segue
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   //DebugLog(@"segue.id: %@", segue.identifier );
+   
+   MIRItemsDetailViewController *vc = [segue destinationViewController];
+//   if ([segue.identifier isEqualToString:@"showPhotos"])
+//   {
+      // pass the existing Item obj to the child view:
+      vc.item = self.item;
+//   }
+   
+   // pass the moc to the child view:
+   vc.managedObjectContext = self.managedObjectContext;
+   
+   // pass the Item obj to the child view:
+   //vc.parent = self.parent;
+}
+
+
+
 #pragma mark - init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -135,7 +158,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
       // new item so date isn't set yet:
       [datePicker setDate:[NSDate date]];
       
-      // TODO: there's duplication here in the following else clause where the date is also set:
+      // TODO: there's duplication here and in the following else clause where the date is also set:
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
       [dateFormatter setDateStyle:kDateFormatStyle];
@@ -148,6 +171,8 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
       NSLog(@"viewDidLoad: self.item != nil");
      
       self.itemName.text = self.item.name;
+      
+      NSLog(@"date: %@", self.item.purchaseDate.description );
       
       [datePicker setDate:self.item.purchaseDate];
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];

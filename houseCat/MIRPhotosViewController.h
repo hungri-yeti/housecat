@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Items.h"
+#import "Images.h"
+
 
 
 @interface MIRPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -16,11 +18,14 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 // Used to pass the parent (Item) in:
-@property( strong, nonatomic ) Items *parent;
+@property( strong, nonatomic ) Items *item;
 
 
 -(IBAction)done:(id)sender;
 -(IBAction)addImage:(id)sender;
+
+-(NSString*)uniqueImagePath;
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 
 @end

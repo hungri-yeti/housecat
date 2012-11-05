@@ -12,7 +12,6 @@
 
 @interface MIRPhotosViewController ()
 
-
 @end
 
 @implementation MIRPhotosViewController
@@ -21,12 +20,40 @@
 
 #pragma mark - utilities
 
+- (NSString*)uniqueImagePath
+{
+   NSMutableString *imageName = [[NSMutableString alloc] initWithCapacity:0];
+   CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
+   if (theUUID)
+   {
+      [imageName appendString:CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, theUUID))];
+      CFRelease(theUUID);
+   }
+   [imageName appendString:@".png"];
+   
+   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
+   NSString *documentsPath = [paths objectAtIndex:0];
+   NSString *filePath = [documentsPath stringByAppendingPathComponent:imageName];
+   NSLog(@"filePath: %@", filePath);
+   
+   return filePath;
+}
+
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+   UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+   [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+   UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();    
+   UIGraphicsEndImageContext();
+   return newImage;
+}
+
+
 
 #pragma mark - Actions
 - (IBAction)addImage:(UIBarButtonItem *)sender
 {
-   NSLog(@"addImage...");
-   
    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if( ! cameraAvailable )
    {
@@ -36,54 +63,16 @@
                                             otherButtonTitles:nil, nil];
       [alert show];
    }
-//   UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//   picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//   NSString *requiredMediaType = (NSString *)kUTTypeImage;
-//   picker.mediaTypes = [[NSArray alloc] initWithObjects:requiredMediaType, nil];
-//   picker.allowsEditing = YES;
-//   picker.delegate = self;
-//   [self.navigationController presentViewController:picker animated:YES completion:nil];
-   
-   
-   // figure out our media types
-//   if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-//   {
-//      NSLog(@"   UIImagePickerControllerSourceTypeCamera");
-//      
-//      NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
-//      if ([mediaTypes containsObject:(NSString *)kUTTypeImage])
-//      {
-//         NSLog(@"      creating camera...");
-//         
-//         // create our image picker
-//         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//         picker.delegate = self;
-//         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//         picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-//         picker.allowsEditing = YES;
-//         
-//         [self presentViewController:picker animated:YES completion:nil];
-//      }
-//   }
-//   else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-//   {
-//      NSLog(@"   UIImagePickerControllerSourceTypePhotoLibrary");
-//      
-//      NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-//      if ([mediaTypes containsObject:(NSString *)kUTTypeImage])
-//      {
-//         NSLog(@"      creating image picker...");
-//         
-//         // create our image picker
-//         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//         picker.delegate = self;
-//         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//         picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-//         picker.allowsEditing = YES;
-//         
-//         [self presentViewController:picker animated:YES completion:nil];
-//      }
-//   }
+   else
+   {
+      UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
+      imagePickController.sourceType=UIImagePickerControllerSourceTypeCamera;
+      imagePickController.delegate=self;
+      imagePickController.allowsEditing=NO;
+      imagePickController.showsCameraControls=YES;
+      //This method inherit from UIView,show imagePicker with animation
+      [self presentViewController:imagePickController animated:YES completion:nil];      
+   }
 }
 
 
@@ -92,6 +81,47 @@
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
+#pragma mark - image picker
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+   [picker dismissViewControllerAnimated:YES completion:nil];
+   
+   UIImage* image = nil;
+   image = [info objectForKey:UIImagePickerControllerOriginalImage];
+   
+   NSString *imagePath = [self uniqueImagePath];
+   NSString *thumbPath = [self uniqueImagePath];
+   
+   // save the main image:
+   NSData *pngBigData = UIImagePNGRepresentation(image);
+   [pngBigData writeToFile:imagePath atomically:YES];
+   
+   // generate & save the thumb:
+   CGSize newSize = CGSizeMake(100, 100);
+   UIImage* thumbImage = [self imageWithImage:image scaledToSize:newSize];
+   NSData *pngThumbData = UIImagePNGRepresentation(thumbImage);
+   [pngThumbData writeToFile:thumbPath atomically:YES];
+   
+   // insert the paths into the db:
+   Images *imageObj = (Images *)[NSEntityDescription
+                                insertNewObjectForEntityForName:@"Images"
+                                inManagedObjectContext:self.managedObjectContext];
+   
+   [imageObj setValue:imagePath forKey:@"imagePath"];
+   [imageObj setValue:thumbPath forKey:@"thumbPath"] ;
+   
+   [self.item addImagesObject:imageObj];
+   NSError *error;
+   if (![self.managedObjectContext save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRPhotosViewController: unresolved error %@, %@", error, [error userInfo]);
+   }
+}
 
 
 #pragma mark - datasource
@@ -145,6 +175,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+   
+   NSLog(@"item: %@", [[self.item valueForKey:@"name"] description]);
 }
 
 
