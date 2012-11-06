@@ -22,15 +22,15 @@
 @property( strong, nonatomic ) Items *item;
 
 
--(IBAction)done:(id)sender;
--(IBAction)addImage:(id)sender;
+//-(IBAction)done:(id)sender;
+//-(IBAction)addImage:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+
 
 -(NSString*)uniqueImagePath;
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
-
-- (void) dumpView: (UIView *) aView atIndent: (int) indent
-             into:(NSMutableString *) outstring;
-- (NSString *) displayViews: (UIView *) aView;
 
 @end

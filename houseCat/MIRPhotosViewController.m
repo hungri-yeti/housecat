@@ -10,6 +10,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MIRPhotosViewController.h"
 #import "MIRCell.h"
+#import "MIRPhotoDetailViewController.h"
+
 
 
 NSString *kCellID = @"uicollection_cell";                          // UICollectionViewCell storyboard id
@@ -58,7 +60,7 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 
 #pragma mark - Actions
 
-- (IBAction)addImage:(UIBarButtonItem *)sender
+- (void) addImage:(id) sender
 {
    UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
    
@@ -86,13 +88,6 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
    [self presentViewController:imagePickController animated:YES completion:nil];      
 
 }
-
-
--(IBAction)done:(id)sender
-{
-   [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 
 #pragma mark - image picker
@@ -141,6 +136,23 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 
 
 
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    MIRPhotoDetailViewController *vc = [segue destinationViewController];
+
+	// pass the existing Image obj to the child view:
+	NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] lastObject];
+	Images *image = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	vc.image = image;
+   
+   // pass the moc to the child view:
+   vc.managedObjectContext = self.managedObjectContext;
+}
+
+
+
 #pragma mark - datasource
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -150,9 +162,6 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
 	
 	[cell.image setImage:thumbImage];
-	
-//   NSLog(@"thumbPath: %@, thumbImage: %@", thumbPath, thumbImage );
-//	NSLog(@"   cell.image.image: %@", cell.image.image );
 	
    return cell;
 }
@@ -238,6 +247,10 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+	UIBarButtonItem* btnCamera = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addImage:)];
+   self.navigationItem.rightBarButtonItem = btnCamera;
+	self.title = @"Photos";
    
    NSLog(@"item: %@", [[self.item valueForKey:@"name"] description]);
    

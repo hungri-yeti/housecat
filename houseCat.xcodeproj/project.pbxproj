@@ -15,6 +15,7 @@
 		3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B702FEC162D187A00EE6C36 /* CoreData.framework */; };
 		3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */; };
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
+		3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
 		3BAF8B91161E8D5900B23848 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B90161E8D5900B23848 /* CoreGraphics.framework */; };
@@ -61,6 +62,8 @@
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
 		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rooms.h; path = ../Rooms.h; sourceTree = "<group>"; };
 		3B702FF9162D192100EE6C36 /* Rooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rooms.m; path = ../Rooms.m; sourceTree = "<group>"; };
+		3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotoDetailViewController.h; sourceTree = "<group>"; };
+		3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotoDetailViewController.m; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B8C161E8D5900B23848 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BAF8B8E161E8D5900B23848 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,6 +186,8 @@
 				3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */,
 				3B1BFD0C16480D3B00CEE99A /* MIRCell.h */,
 				3B1BFD0D16480D3B00CEE99A /* MIRCell.m */,
+				3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */,
+				3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -368,6 +373,7 @@
 				3B50B6AE16430F0E005BA6B8 /* MIRPhotosViewController.m in Sources */,
 				3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */,
 				3B1BFD11164848A900CEE99A /* Images.m in Sources */,
+				3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
