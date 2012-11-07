@@ -14,7 +14,7 @@
 
 
 
-NSString *kCellID = @"uicollection_cell";                          // UICollectionViewCell storyboard id
+NSString *kCellID = @"uicollection_cell";      
 
 
 @interface MIRPhotosViewController ()
@@ -94,7 +94,7 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-   [picker dismissViewControllerAnimated:YES completion:nil];
+   //[picker dismissViewControllerAnimated:YES completion:nil];
    
    UIImage* image = nil;
    image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -102,16 +102,38 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
    NSString *imagePath = [self uniqueImagePath];
    NSString *thumbPath = [self uniqueImagePath];
    
-   // TODO: refactor this out?
-   // save the main image:
-   NSData *pngBigData = UIImagePNGRepresentation(image);
-   [pngBigData writeToFile:imagePath atomically:YES];
+	// imageWithImage also rotates the image to the proper orientation. If we don't do this
+	// for the main image, it will be offset 90 degrees ccw compared to the thumb. The only
+	// drawback is the amount of time required, so we'll display an activity indicator.
+	// replace right bar button 'refresh' with spinner
+	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	spinner.center = CGPointMake(160, 240);
+	spinner.hidesWhenStopped = YES;
+	[self.view addSubview:spinner];   
+	[spinner startAnimating];	
+	
+	// this code is just copy & paste. the spinner doesn't show up but the imgpicker
+	// returns immediately. The interesting thing is that the thumb shows up
+	// immediately, it can take some time for the actual img to show up.
+	// TODO: verify this works on device
+	// how we stop refresh from freezing the main UI thread
+	dispatch_queue_t resizeBigImage = dispatch_queue_create("resize", NULL);
+	dispatch_async(resizeBigImage, ^{
+		// do our long running process here
+		CGSize newSize = CGSizeMake(720, 960);   
+		UIImage* mainImage = [self imageWithImage:image scaledToSize:newSize];	
+		NSData *pngBigData = UIImagePNGRepresentation(mainImage);
+		[pngBigData writeToFile:imagePath atomically:YES];
+		// do any UI stuff on the main UI thread
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[spinner stopAnimating];
+		});
+	});
    
    // generate & save the thumb:
    // TODO: this should query the cell size on the subview and set the size from that:
-   CGSize newSize = CGSizeMake(100, 100);   
-   
-   UIImage* thumbImage = [self imageWithImage:image scaledToSize:newSize];
+   CGSize newThumbSize = CGSizeMake(100, 100);   
+   UIImage* thumbImage = [self imageWithImage:image scaledToSize:newThumbSize];
    NSData *pngThumbData = UIImagePNGRepresentation(thumbImage);
    [pngThumbData writeToFile:thumbPath atomically:YES];
    
@@ -124,6 +146,7 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
    [imageObj setValue:thumbPath forKey:@"thumbPath"] ;
    
    // TODO: what happens here if the parent Item is a new item that hasn't been saved yet?
+	// crash-ola
    [self.item addImagesObject:imageObj];
    NSError *error;
    if (![self.managedObjectContext save:&error])
@@ -132,6 +155,8 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
       NSLog(@"MIRPhotosViewController: unresolved error %@, %@", error, [error userInfo]);
    }
+   [picker dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
@@ -210,6 +235,23 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 }
 
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+	UICollectionView *collectionView = self.collectionView;
+   
+   switch(type) {
+      case NSFetchedResultsChangeInsert:
+         [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+         break;
+         
+      case NSFetchedResultsChangeDelete:
+         [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+         break;
+	}
+}
+
 
 
 #pragma mark - delegate
@@ -253,8 +295,6 @@ NSString *kCellID = @"uicollection_cell";                          // UICollecti
 	self.title = @"Photos";
    
    NSLog(@"item: %@", [[self.item valueForKey:@"name"] description]);
-   
-//   NSLog(@"%@", [self displayViews:self.view]);
 }
 
 

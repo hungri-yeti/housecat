@@ -321,15 +321,22 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyA-IZ-eal">
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="371" id="mnE-mt-rds"/>
+                                </constraints>
+                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8R-ap-a70">
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hfw-4c-nsU"/>
-                                    <barButtonItem systemItem="trash" id="nQi-mk-mci"/>
+                                    <barButtonItem systemItem="trash" id="nQi-mk-mci">
+                                        <connections>
+                                            <action selector="deleteImage:" destination="1vD-bH-9pf" id="g40-VV-Zig"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyA-IZ-eal">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -339,7 +346,6 @@
                             <constraint firstItem="q8R-ap-a70" firstAttribute="leading" secondItem="WBC-Ct-ee6" secondAttribute="leading" type="default" id="qmQ-HQ-2cv"/>
                             <constraint firstItem="NyA-IZ-eal" firstAttribute="top" secondItem="WBC-Ct-ee6" secondAttribute="top" type="default" id="skH-tr-kMP"/>
                             <constraint firstItem="NyA-IZ-eal" firstAttribute="trailing" secondItem="WBC-Ct-ee6" secondAttribute="trailing" type="default" id="tVa-Fr-5FP"/>
-                            <constraint firstItem="NyA-IZ-eal" firstAttribute="bottom" secondItem="q8R-ap-a70" secondAttribute="top" type="default" id="vL1-JJ-Xke"/>
                         </constraints>
                     </view>
                     <connections>
