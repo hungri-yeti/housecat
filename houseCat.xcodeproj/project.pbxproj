@@ -124,9 +124,9 @@
 		3B702FF2162D18C400EE6C36 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
 				3B1BFD0F164848A900CEE99A /* Images.h */,
 				3B1BFD10164848A900CEE99A /* Images.m */,
-				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
 				3B702FF8162D192100EE6C36 /* Rooms.h */,
 				3B702FF9162D192100EE6C36 /* Rooms.m */,
 				3B4D0B42163600790049C8D4 /* Items.h */,

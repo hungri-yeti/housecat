@@ -22,6 +22,7 @@
 
 // This is used in a couple of different places, edit here to change globally (file scope)
 NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
+bool newItem;
 
 
 
@@ -50,9 +51,23 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 #pragma mark - buttons
 - (void)cancelButton:(id)sender
 {
-   // TODO: does Item need to be specifically deleted? what happens to the Images that may have been added as a relation?
-   // The delete rule is currently set to Cascade so the Images should be deleted 
-   // EXCEPT that this item may not have been saved into the store yet?
+	NSLog(@"cancelButton:");
+	
+	if( newItem )
+	{ 
+		NSLog(@"   newItem");
+		
+		[self.parent removeItemsObject:self.item];
+		[self.managedObjectContext deleteObject:self.item];
+		NSManagedObjectContext *context = self.managedObjectContext;
+		NSError *error;
+		if (![context save:&error])
+		{
+			// Replace this implementation with code to handle the error appropriately.
+			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+			NSLog(@"MIRItemsDetailViewController:cancelButton: unresolved error %@, %@", error, [error userInfo]);
+		}
+	}
    [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -77,7 +92,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    [self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
    [self.item setValue:self.itemNotes.text forKey:@"notes"];
 
-   [self.parent addItemsObject:self.item];
+   //[self.parent addItemsObject:self.item];
    NSError *error;
    if (![context save:&error])
    {
@@ -97,16 +112,6 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 }
 
 
-
-
-   // room > items: 
-   //// pass the moc to the child view:
-   //MIRItemsViewController *vc = [segue destinationViewController];
-   //vc.managedObjectContext = self.managedObjectContext;
-   //
-   //// pass the Room obj to the child view:
-   //Rooms *room = [self.fetchedResultsController objectAtIndexPath:indexPath];
-   //vc.parent = room;
 
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -146,35 +151,57 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
    if( self.item == nil )
    {
+		newItem = YES;
+		
       //NSLog(@"viewDidLoad: self.item == nil");
-      
+		
+		// create new empty Item and store it:
       Items *item = (Items *)[NSEntityDescription
                               insertNewObjectForEntityForName:@"Items"
                               inManagedObjectContext:self.managedObjectContext];
       self.item = item;
-      
-      // new item so date isn't set yet:
+		[self.parent addItemsObject:self.item];
+		NSManagedObjectContext *context = self.managedObjectContext;
+		NSError *error;
+		if (![context save:&error])
+		{
+			// Replace this implementation with code to handle the error appropriately.
+			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+			NSLog(@"MIRItemsDetailViewController:viewDidLoad: unresolved error %@, %@", error, [error userInfo]);
+		}
+      // this is a new item so date isn't set yet:
       [datePicker setDate:[NSDate date]];
       
-      // TODO: there's duplication here and in the following else clause where the date is also set:
+      // DRY: there's some duplication here and in the following else clause but
+		// I don't think there's anything I can do about it due to the pre- and post-
+		// requisites being different
+		// -
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
       [dateFormatter setDateStyle:kDateFormatStyle];
       [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+		// -
       self.itemPurchaseDate.text = [dateFormatter stringFromDate:[NSDate date]];
       purchaseDate = [NSDate date];
    }
    else
    {
+		newItem = NO;
+		
       //NSLog(@"viewDidLoad: self.item != nil");
-     
+		// TODO: need to figure out which Image will be used for the thumbnail
+		// (if sort order is implemented it should the first img)
       self.itemName.text = self.item.name;
       
       [datePicker setDate:self.item.purchaseDate];
+		
+		// -
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
       [dateFormatter setDateStyle:kDateFormatStyle];
       [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+		// -
+		
       self.itemPurchaseDate.text = [dateFormatter stringFromDate:self.item.purchaseDate];
       
       NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithFloat:[self.item.cost floatValue]]

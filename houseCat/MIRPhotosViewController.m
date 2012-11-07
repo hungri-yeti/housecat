@@ -119,7 +119,7 @@ NSString *kCellID = @"uicollection_cell";
 	// how we stop refresh from freezing the main UI thread
 	dispatch_queue_t resizeBigImage = dispatch_queue_create("resize", NULL);
 	dispatch_async(resizeBigImage, ^{
-		// do our long running process here
+		// do our long running process here:
 		CGSize newSize = CGSizeMake(720, 960);   
 		UIImage* mainImage = [self imageWithImage:image scaledToSize:newSize];	
 		NSData *pngBigData = UIImagePNGRepresentation(mainImage);
@@ -156,7 +156,6 @@ NSString *kCellID = @"uicollection_cell";
       NSLog(@"MIRPhotosViewController: unresolved error %@, %@", error, [error userInfo]);
    }
    [picker dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 
