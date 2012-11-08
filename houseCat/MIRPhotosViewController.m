@@ -200,7 +200,6 @@ NSString *kCellID = @"uicollection_cell";
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"item == %@", self.item];
    
-   // Edit the entity name as appropriate.
    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" inManagedObjectContext:self.managedObjectContext];
    [fetchRequest setEntity:entity];
    

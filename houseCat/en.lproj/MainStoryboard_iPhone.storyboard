@@ -37,8 +37,6 @@
                                 <segue destination="dHk-Oe-t2u" kind="push" identifier="lossReport" id="Fr5-yu-Apq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="uzk-Ss-RfD"/>
-                        <barButtonItem systemItem="action" id="1Ab-Av-gSE"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Rooms" id="584-cg-cAo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bBt-nR-fbg">
@@ -118,7 +116,11 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="action" id="LQh-mx-WQj"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="NLu-3H-bVt"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRU-WB-Xfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,6 +10,7 @@
 // for segue:
 #import "MIRItemsDetailViewController.h"
 #import "Items.h"
+#import "Images.h"
 
 
 @interface MIRItemsViewController ()
@@ -111,6 +112,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	// TODO: I was getting dropped into the debugger on a thrown exception, but no crash.
+	// It occured when going down into a room and then back up into a different one. The exception
+	// was consistent for a while but then stopped occuring, I didn't do anything to fix it though.
    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemsCell" forIndexPath:indexPath];
    [self configureCell:cell atIndexPath:indexPath];
    return cell;
@@ -203,7 +207,7 @@
          break;
          
       case NSFetchedResultsChangeDelete:
-         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
          break;
          
       case NSFetchedResultsChangeUpdate:
@@ -226,12 +230,38 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   if (editingStyle == UITableViewCellEditingStyleDelete) {
+   if (editingStyle == UITableViewCellEditingStyleDelete)
+	{
+		Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+		NSLog(@"preparing to delete images for: %@", item.name );
+
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		// get all of the Images for this Item:
+		[fetchRequest setEntity:[NSEntityDescription entityForName:@"Images"
+												 inManagedObjectContext:self.managedObjectContext]];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"item == %@", item];
+		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+		
+		NSError* error;
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		for (Images *image in results)
+		{
+			NSLog(@"thumbPath: %@, imagePath: %@", [image thumbPath], [image imagePath] );
+			
+			// delete the image files so we don't fill up the file system:
+			error = nil;
+			[fileManager removeItemAtPath:[image thumbPath] error:&error];
+			error = nil;
+			[fileManager removeItemAtPath:[image imagePath] error:&error];
+			// TODO: do we care about any errors here?
+		}
+		
       NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
       [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
       
-      NSError *error = nil;
-      if (![context save:&error]) {
+		error = nil;
+      if (![context save:&error])
+		{
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
          NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
