@@ -32,7 +32,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="loss" id="ktb-hh-eZB"/>
+                        <barButtonItem title="loss" id="ktb-hh-eZB">
+                            <connections>
+                                <segue destination="dHk-Oe-t2u" kind="push" identifier="lossReport" id="Fr5-yu-Apq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="uzk-Ss-RfD"/>
                         <barButtonItem systemItem="action" id="1Ab-Av-gSE"/>
                     </toolbarItems>
@@ -93,6 +97,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Cp-2Z-d0R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1044" y="50"/>
+        </scene>
+        <!--Loss Report List View Controller-->
+        <scene sceneID="1hM-wt-Htf">
+            <objects>
+                <tableViewController id="dHk-Oe-t2u" customClass="MIRLossReportListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Uel-ZT-1PP">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deque_cell" id="7c7-dc-BSd">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NLu-3H-bVt"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NRU-WB-Xfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="691"/>
         </scene>
         <!--Items Detail View Controller-->
         <scene sceneID="3Du-sY-dGz">

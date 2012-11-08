@@ -11,6 +11,7 @@
 #import "MIRitemsViewController.h"
 #import "MIRAddRoomViewController.h"
 #import "Rooms.h"
+#import "MIRLossReportListViewController.h"
 
 
 @interface MIRRoomsViewController ()
@@ -87,6 +88,14 @@
       MIRAddRoomViewController *vc = (MIRAddRoomViewController *)[[navController viewControllers] lastObject];
       vc.managedObjectContext = self.managedObjectContext;
    }
+	else if( [segue.identifier isEqualToString:@"lossReport"])
+	{
+		NSLog(@"self.moc: %@", self.managedObjectContext );
+		
+      // pass the moc to the child view:
+      MIRLossReportListViewController *vc = [segue destinationViewController];
+      vc.managedObjectContext = self.managedObjectContext; // < crash here	
+	}
 }
 
 

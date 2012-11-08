@@ -59,9 +59,8 @@ bool newItem;
 		
 		[self.parent removeItemsObject:self.item];
 		[self.managedObjectContext deleteObject:self.item];
-		NSManagedObjectContext *context = self.managedObjectContext;
 		NSError *error;
-		if (![context save:&error])
+		if (![self.managedObjectContext save:&error])
 		{
 			// Replace this implementation with code to handle the error appropriately.
 			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -76,8 +75,6 @@ bool newItem;
 {
    //NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
 
-   NSManagedObjectContext *context = self.managedObjectContext;
-   
    // set attributes from view:
    [self.item setValue:self.itemName.text forKey:@"name"];
    [self.item setValue:purchaseDate forKey:@"purchaseDate"];
@@ -92,9 +89,8 @@ bool newItem;
    [self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
    [self.item setValue:self.itemNotes.text forKey:@"notes"];
 
-   //[self.parent addItemsObject:self.item];
    NSError *error;
-   if (![context save:&error])
+   if (![self.managedObjectContext save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -151,9 +147,9 @@ bool newItem;
 
    if( self.item == nil )
    {
-		newItem = YES;
-		
       //NSLog(@"viewDidLoad: self.item == nil");
+		
+		newItem = YES;
 		
 		// create new empty Item and store it:
       Items *item = (Items *)[NSEntityDescription
@@ -161,9 +157,8 @@ bool newItem;
                               inManagedObjectContext:self.managedObjectContext];
       self.item = item;
 		[self.parent addItemsObject:self.item];
-		NSManagedObjectContext *context = self.managedObjectContext;
 		NSError *error;
-		if (![context save:&error])
+		if (![self.managedObjectContext save:&error])
 		{
 			// Replace this implementation with code to handle the error appropriately.
 			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
