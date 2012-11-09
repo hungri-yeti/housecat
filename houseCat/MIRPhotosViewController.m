@@ -25,31 +25,6 @@ NSString *kCellID = @"uicollection_cell";
 
 
 
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	// go through each cell in the order that they appear in the collectionView,
-	UInt16 sortOrder = 0;
-	NSArray *indexPaths = [self.collectionView indexPathsForVisibleItems];
-	for (NSIndexPath* indexPath in indexPaths )
-	{
-		MIRCell* cell = (MIRCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-		[cell.image setValue:[NSNumber numberWithUnsignedInt:sortOrder] forKey:@"sortOrder"];
-
-		sortOrder++;
-	}
-	
-   NSError *error;
-   if (![self.managedObjectContext save:&error]) // < crash here
-   {
-      // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotosViewController: viewWillDisappear: unresolved error %@, %@", error, [error userInfo]);
-   }
-}
-
-
-
 #pragma mark - utilities
 
 - (NSString*)uniqueImagePath
@@ -202,6 +177,43 @@ NSString *kCellID = @"uicollection_cell";
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	// Set sortOrder for all the photos. Assume that either a new image (sortOrder = 255) was
+	// added or an image was deleted from the view (hole in sort order).
+	// Obtain all remaining images based on sortOrder, reset sortOrder starting at 0.
+	NSManagedObjectContext *context = [self managedObjectContext]; 
+	NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
+   request.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
+   
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" 
+															inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+   // Edit the sort key as appropriate.
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"sortOrder"
+                                       ascending:YES];
+   NSArray *sortDescriptors = @[sortDescriptor];
+   [request setSortDescriptors:sortDescriptors];
+	
+	NSArray *results = [context executeFetchRequest:request error:nil];
+	UInt16 sortOrder = 0;
+	for (NSManagedObject *object in results)
+	{
+		[object setValue:[NSNumber numberWithUnsignedInt:sortOrder] forKey:@"sortOrder"];
+		sortOrder++;
+	}
+	
+   NSError *error;
+   if (![context save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRPhotosViewController: viewWillDisappear: unresolved error %@, %@", error, [error userInfo]);
+   }
+}
+
+
 
 #pragma mark - datasource
 
@@ -317,6 +329,9 @@ NSString *kCellID = @"uicollection_cell";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
+	// TODO: the nav bar at the top obscures the top of the collection until the collection is pulled down, it then bounces back to the proper top (under the bottom edge of the navbar)
+	
 
 	UIBarButtonItem* btnCamera = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addImage:)];
    self.navigationItem.rightBarButtonItem = btnCamera;

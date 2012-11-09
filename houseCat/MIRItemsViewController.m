@@ -232,6 +232,8 @@
 {
    if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
+		// TODO: crashing here (getting results from [moc executeFetchRequest]
+		// *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: 'keypath item not found in entity <NSSQLEntity Images id=1>'
 		Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 		NSLog(@"preparing to delete images for: %@", item.name );
 
