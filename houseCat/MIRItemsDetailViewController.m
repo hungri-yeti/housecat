@@ -131,6 +131,23 @@ bool newItem;
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	// take care of the button's thumbnail image here instead of viewDidLoad
+	// as we might be returning from a newly selected photo via MIRPhotosViewController
+	NSString *imgPath = [self.item thumbPath];
+	if( nil != imgPath )
+	{
+		UIImage *image = [UIImage imageWithContentsOfFile:imgPath];
+		[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];		
+	}
+	else
+	{
+		[self.photoButton setTitle:@"Click to set photo" forState:(UIControlStateNormal && UIControlStateHighlighted)];
+	}
+}
+
+
 - (void)viewDidLoad
 {
    [super viewDidLoad];
@@ -181,12 +198,10 @@ bool newItem;
    }
    else
    {
-		newItem = NO;
-		
       //NSLog(@"viewDidLoad: self.item != nil");
-		// TODO: need to figure out which Image will be used for the thumbnail
-		// (if sort order is implemented it should the first img)
-      self.itemName.text = self.item.name;
+		
+		newItem = NO;
+		self.itemName.text = self.item.name;
       
 		// date may or may not have been set:
 		if( nil == self.item.purchaseDate )
@@ -212,13 +227,11 @@ bool newItem;
       self.itemCost.text = numberStr;
       self.itemSerialNumber.text = self.item.serialNumber;
       self.itemNotes.text = self.item.notes;
-   }
-
+	}
    [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
    [self.itemPurchaseDate addTarget:self action:@selector(setupPurchaseDateField:) forControlEvents:UIControlEventEditingDidBegin];
    
    [self.itemPurchaseDate setInputView:datePicker];
-
    
    [self registerForKeyboardNotifications];
 }

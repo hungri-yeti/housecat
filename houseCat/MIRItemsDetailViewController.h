@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *itemNotes;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UIButton *photoButton;
 
 - (IBAction)saveButton:(id)sender;
 
