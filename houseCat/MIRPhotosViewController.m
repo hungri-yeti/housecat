@@ -27,6 +27,87 @@ NSString *kCellID = @"uicollection_cell";
 
 #pragma mark - utilities
 
+-(void)updateParentThumbPath
+{
+	// Update Item.thumbPath 
+	//   Get all of the Image objects that are shown
+	//   If at least 1 Image found
+	//		Set parentItem.thumbPath to results[0].thumbPath
+	//   else set parentItem.thumbPath = nil
+	NSManagedObjectContext *context = [self managedObjectContext]; 
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+   request.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
+   
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" 
+															inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"sortOrder"
+                                       ascending:YES];
+   NSArray *sortDescriptors = @[sortDescriptor];
+   [request setSortDescriptors:sortDescriptors];
+	// TODO: is there any way to get just the first image (results[0] instead of the entire set?
+	NSArray *results = [context executeFetchRequest:request error:nil];
+
+	if ([results count]) 
+	{
+		Images* thumbImage = [results objectAtIndex:0];
+		[self.item setThumbPath:[thumbImage thumbPath]];
+	}
+	else
+	{
+		// TODO: instead of nil, set it to a default "click here to add photo" image (will also need to be localized). Alternately, in ItemsDetailVC set a label in the middle of the UIImageView
+		[self.item setThumbPath:nil];
+	}
+
+	NSLog(@"image.thumbPath: %@", [self.item thumbPath]);
+
+   NSError *error;
+   if (![context save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRPhotosViewController: updateParentThumbPath: unresolved error %@, %@", error, [error userInfo]);
+   }
+}
+
+
+- (void)updateSortOrder
+{
+	// Set sortOrder for all the photos. Assume that either a new image (sortOrder = 255) was
+	// added or an image was deleted from the view (hole in sort order).
+	// Obtain all remaining images based on sortOrder, reset sortOrder starting at 0.
+	NSManagedObjectContext *context = [self managedObjectContext]; 
+	NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
+   request.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
+   
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" 
+															inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+   // Edit the sort key as appropriate.
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"sortOrder"
+                                       ascending:YES];
+   NSArray *sortDescriptors = @[sortDescriptor];
+   [request setSortDescriptors:sortDescriptors];
+	
+	NSArray *results = [context executeFetchRequest:request error:nil];
+	UInt16 sortOrder = 0;
+	for (NSManagedObject *object in results)
+	{
+		[object setValue:[NSNumber numberWithUnsignedInt:sortOrder] forKey:@"sortOrder"];
+		sortOrder++;
+	}
+	
+   NSError *error;
+   if (![context save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRPhotosViewController: viewWillDisappear: unresolved error %@, %@", error, [error userInfo]);
+   }
+}
+
 - (NSString*)uniqueImagePath
 {
    NSMutableString *imageName = [[NSMutableString alloc] initWithCapacity:0];
@@ -179,38 +260,8 @@ NSString *kCellID = @"uicollection_cell";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	// Set sortOrder for all the photos. Assume that either a new image (sortOrder = 255) was
-	// added or an image was deleted from the view (hole in sort order).
-	// Obtain all remaining images based on sortOrder, reset sortOrder starting at 0.
-	NSManagedObjectContext *context = [self managedObjectContext]; 
-	NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
-   request.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
-   
-   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" 
-															inManagedObjectContext:self.managedObjectContext];
-	[request setEntity:entity];
-   // Edit the sort key as appropriate.
-   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                       initWithKey:@"sortOrder"
-                                       ascending:YES];
-   NSArray *sortDescriptors = @[sortDescriptor];
-   [request setSortDescriptors:sortDescriptors];
-	
-	NSArray *results = [context executeFetchRequest:request error:nil];
-	UInt16 sortOrder = 0;
-	for (NSManagedObject *object in results)
-	{
-		[object setValue:[NSNumber numberWithUnsignedInt:sortOrder] forKey:@"sortOrder"];
-		sortOrder++;
-	}
-	
-   NSError *error;
-   if (![context save:&error])
-   {
-      // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotosViewController: viewWillDisappear: unresolved error %@, %@", error, [error userInfo]);
-   }
+	[self updateSortOrder];
+	[self updateParentThumbPath];
 }
 
 

@@ -112,9 +112,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	// TODO: I was getting dropped into the debugger on a thrown exception, but no crash.
-	// It occured when going down into a room and then back up into a different one. The exception
-	// was consistent for a while but then stopped occuring, I didn't do anything to fix it though.
    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemsCell" forIndexPath:indexPath];
    [self configureCell:cell atIndexPath:indexPath];
    return cell;

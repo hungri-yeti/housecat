@@ -18,6 +18,7 @@
 
 - (IBAction)deleteImage:(id)sender
 {
+	// DRY: some of this code is duplicated in MIRItemsViewController:commitEditingStyle
 	NSError* error;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 

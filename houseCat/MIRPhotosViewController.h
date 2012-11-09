@@ -31,6 +31,7 @@
 
 -(NSString*)uniqueImagePath;
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
-
+-(void)updateSortOrder;
+-(void)updateParentThumbPath;
 
 @end
