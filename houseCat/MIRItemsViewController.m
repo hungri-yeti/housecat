@@ -232,8 +232,7 @@
 {
    if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
-		// TODO: crashing here (getting results from [moc executeFetchRequest]
-		// *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: 'keypath item not found in entity <NSSQLEntity Images id=1>'
+		// DRY: some of this code is repeated in MIRPhotoDetailVC:deleteImage
 		Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 		NSLog(@"preparing to delete images for: %@", item.name );
 
@@ -241,7 +240,7 @@
 		// get all of the Images for this Item:
 		[fetchRequest setEntity:[NSEntityDescription entityForName:@"Images"
 												 inManagedObjectContext:self.managedObjectContext]];
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"item == %@", item];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", item];
 		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil]; // crash here?
 		
 		NSError* error;

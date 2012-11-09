@@ -18,7 +18,20 @@
 
 - (IBAction)deleteImage:(id)sender
 {
-   NSError *error;
+	NSError* error;
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+
+	NSLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
+		
+	// delete the image files so we don't fill up the file system:
+	error = nil;
+	[fileManager removeItemAtPath:[self.image thumbPath] error:&error];
+	error = nil;
+	[fileManager removeItemAtPath:[self.image imagePath] error:&error];
+	// TODO: do we care about any errors here?
+	
+	// then delete the obj:
+	error = nil;
 	[self.managedObjectContext deleteObject:self.image];
    if (![self.managedObjectContext save:&error])
    {
