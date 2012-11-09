@@ -2,7 +2,7 @@
 //  Images.m
 //  houseCat
 //
-//  Created by kenl on 12/11/5.
+//  Created by kenl on 12/11/8.
 //  Copyright (c) 2012 kl. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 @implementation Images
 
 @dynamic imagePath;
-@dynamic sort;
+@dynamic sortOrder;
 @dynamic thumbPath;
-@dynamic item;
+@dynamic parentItem;
 
 @end

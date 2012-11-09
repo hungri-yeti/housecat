@@ -18,7 +18,6 @@
 
 - (IBAction)deleteImage:(id)sender
 {
-	// TODO: this does not delete the file(s) referenced by thumbPath and imagePath. Additionally, if the user deletes the parent Item via the table, that also leaves the files laying around. This will eventually cause file system usage issues.
    NSError *error;
 	[self.managedObjectContext deleteObject:self.image];
    if (![self.managedObjectContext save:&error])

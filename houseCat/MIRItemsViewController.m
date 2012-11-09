@@ -240,7 +240,7 @@
 		[fetchRequest setEntity:[NSEntityDescription entityForName:@"Images"
 												 inManagedObjectContext:self.managedObjectContext]];
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"item == %@", item];
-		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil]; // crash here?
 		
 		NSError* error;
 		NSFileManager *fileManager = [NSFileManager defaultManager];

@@ -29,6 +29,7 @@
 }
 
 
+// TODO: need to show running total cost of checked items
 - (NSFetchedResultsController *)fetchedResultsController
 {
    if (_fetchedResultsController != nil) {
@@ -173,7 +174,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"deque_cell" forIndexPath:indexPath];
+	// Does this really do anything? I didn't get the requested style until I changed it in the storyboard.
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"lossreport_cell" forIndexPath:indexPath];
+	if (cell == nil)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"lossreport_cell"];
+	}
    [self configureCell:cell atIndexPath:indexPath];
    return cell;
 }
@@ -183,6 +189,16 @@
 {
    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
    cell.textLabel.text = [[object valueForKey:@"name"] description];
+	NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[object valueForKey:@"cost"]
+																			 numberStyle:NSNumberFormatterCurrencyStyle];
+	cell.detailTextLabel.text = numberStr;
+	
+	//NSLog(@"configureCell:detailTextLabel: %@", cell.detailTextLabel.text );
+	//NSLog(@"configureCell: numberStr: %@", numberStr );
+	
+//	NSString *thumbPath = [[self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row] thumbPath];
+//	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
+//	cell.imageView.image = thumbImage;
 }
 
 

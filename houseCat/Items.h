@@ -2,30 +2,31 @@
 //  Items.h
 //  houseCat
 //
-//  Created by kenl on 12/10/22.
+//  Created by kenl on 12/11/8.
 //  Copyright (c) 2012 kl. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Rooms;
+@class Images, Rooms;
 
 @interface Items : NSManagedObject
 
-@property (nonatomic, retain) NSDecimalNumber *cost;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *notes;
-@property (nonatomic, retain) NSDate *purchaseDate;
-@property (nonatomic, retain) NSString *serialNumber;
+@property (nonatomic, retain) NSDecimalNumber * cost;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSDate * purchaseDate;
+@property (nonatomic, retain) NSString * serialNumber;
+@property (nonatomic, retain) NSString * thumbPath;
 @property (nonatomic, retain) NSSet *images;
 @property (nonatomic, retain) Rooms *room;
 @end
 
 @interface Items (CoreDataGeneratedAccessors)
 
-- (void)addImagesObject:(NSManagedObject *)value;
-- (void)removeImagesObject:(NSManagedObject *)value;
+- (void)addImagesObject:(Images *)value;
+- (void)removeImagesObject:(Images *)value;
 - (void)addImages:(NSSet *)values;
 - (void)removeImages:(NSSet *)values;
 

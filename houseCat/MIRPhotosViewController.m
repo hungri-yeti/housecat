@@ -25,6 +25,31 @@ NSString *kCellID = @"uicollection_cell";
 
 
 
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	// go through each cell in the order that they appear in the collectionView,
+	UInt16 sortOrder = 0;
+	NSArray *indexPaths = [self.collectionView indexPathsForVisibleItems];
+	for (NSIndexPath* indexPath in indexPaths )
+	{
+		MIRCell* cell = (MIRCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+		[cell.image setValue:[NSNumber numberWithUnsignedInt:sortOrder] forKey:@"sortOrder"];
+
+		sortOrder++;
+	}
+	
+   NSError *error;
+   if (![self.managedObjectContext save:&error]) // < crash here
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRPhotosViewController: viewWillDisappear: unresolved error %@, %@", error, [error userInfo]);
+   }
+}
+
+
+
 #pragma mark - utilities
 
 - (NSString*)uniqueImagePath
@@ -141,19 +166,20 @@ NSString *kCellID = @"uicollection_cell";
    Images *imageObj = (Images *)[NSEntityDescription
                                 insertNewObjectForEntityForName:@"Images"
                                 inManagedObjectContext:self.managedObjectContext];
-   
+	
    [imageObj setValue:imagePath forKey:@"imagePath"];
-   [imageObj setValue:thumbPath forKey:@"thumbPath"] ;
+   [imageObj setValue:thumbPath forKey:@"thumbPath"];
+	// I assume that there will never be more than 254 images, so the new image
+	// is always inserted at the end.
+	[imageObj setValue:[NSNumber numberWithInt:255] forKey:@"sortOrder"];
    
-   // TODO: what happens here if the parent Item is a new item that hasn't been saved yet?
-	// crash-ola
    [self.item addImagesObject:imageObj];
    NSError *error;
    if (![self.managedObjectContext save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotosViewController: unresolved error %@, %@", error, [error userInfo]);
+      NSLog(@"MIRPhotosViewController: didFinishPickingMediaWithInfo: unresolved error %@, %@", error, [error userInfo]);
    }
    [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -184,8 +210,12 @@ NSString *kCellID = @"uicollection_cell";
    MIRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
 	NSString *thumbPath = [[self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row] thumbPath];
 	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
+	Items* parentItem = [[self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row] parentItem];
+	cell.parentItem = parentItem;
+	Images* imageObj = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row];
+	cell.image = imageObj;
 	
-	[cell.image setImage:thumbImage];
+	[cell.imageView setImage:thumbImage];
 	
    return cell;
 }
@@ -198,7 +228,7 @@ NSString *kCellID = @"uicollection_cell";
    }
    
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   fetchRequest.predicate = [NSPredicate predicateWithFormat:@"item == %@", self.item];
+   fetchRequest.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
    
    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" inManagedObjectContext:self.managedObjectContext];
    [fetchRequest setEntity:entity];
@@ -208,21 +238,24 @@ NSString *kCellID = @"uicollection_cell";
    
    // Edit the sort key as appropriate.
    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                       initWithKey:@"thumbPath"
-                                       ascending:YES
-                                       selector:@selector(localizedCaseInsensitiveCompare:)];
+                                       initWithKey:@"sortOrder"
+                                       ascending:YES];
    NSArray *sortDescriptors = @[sortDescriptor];
-   
    [fetchRequest setSortDescriptors:sortDescriptors];
    
    // Edit the section name key path and cache name if appropriate.
    // nil for section name key path means "no sections".
-   NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+   NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] 
+																				initWithFetchRequest:fetchRequest 
+																				managedObjectContext:self.managedObjectContext 
+																				sectionNameKeyPath:nil 
+																				cacheName:nil];
    aFetchedResultsController.delegate = self;
    self.fetchedResultsController = aFetchedResultsController;
    
+	
 	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
+	if (![self.fetchedResultsController performFetch:&error]) {	// < crash here
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -263,9 +296,6 @@ NSString *kCellID = @"uicollection_cell";
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
 {
    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-   
-   NSLog(@"# of items: %i, frc: %@", [sectionInfo numberOfObjects], self.fetchedResultsController );
-   
    return [sectionInfo numberOfObjects];
 }
 

@@ -2,9 +2,9 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2056" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Images" representedClassName="Images" syncable="YES">
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sort" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sortOrder" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbPath" attributeType="String" syncable="YES"/>
-        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Items" inverseName="images" inverseEntity="Items" syncable="YES"/>
+        <relationship name="parentItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Items" inverseName="images" inverseEntity="Items" syncable="YES"/>
     </entity>
     <entity name="Items" representedClassName="Items" syncable="YES">
         <attribute name="cost" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
@@ -12,7 +12,8 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="purchaseDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="serialNumber" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Images" inverseName="item" inverseEntity="Images" syncable="YES"/>
+        <attribute name="thumbPath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Images" inverseName="parentItem" inverseEntity="Images" syncable="YES"/>
         <relationship name="room" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rooms" inverseName="items" inverseEntity="Rooms" syncable="YES"/>
     </entity>
     <entity name="Rooms" representedClassName="Rooms" syncable="YES">
@@ -21,7 +22,7 @@
     </entity>
     <elements>
         <element name="Images" positionX="-2115" positionY="-3216" width="128" height="105"/>
-        <element name="Items" positionX="-2216" positionY="-3438" width="128" height="150"/>
+        <element name="Items" positionX="-2216" positionY="-3438" width="128" height="165"/>
         <element name="Rooms" positionX="-2250" positionY="-3594" width="128" height="75"/>
     </elements>
 </model>

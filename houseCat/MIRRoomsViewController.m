@@ -90,8 +90,6 @@
    }
 	else if( [segue.identifier isEqualToString:@"lossReport"])
 	{
-		NSLog(@"self.moc: %@", self.managedObjectContext );
-		
       // pass the moc to the child view:
       MIRLossReportListViewController *vc = [segue destinationViewController];
       vc.managedObjectContext = self.managedObjectContext; // < crash here	

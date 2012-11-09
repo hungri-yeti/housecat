@@ -188,7 +188,15 @@ bool newItem;
 		// (if sort order is implemented it should the first img)
       self.itemName.text = self.item.name;
       
-      [datePicker setDate:self.item.purchaseDate];
+		// date may or may not have been set:
+		if( nil == self.item.purchaseDate )
+		{
+			[datePicker setDate:[NSDate date]];			
+		}
+		else
+		{
+			[datePicker setDate:self.item.purchaseDate];
+		}
 		
 		// -
       [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
@@ -283,8 +291,8 @@ bool newItem;
    {
       // There may or may not be a currency symbol included in the string.
       // If not, add it:
-      if( [textField.text floatValue] != 0.0 )  // TODO: is there any better way to determine if the string starts with any arbitrary currency symbol?
-      {
+      if( [textField.text floatValue] != 0.0 )
+      {	// TODO: use NSScanner for localized scan instead of the above comparison
          NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithFloat:[textField.text floatValue]]
                                                                 numberStyle:NSNumberFormatterCurrencyStyle];
          self.itemCost.text = numberStr;
