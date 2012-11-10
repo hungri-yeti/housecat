@@ -20,6 +20,24 @@
 
 
 
+#pragma mark - table delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+	if (cell.accessoryType == UITableViewCellAccessoryNone)
+	{
+		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+	} 
+	else
+	{
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selected = NO;
+	}
+}
+
+
+
 #pragma mark - Fetched results controller
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
