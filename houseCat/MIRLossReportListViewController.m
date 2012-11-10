@@ -29,7 +29,6 @@
 }
 
 
-// TODO: need to show running total cost of checked items
 - (NSFetchedResultsController *)fetchedResultsController
 {
    if (_fetchedResultsController != nil) {
@@ -193,12 +192,9 @@
 																			 numberStyle:NSNumberFormatterCurrencyStyle];
 	cell.detailTextLabel.text = numberStr;
 	
-	//NSLog(@"configureCell:detailTextLabel: %@", cell.detailTextLabel.text );
-	//NSLog(@"configureCell: numberStr: %@", numberStr );
-	
-//	NSString *thumbPath = [[self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row] thumbPath];
-//	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
-//	cell.imageView.image = thumbImage;
+	NSString* thumbPath = [[object valueForKey:@"thumbPath"] description];
+	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
+	cell.imageView.image = thumbImage;
 }
 
 

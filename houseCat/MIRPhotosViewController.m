@@ -56,7 +56,6 @@ NSString *kCellID = @"uicollection_cell";
 	}
 	else
 	{
-		// TODO: instead of nil, set it to a default "click here to add photo" image (will also need to be localized). Alternately, in ItemsDetailVC set a label in the middle of the UIImageView
 		[self.item setThumbPath:nil];
 	}
 
@@ -143,8 +142,12 @@ NSString *kCellID = @"uicollection_cell";
 
 - (void) addImage:(id) sender
 {
+	// TODO: when I navigate down into the photo library the collection view starts at the top
+	// of the screen, not below the navbar. After I pull the collection down and let it
+	// pop back up, it snaps to the proper location. This shouldn't be a big deal since it's
+	// only the photo library which is used in the simulator, the device uses the camera.
    UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
-   
+
    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if( ! cameraAvailable )
    {
@@ -186,7 +189,9 @@ NSString *kCellID = @"uicollection_cell";
 	// imageWithImage also rotates the image to the proper orientation. If we don't do this
 	// for the main image, it will be offset 90 degrees ccw compared to the thumb. The only
 	// drawback is the amount of time required, so we'll display an activity indicator.
-	// replace right bar button 'refresh' with spinner
+	// replace right bar button 'refresh' with spinner.
+	// I tested this on an actual device and didn't see the spinner but the process
+	// didn't take very long either. This may not be necessary.
 	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	spinner.center = CGPointMake(160, 240);
 	spinner.hidesWhenStopped = YES;
@@ -196,7 +201,7 @@ NSString *kCellID = @"uicollection_cell";
 	// this code is just copy & paste. the spinner doesn't show up but the imgpicker
 	// returns immediately. The interesting thing is that the thumb shows up
 	// immediately, it can take some time for the actual img to show up.
-	// TODO: verify this works on device
+
 	// how we stop refresh from freezing the main UI thread
 	dispatch_queue_t resizeBigImage = dispatch_queue_create("resize", NULL);
 	dispatch_async(resizeBigImage, ^{

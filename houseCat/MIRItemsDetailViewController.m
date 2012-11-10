@@ -49,27 +49,6 @@ bool newItem;
 
 
 #pragma mark - buttons
-- (void)cancelButton:(id)sender
-{
-	NSLog(@"cancelButton:");
-	
-	if( newItem )
-	{ 
-		NSLog(@"   newItem");
-		
-		[self.parent removeItemsObject:self.item];
-		[self.managedObjectContext deleteObject:self.item];
-		NSError *error;
-		if (![self.managedObjectContext save:&error])
-		{
-			// Replace this implementation with code to handle the error appropriately.
-			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-			NSLog(@"MIRItemsDetailViewController:cancelButton: unresolved error %@, %@", error, [error userInfo]);
-		}
-	}
-   [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 - (IBAction)saveButton:(id)sender
 {
@@ -97,6 +76,7 @@ bool newItem;
       NSLog(@"MIRItemsDetailViewController:saveButton: unresolved error %@, %@", error, [error userInfo]);
    }
    
+	newItem = NO;	// otherwise this new Item will be deleted in viewWillDisappear
    [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -136,15 +116,20 @@ bool newItem;
 	// take care of the button's thumbnail image here instead of viewDidLoad
 	// as we might be returning from a newly selected photo via MIRPhotosViewController
 	NSString *imgPath = [self.item thumbPath];
+	UIImage *image = nil;
+	
+	//NSLog(@"viewWillAppear: imgPath: %@", imgPath );
+	
 	if( nil != imgPath )
 	{
-		UIImage *image = [UIImage imageWithContentsOfFile:imgPath];
-		[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];		
+		image = [UIImage imageWithContentsOfFile:imgPath];
 	}
 	else
 	{
+		image = nil;
 		[self.photoButton setTitle:@"Click to set photo" forState:(UIControlStateNormal && UIControlStateHighlighted)];
 	}
+	[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];		
 }
 
 
@@ -157,11 +142,7 @@ bool newItem;
    // setup date picker:
    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
    datePicker.datePickerMode = UIDatePickerModeDate;
-
-   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                             target:self 
-                                                                           action:@selector(cancelButton:)];
-
+	
    if( self.item == nil )
    {
       //NSLog(@"viewDidLoad: self.item == nil");
@@ -254,6 +235,32 @@ bool newItem;
    [[NSNotificationCenter defaultCenter] addObserver:self
                                             selector:@selector(keyboardWillBeHidden:)
                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+// since we can't tap in to the nav bar's back button we will see if we need to do
+// the equivalent of a Cancel (and delete new item) operation here
+- (void)viewWillDisappear:(BOOL)animated
+{
+	//NSLog(@"viewWillDisappear");
+	
+	// If this is a new Item and they click on the back button, assume that they do not
+	// want to save the edits:
+	if( YES == newItem )
+	{ 
+		NSLog(@"   newItem");
+		
+		[self.parent removeItemsObject:self.item];
+		[self.managedObjectContext deleteObject:self.item];
+		NSError *error;
+		if (![self.managedObjectContext save:&error])
+		{
+			// Replace this implementation with code to handle the error appropriately.
+			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+			NSLog(@"MIRItemsDetailViewController:cancelButton: unresolved error %@, %@", error, [error userInfo]);
+		}
+	}
+	
 }
 
 
