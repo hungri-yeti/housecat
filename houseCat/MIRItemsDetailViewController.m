@@ -122,6 +122,13 @@ bool newItem;
 	
 	if( nil != imgPath )
 	{
+		// TODO: what happens here if the img file doesn't exist?
+		// This could happen if the db is stored on iCloud, they delete the app or lose their phone and then reload the app.
+		// They'll still have all the entries, but thumbPath & imgPath will point to nonexistant files (I don't think I'll
+		// be able to store the actual images in iCloud due to file size issues)
+		// Should I set path = nil, do I inform the user, do I display a specific "Image not found" label?
+		// wait a minute, won't the images be restored when they do a restore from iTunes? Since I'm not planning
+		// on a desktop client, maybe I don't really need iCloud backup?
 		image = [UIImage imageWithContentsOfFile:imgPath];
 	}
 	else

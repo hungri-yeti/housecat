@@ -12,6 +12,9 @@
 		3B50B6B1164391A5005BA6B8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */; };
 		3B5CB40F164C837E005B19FC /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB40E164C837E005B19FC /* Items.m */; };
 		3B5CB41B164CB611005B19FC /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB41A164CB611005B19FC /* Images.m */; };
+		3B5CB41E164F2B19005B19FC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CB41C164F2B19005B19FC /* AddressBook.framework */; };
+		3B5CB41F164F2B19005B19FC /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CB41D164F2B19005B19FC /* AddressBookUI.framework */; };
+		3B5CB422164F32C2005B19FC /* MIRLossComposeMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */; };
 		3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B702FEC162D187A00EE6C36 /* CoreData.framework */; };
 		3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */; };
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
@@ -59,6 +62,10 @@
 		3B5CB40E164C837E005B19FC /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
 		3B5CB419164CB611005B19FC /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
 		3B5CB41A164CB611005B19FC /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
+		3B5CB41C164F2B19005B19FC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		3B5CB41D164F2B19005B19FC /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3B5CB420164F32C2005B19FC /* MIRLossComposeMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRLossComposeMsgViewController.h; sourceTree = "<group>"; };
+		3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossComposeMsgViewController.m; sourceTree = "<group>"; };
 		3B702FEC162D187A00EE6C36 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
 		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rooms.h; path = ../Rooms.h; sourceTree = "<group>"; };
@@ -103,6 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B5CB41E164F2B19005B19FC /* AddressBook.framework in Frameworks */,
+				3B5CB41F164F2B19005B19FC /* AddressBookUI.framework in Frameworks */,
 				3B50B6B1164391A5005BA6B8 /* MobileCoreServices.framework in Frameworks */,
 				3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */,
 				3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */,
@@ -160,6 +169,8 @@
 		3BAF8B8B161E8D5900B23848 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B5CB41C164F2B19005B19FC /* AddressBook.framework */,
+				3B5CB41D164F2B19005B19FC /* AddressBookUI.framework */,
 				3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */,
 				3B702FEC162D187A00EE6C36 /* CoreData.framework */,
 				3BAF8B8C161E8D5900B23848 /* UIKit.framework */,
@@ -181,6 +192,8 @@
 				3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */,
 				3BF0BA6E164B5AE800269D1A /* MIRLossReportListViewController.h */,
 				3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */,
+				3B5CB420164F32C2005B19FC /* MIRLossComposeMsgViewController.h */,
+				3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */,
 				3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */,
 				3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */,
 				3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */,
@@ -380,6 +393,7 @@
 				3BF0BA70164B5AE800269D1A /* MIRLossReportListViewController.m in Sources */,
 				3B5CB40F164C837E005B19FC /* Items.m in Sources */,
 				3B5CB41B164CB611005B19FC /* Images.m in Sources */,
+				3B5CB422164F32C2005B19FC /* MIRLossComposeMsgViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
