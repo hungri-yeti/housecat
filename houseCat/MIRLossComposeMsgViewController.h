@@ -12,6 +12,7 @@
 @interface MIRLossComposeMsgViewController : UIViewController
 
 - (IBAction)getToAddressee:(id)sender;
-- (IBAction)getFromAddressee:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *toAddressee;
+
 
 @end
