@@ -38,52 +38,52 @@ NSMutableArray* addressArray;
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
-	NSString* email = nil;
-	ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonEmailProperty);
-	NSLog(@"count: %li", ABMultiValueGetCount(multi) );
-	
-	if( ABMultiValueGetCount(multi) > 0 )
-	{
-		email = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(multi, 0);
-
-		[addressArray addObject:email];
-		NSLog(@"email: %@", email );
-		
-		
-		// there may be other addressees in the array, pretty-print to the text field:
-		self.toAddressee.text = NULL;
-		NSMutableString* emailAddress = [[NSMutableString alloc] init];
-		
-		for(NSString *address in addressArray)
-		{
-			NSLog(@"   address: %@", address );
-			
-			[emailAddress appendString:address];
-			[emailAddress appendString:@", "];
-		}
-		NSLog(@"emailAddress: %@", emailAddress);
-		
-		// the last entry will always have an extraneous trailing comma-space, trim it off:
-		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@", \\z" 
-																									  options:NSRegularExpressionCaseInsensitive 
-																										 error:nil];
-		NSString *addressesFormatted = [regex stringByReplacingMatchesInString:emailAddress 
-																							options:0 
-																							  range:NSMakeRange(0, [emailAddress length])
-																					 withTemplate:@""];
-		self.toAddressee.text = addressesFormatted; 
-	}
-	else
-	{
-		// Apparently we can not push an alert when the peoplepicker is on top:
-		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No email"
-		//																message:@"That contact does not have an email address."
-		//															  delegate:self cancelButtonTitle:@"OK"
-		//												  otherButtonTitles:nil, nil];
-      //[alert show];
-		
-		// for now, do nothing
-	}
+//	NSString* email = nil;
+//	ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonEmailProperty);
+//	NSLog(@"count: %li", ABMultiValueGetCount(multi) );
+//	
+//	if( ABMultiValueGetCount(multi) > 0 )
+//	{
+//		email = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(multi, 0);
+//
+//		[addressArray addObject:email];
+//		NSLog(@"email: %@", email );
+//		
+//		
+//		// there may be other addressees in the array, pretty-print to the text field:
+//		self.toAddressee.text = NULL;
+//		NSMutableString* emailAddress = [[NSMutableString alloc] init];
+//		
+//		for(NSString *address in addressArray)
+//		{
+//			NSLog(@"   address: %@", address );
+//			
+//			[emailAddress appendString:address];
+//			[emailAddress appendString:@", "];
+//		}
+//		NSLog(@"emailAddress: %@", emailAddress);
+//		
+//		// the last entry will always have an extraneous trailing comma-space, trim it off:
+//		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@", \\z" 
+//																									  options:NSRegularExpressionCaseInsensitive 
+//																										 error:nil];
+//		NSString *addressesFormatted = [regex stringByReplacingMatchesInString:emailAddress 
+//																							options:0 
+//																							  range:NSMakeRange(0, [emailAddress length])
+//																					 withTemplate:@""];
+//		self.toAddressee.text = addressesFormatted; 
+//	}
+//	else
+//	{
+//		// Apparently we can not push an alert when the peoplepicker is on top:
+//		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No email"
+//		//																message:@"That contact does not have an email address."
+//		//															  delegate:self cancelButtonTitle:@"OK"
+//		//												  otherButtonTitles:nil, nil];
+//      //[alert show];
+//		
+//		// for now, do nothing
+//	}
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
 	return NO;

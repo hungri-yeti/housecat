@@ -10,13 +10,107 @@
 #import "Rooms.h"
 
 
-@interface MIRLossReportListViewController ()
+@interface MIRLossReportListViewController (Private)
+	- (void)drawPageNumber:(NSInteger)pageNum;
 
 @end
 
 
 
 @implementation MIRLossReportListViewController
+
+
+
+#pragma mark - loss info delegate
+-(void)readLossInfo:(NSArray*)results
+{
+	NSLog(@"loss date: %@, policy number: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
+	[self performSegueWithIdentifier:@"selectItemsToPreview" sender:self];
+}
+
+
+
+#pragma mark - PDF generation
+- (NSString*) generatePDF
+{
+	// TODO: should consider localizing this (e.g. A4)
+	pageSize = CGSizeMake(612, 792);
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setFormatterBehavior:NSDateFormatterBehavior10_4]; 
+	[formatter setDateFormat:@"yyyyMMddHmmss"];
+	NSDate* date = [[NSDate alloc] init];
+	NSString* dateStr = [formatter stringFromDate:date];
+	
+	NSString* fileName = [[NSString alloc] initWithFormat:@"houseCat_%@.pdf", dateStr];
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	// TODO: this file will need to be deleted at some point, when is it safe/advisable to do so?
+	NSString *pdfFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+	
+	NSLog(@"pdfFilePath: %@", pdfFilePath );
+	
+	[self generatePdfWithFilePath:pdfFilePath];	
+	return pdfFilePath;
+}
+
+
+- (void) generatePdfWithFilePath: (NSString *)thefilePath
+{
+	UIGraphicsBeginPDFContextToFile(thefilePath, CGRectZero, nil);
+	
+	NSInteger currentPage = 0;
+	BOOL done = NO;
+	do
+	{
+		// Mark the beginning of a new page.
+		UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, pageSize.width, pageSize.height), nil);
+		
+		// Draw a page number at the bottom of each page.
+		currentPage++;
+		[self drawPageNumber:currentPage];
+		
+		//Draw a border for each page.
+		//[self drawBorder];
+		
+//		//Draw text fo our header.
+//		[self drawHeader];
+//		
+//		//Draw a line below the header.
+//		[self drawLine];
+//		
+//		//Draw some text for the page.
+//		[self drawText];
+//		
+//		//Draw an image
+//		[self drawImage];
+		done = YES;
+	}
+	while (!done);
+	
+	// Close the PDF context and write the contents out.
+	UIGraphicsEndPDFContext();
+}
+
+
+- (void)drawPageNumber:(NSInteger)pageNumber
+{
+//	NSString* pageNumberString = [NSString stringWithFormat:@"Page %d", pageNumber];
+//	UIFont* theFont = [UIFont systemFontOfSize:12];
+//	
+//	CGSize pageNumberStringSize = [pageNumberString sizeWithFont:theFont
+//															 constrainedToSize:pageSize
+//																  lineBreakMode:UILineBreakModeWordWrap];
+//	
+//	CGRect stringRenderingRect = CGRectMake(kBorderInset,
+//														 pageSize.height - 40.0,
+//														 pageSize.width - 2*kBorderInset,
+//														 pageNumberStringSize.height);
+//	
+//	[pageNumberString drawInRect:stringRenderingRect withFont:theFont lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+}
+
 
 
 
@@ -213,6 +307,29 @@
 	NSString* thumbPath = [[object valueForKey:@"thumbPath"] description];
 	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
 	cell.imageView.image = thumbImage;
+}
+
+
+
+#pragma mark - Segue
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   //DebugLog(@"segue.id: %@", segue.identifier );
+	
+   if ([segue.identifier isEqualToString:@"selectItemsToPreview"])
+	{
+		// generate the PDF:
+		NSString* pdfPath = [self generatePDF];
+
+		// provide the file path to the preview controller:
+		NSLog(@"pdfPath: %@", pdfPath );
+	}
+	else if([segue.identifier isEqualToString:@"requestInfo"])
+	{
+		UIViewController *newController = segue.destinationViewController;
+		MIRLossReportInfoRequestController *mlrVC = (MIRLossReportInfoRequestController *) newController;
+		mlrVC.delegate = self;
+	}
 }
 
 
