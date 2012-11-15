@@ -142,7 +142,7 @@ NSString *kCellID = @"uicollection_cell";
 
 - (void) addImage:(id) sender
 {
-	// TODO: when I navigate down into the photo library the collection view starts at the top
+	// Weird bug(?) when I navigate down into the photo library the collection view starts at the top
 	// of the screen, not below the navbar. After I pull the collection down and let it
 	// pop back up, it snaps to the proper location. This shouldn't be a big deal since it's
 	// only the photo library which is used in the simulator, the device uses the camera.

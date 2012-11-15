@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B0824511655753D000221B6 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0824501655753D000221B6 /* Items.m */; };
+		3B08245716557E11000221B6 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B08245616557E11000221B6 /* Items.m */; };
 		3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BFD0D16480D3B00CEE99A /* MIRCell.m */; };
 		3B50B6AE16430F0E005BA6B8 /* MIRPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */; };
 		3B50B6B1164391A5005BA6B8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */; };
@@ -56,9 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B08244F1655753D000221B6 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
-		3B0824501655753D000221B6 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
 		3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = houseCat_002.xcdatamodel; sourceTree = "<group>"; };
+		3B08245516557E11000221B6 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
+		3B08245616557E11000221B6 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
+		3B08245816557F36000221B6 /* houseCat_003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = houseCat_003.xcdatamodel; sourceTree = "<group>"; };
 		3B1BFD0C16480D3B00CEE99A /* MIRCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRCell.h; sourceTree = "<group>"; };
 		3B1BFD0D16480D3B00CEE99A /* MIRCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRCell.m; sourceTree = "<group>"; };
 		3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotosViewController.h; sourceTree = "<group>"; };
@@ -143,16 +144,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B0824531655789A000221B6 /* view controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */,
+				3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */,
+				3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */,
+				3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */,
+				3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */,
+				3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */,
+				3BE3855116379F6F0023747A /* MIRItemsDetailViewController.h */,
+				3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */,
+				3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */,
+				3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */,
+				3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */,
+				3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */,
+				3B1BFD0C16480D3B00CEE99A /* MIRCell.h */,
+				3B1BFD0D16480D3B00CEE99A /* MIRCell.m */,
+			);
+			name = "view controllers";
+			sourceTree = "<group>";
+		};
+		3B082454165578DC000221B6 /* loss reporting */ = {
+			isa = PBXGroup;
+			children = (
+				3BF0BA6E164B5AE800269D1A /* MIRLossReportListViewController.h */,
+				3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */,
+				3B83C6151651D7CC006C7D50 /* MIRLossReportInfoRequestController.h */,
+				3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */,
+				3B83C60F1651958F006C7D50 /* MIRPDFPreviewViewController.h */,
+				3B83C6101651958F006C7D50 /* MIRPDFPreviewViewController.m */,
+				3B5CB420164F32C2005B19FC /* MIRLossComposeMsgViewController.h */,
+				3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */,
+				3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */,
+				3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */,
+			);
+			name = "loss reporting";
+			sourceTree = "<group>";
+		};
 		3B702FF2162D18C400EE6C36 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
-				3B08244F1655753D000221B6 /* Items.h */,
-				3B0824501655753D000221B6 /* Items.m */,
-				3B5CB419164CB611005B19FC /* Images.h */,
-				3B5CB41A164CB611005B19FC /* Images.m */,
 				3B702FF8162D192100EE6C36 /* Rooms.h */,
 				3B702FF9162D192100EE6C36 /* Rooms.m */,
+				3B08245516557E11000221B6 /* Items.h */,
+				3B08245616557E11000221B6 /* Items.m */,
+				3B5CB419164CB611005B19FC /* Images.h */,
+				3B5CB41A164CB611005B19FC /* Images.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -198,30 +237,8 @@
 				3BAF8B9B161E8D5900B23848 /* MIRAppDelegate.h */,
 				3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */,
 				3BE3854F16379EE90023747A /* Storyboards */,
-				3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */,
-				3BAF8BCB161E8D8800B23848 /* MIRRoomsViewController.m */,
-				3BF0BA6E164B5AE800269D1A /* MIRLossReportListViewController.h */,
-				3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */,
-				3B83C6151651D7CC006C7D50 /* MIRLossReportInfoRequestController.h */,
-				3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */,
-				3B83C60F1651958F006C7D50 /* MIRPDFPreviewViewController.h */,
-				3B83C6101651958F006C7D50 /* MIRPDFPreviewViewController.m */,
-				3B5CB420164F32C2005B19FC /* MIRLossComposeMsgViewController.h */,
-				3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */,
-				3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */,
-				3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */,
-				3BAF8BCD161EA32800B23848 /* MIRItemsViewController.h */,
-				3BAF8BCE161EA32800B23848 /* MIRItemsViewController.m */,
-				3BE3855116379F6F0023747A /* MIRItemsDetailViewController.h */,
-				3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */,
-				3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */,
-				3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */,
-				3B1BFD0C16480D3B00CEE99A /* MIRCell.h */,
-				3B1BFD0D16480D3B00CEE99A /* MIRCell.m */,
-				3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */,
-				3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */,
-				3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */,
-				3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */,
+				3B0824531655789A000221B6 /* view controllers */,
+				3B082454165578DC000221B6 /* loss reporting */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -412,7 +429,7 @@
 				3B83C6111651958F006C7D50 /* MIRPDFPreviewViewController.m in Sources */,
 				3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */,
 				3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */,
-				3B0824511655753D000221B6 /* Items.m in Sources */,
+				3B08245716557E11000221B6 /* Items.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,9 +633,10 @@
 			isa = XCVersionGroup;
 			children = (
 				3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */,
+				3B08245816557F36000221B6 /* houseCat_003.xcdatamodel */,
 				3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */,
 			);
-			currentVersion = 3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */;
+			currentVersion = 3B08245816557F36000221B6 /* houseCat_003.xcdatamodel */;
 			path = houseCat.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

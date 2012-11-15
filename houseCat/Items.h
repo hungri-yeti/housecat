@@ -17,9 +17,9 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * purchaseDate;
+@property (nonatomic, retain) NSNumber * selected;
 @property (nonatomic, retain) NSString * serialNumber;
 @property (nonatomic, retain) NSString * thumbPath;
-@property (nonatomic, retain) NSNumber * selected;
 @property (nonatomic, retain) NSSet *images;
 @property (nonatomic, retain) Rooms *room;
 @end

@@ -8,6 +8,7 @@
 
 #import "MIRLossReportListViewController.h"
 #import "Rooms.h"
+#import "Items.h"
 #import "MIRGeneratePDF.h"
 
 
@@ -37,16 +38,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	if (cell.accessoryType == UITableViewCellAccessoryNone)
+	if( NO == [item.selected boolValue] )
 	{
-		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+		[item setSelected:[NSNumber numberWithBool:YES]];
 	} 
 	else
 	{
-		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selected = NO;
+		[item setSelected:[NSNumber numberWithBool:NO]];
 	}
+
+	NSManagedObjectContext *context = [self managedObjectContext]; 
+   NSError *error;
+   if (![context save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRLossReportListViewController: didSelectRowAtIndexPath: unresolved error %@, %@", error, [error userInfo]);
+   }
 }
 
 
@@ -217,15 +229,25 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-   NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-   cell.textLabel.text = [[object valueForKey:@"name"] description];
-	NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[object valueForKey:@"cost"]
+	Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	cell.textLabel.text = item.name;
+	NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:item.cost
 																			 numberStyle:NSNumberFormatterCurrencyStyle];
 	cell.detailTextLabel.text = numberStr;
 	
-	NSString* thumbPath = [[object valueForKey:@"thumbPath"] description];
+	NSString* thumbPath = item.thumbPath;
 	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
 	cell.imageView.image = thumbImage;
+	
+	// set checkmark state:
+	if( YES == [item.selected boolValue] )
+	{
+		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+	}
+	else
+	{
+		cell.accessoryType = UITableViewCellAccessoryNone;
+	}
 }
 
 

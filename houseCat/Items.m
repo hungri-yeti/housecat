@@ -17,9 +17,9 @@
 @dynamic name;
 @dynamic notes;
 @dynamic purchaseDate;
+@dynamic selected;
 @dynamic serialNumber;
 @dynamic thumbPath;
-@dynamic selected;
 @dynamic images;
 @dynamic room;
 
