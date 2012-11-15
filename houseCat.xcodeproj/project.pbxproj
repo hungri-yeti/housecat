@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0824511655753D000221B6 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0824501655753D000221B6 /* Items.m */; };
 		3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BFD0D16480D3B00CEE99A /* MIRCell.m */; };
 		3B50B6AE16430F0E005BA6B8 /* MIRPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */; };
 		3B50B6B1164391A5005BA6B8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */; };
-		3B5CB40F164C837E005B19FC /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB40E164C837E005B19FC /* Items.m */; };
 		3B5CB41B164CB611005B19FC /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB41A164CB611005B19FC /* Images.m */; };
 		3B5CB41E164F2B19005B19FC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CB41C164F2B19005B19FC /* AddressBook.framework */; };
 		3B5CB41F164F2B19005B19FC /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CB41D164F2B19005B19FC /* AddressBookUI.framework */; };
@@ -20,6 +20,7 @@
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
 		3B83C6111651958F006C7D50 /* MIRPDFPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C6101651958F006C7D50 /* MIRPDFPreviewViewController.m */; };
 		3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */; };
+		3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */; };
 		3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
@@ -55,13 +56,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B08244F1655753D000221B6 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
+		3B0824501655753D000221B6 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
+		3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = houseCat_002.xcdatamodel; sourceTree = "<group>"; };
 		3B1BFD0C16480D3B00CEE99A /* MIRCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRCell.h; sourceTree = "<group>"; };
 		3B1BFD0D16480D3B00CEE99A /* MIRCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRCell.m; sourceTree = "<group>"; };
 		3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotosViewController.h; sourceTree = "<group>"; };
 		3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotosViewController.m; sourceTree = "<group>"; };
 		3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		3B5CB40D164C837E005B19FC /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
-		3B5CB40E164C837E005B19FC /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
 		3B5CB419164CB611005B19FC /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
 		3B5CB41A164CB611005B19FC /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
 		3B5CB41C164F2B19005B19FC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -70,12 +72,14 @@
 		3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossComposeMsgViewController.m; sourceTree = "<group>"; };
 		3B702FEC162D187A00EE6C36 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
-		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rooms.h; path = ../Rooms.h; sourceTree = "<group>"; };
-		3B702FF9162D192100EE6C36 /* Rooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rooms.m; path = ../Rooms.m; sourceTree = "<group>"; };
+		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rooms.h; sourceTree = "<group>"; };
+		3B702FF9162D192100EE6C36 /* Rooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rooms.m; sourceTree = "<group>"; };
 		3B83C60F1651958F006C7D50 /* MIRPDFPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPDFPreviewViewController.h; sourceTree = "<group>"; };
 		3B83C6101651958F006C7D50 /* MIRPDFPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPDFPreviewViewController.m; sourceTree = "<group>"; };
 		3B83C6151651D7CC006C7D50 /* MIRLossReportInfoRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRLossReportInfoRequestController.h; sourceTree = "<group>"; };
 		3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossReportInfoRequestController.m; sourceTree = "<group>"; };
+		3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRGeneratePDF.h; sourceTree = "<group>"; };
+		3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRGeneratePDF.m; sourceTree = "<group>"; };
 		3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotoDetailViewController.h; sourceTree = "<group>"; };
 		3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotoDetailViewController.m; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,10 +147,10 @@
 			isa = PBXGroup;
 			children = (
 				3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */,
+				3B08244F1655753D000221B6 /* Items.h */,
+				3B0824501655753D000221B6 /* Items.m */,
 				3B5CB419164CB611005B19FC /* Images.h */,
 				3B5CB41A164CB611005B19FC /* Images.m */,
-				3B5CB40D164C837E005B19FC /* Items.h */,
-				3B5CB40E164C837E005B19FC /* Items.m */,
 				3B702FF8162D192100EE6C36 /* Rooms.h */,
 				3B702FF9162D192100EE6C36 /* Rooms.m */,
 			);
@@ -216,6 +220,8 @@
 				3B1BFD0D16480D3B00CEE99A /* MIRCell.m */,
 				3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */,
 				3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */,
+				3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */,
+				3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -401,11 +407,12 @@
 				3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */,
 				3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */,
 				3BF0BA70164B5AE800269D1A /* MIRLossReportListViewController.m in Sources */,
-				3B5CB40F164C837E005B19FC /* Items.m in Sources */,
 				3B5CB41B164CB611005B19FC /* Images.m in Sources */,
 				3B5CB422164F32C2005B19FC /* MIRLossComposeMsgViewController.m in Sources */,
 				3B83C6111651958F006C7D50 /* MIRPDFPreviewViewController.m in Sources */,
 				3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */,
+				3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */,
+				3B0824511655753D000221B6 /* Items.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,9 +615,10 @@
 		3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */,
 				3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */,
 			);
-			currentVersion = 3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */;
+			currentVersion = 3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */;
 			path = houseCat.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

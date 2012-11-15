@@ -2,7 +2,7 @@
 //  Items.h
 //  houseCat
 //
-//  Created by kenl on 12/11/8.
+//  Created by kenl on 12/11/15.
 //  Copyright (c) 2012 kl. All rights reserved.
 //
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSDate * purchaseDate;
 @property (nonatomic, retain) NSString * serialNumber;
 @property (nonatomic, retain) NSString * thumbPath;
+@property (nonatomic, retain) NSNumber * selected;
 @property (nonatomic, retain) NSSet *images;
 @property (nonatomic, retain) Rooms *room;
 @end

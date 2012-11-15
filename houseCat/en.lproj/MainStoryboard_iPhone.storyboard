@@ -266,18 +266,30 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNX-cd-6Mf">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" id="EN8-sF-IGD"/>
+                                </constraints>
+                                <string key="text">Enter the date of loss and your insurance policy number. This information will be added to the header of every page. This information is optional. Click Save when you are done.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ino-2e-bFg" firstAttribute="leading" secondItem="H8B-zn-BXf" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="1XM-1G-6nS"/>
+                            <constraint firstItem="ino-2e-bFg" firstAttribute="top" secondItem="kLl-ay-U09" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="BIc-KH-Zdi"/>
+                            <constraint firstItem="yNX-cd-6Mf" firstAttribute="top" secondItem="bKi-FJ-vKW" secondAttribute="bottom" type="default" id="BSK-6m-eJv"/>
+                            <constraint firstItem="kLl-ay-U09" firstAttribute="top" secondItem="yNX-cd-6Mf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="End-sb-8d7"/>
                             <constraint firstItem="kLl-ay-U09" firstAttribute="leading" secondItem="H8B-zn-BXf" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="H5S-bd-6D7"/>
                             <constraint firstItem="bKi-FJ-vKW" firstAttribute="trailing" secondItem="H8B-zn-BXf" secondAttribute="trailing" type="default" id="KUL-x7-oz5"/>
                             <constraint firstItem="bKi-FJ-vKW" firstAttribute="leading" secondItem="H8B-zn-BXf" secondAttribute="leading" type="default" id="Q3h-ei-lTD"/>
                             <constraint firstItem="bKi-FJ-vKW" firstAttribute="top" secondItem="H8B-zn-BXf" secondAttribute="top" type="default" id="k7v-Nj-jn2"/>
                             <constraint firstAttribute="trailing" secondItem="ino-2e-bFg" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="kEa-GW-t7H"/>
-                            <constraint firstItem="ino-2e-bFg" firstAttribute="top" secondItem="kLl-ay-U09" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="nHh-QU-97O"/>
+                            <constraint firstItem="yNX-cd-6Mf" firstAttribute="leading" secondItem="H8B-zn-BXf" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="krL-h6-CxG"/>
                             <constraint firstAttribute="trailing" secondItem="kLl-ay-U09" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="nwl-Pe-epi"/>
-                            <constraint firstItem="kLl-ay-U09" firstAttribute="top" secondItem="H8B-zn-BXf" secondAttribute="top" constant="57" id="z5D-eW-pBp"/>
+                            <constraint firstAttribute="trailing" secondItem="yNX-cd-6Mf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="tXm-IY-i7e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xFw-lk-1ca">
@@ -649,89 +661,6 @@
             <point key="canvasLocation" x="1044" y="-589"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MIRAddRoomViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRAddRoomViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="endEditing:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="outlet" name="roomNameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MIRCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MIRItemsDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="saveButton:"/>
-                <relationship kind="outlet" name="itemCost" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="itemName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="itemNotes" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="itemPurchaseDate" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="itemSerialNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="photoButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MIRItemsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsViewController.h"/>
-        </class>
-        <class className="MIRLossComposeMsgViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRLossComposeMsgViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="getToAddressee:"/>
-                <relationship kind="outlet" name="toAddressee" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MIRLossReportInfoRequestController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRLossReportInfoRequestController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="outlet" name="lossDate" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="policyNumber" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MIRLossReportListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRLossReportListViewController.h"/>
-        </class>
-        <class className="MIRPDFPreviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRPDFPreviewViewController.h"/>
-        </class>
-        <class className="MIRPhotoDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRPhotoDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteImage:"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MIRPhotosViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRPhotosViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
-            </relationships>
-        </class>
-        <class className="MIRRoomsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRRoomsViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
