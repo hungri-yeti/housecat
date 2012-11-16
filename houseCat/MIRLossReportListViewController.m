@@ -9,6 +9,7 @@
 #import "MIRLossReportListViewController.h"
 #import "Rooms.h"
 #import "Items.h"
+#import "Images.h"
 #import "MIRGeneratePDF.h"
 
 
@@ -27,7 +28,38 @@
 #pragma mark - loss info delegate
 -(void)readLossInfo:(NSArray*)results
 {
-	NSLog(@"loss date: %@, policy number: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
+	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
+	
+	NSString* resultsString = [[NSString alloc] initWithFormat:@"Policy: %@, Date of Loss: %@", [results objectAtIndex:0], [results objectAtIndex:1]];
+	
+	// get the data for the pdf generator:
+	NSManagedObjectContext *context = [self managedObjectContext]; 
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Items"
+															inManagedObjectContext:context];
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init]; 
+	[fetchRequest setEntity:entity];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected=1"];
+	[fetchRequest setPredicate:predicate];
+	NSArray *items = [context executeFetchRequest:fetchRequest error:nil];
+
+	//for( Items* item in items )
+	//{
+	//	NSLog(@"name: %@", item.name );
+	//	NSEnumerator *e = [item.images objectEnumerator];
+	//	Images* object;
+	//	while (object = [e nextObject])
+	//	{
+	//		NSLog(@"   sortOrder: %@", object.sortOrder );
+	//	}
+	//}
+	
+	// generate the PDF:
+	MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
+	// TODO: this file will need to be deleted at some point, when is it safe/advisable to do so?
+	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:resultsString];	
+	
+	// provide the file path to the preview controller:
+	NSLog(@"pdfPath: %@", pdfPath );
 	
 	[self performSegueWithIdentifier:@"selectItemsToPreview" sender:self];
 }
@@ -254,9 +286,7 @@
 
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-   //DebugLog(@"segue.id: %@", segue.identifier );
-	
+{	
    if ([segue.identifier isEqualToString:@"selectItemsToPreview"])
 	{
 		// generate the PDF:

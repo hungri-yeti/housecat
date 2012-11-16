@@ -151,7 +151,7 @@
    }
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"houseCat"];
-   NSLog(@"MIRApDelegate: psc: storeURL: %@", storeURL);
+   //NSLog(@"MIRApDelegate: psc: storeURL: %@", storeURL);
    
    NSError *error = nil;
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

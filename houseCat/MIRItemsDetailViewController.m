@@ -30,6 +30,8 @@ bool newItem;
 
 -(void)updatePurchaseDateField:(id)sender
 {
+	// TODO: double-check that this still works; I think it null-ed out the date when I was fiddling with
+	//	something else, but I'm not sure.
    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
    [dateFormatter setDateStyle:kDateFormatStyle];
    
@@ -322,7 +324,9 @@ bool newItem;
       {	// TODO: use NSScanner for localized scan instead of the above comparison
          NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithFloat:[textField.text floatValue]]
                                                                 numberStyle:NSNumberFormatterCurrencyStyle];
-         self.itemCost.text = numberStr;
+         // FIXME: stopped showing cents after text input, just the dollars. Cents appear correctly after refresh
+			// This problem occurs when you just type in the dollar amount, e.g. 42
+			self.itemCost.text = numberStr;
       }
    }
    

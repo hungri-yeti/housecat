@@ -12,12 +12,18 @@
 #define kBorderWidth            1.0
 #define kMarginInset            10.0
 
+//Line drawing
+#define kLineWidth              1.0
+
 
 @interface MIRGeneratePDF : NSObject
 {
 	CGSize pageSize;
 }
 
-- (NSString*) generatePDF: (NSArray*) objects;
+@property (strong, nonatomic) NSArray* itemArray;
+@property (strong, nonatomic) NSString* headerText;
+
+- (NSString*)generatePDF: (NSArray*)items headerText:(NSString*)resultsString;
 
 @end
