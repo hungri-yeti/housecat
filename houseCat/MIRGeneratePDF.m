@@ -28,7 +28,6 @@
 @end
 
 
-
 @implementation MIRGeneratePDF
 
 
@@ -42,7 +41,7 @@
 	
 	
 	// TODO: this will need to be localized (e.g. A4)
-	pageSize = CGSizeMake(612, 792);
+	pageSize = CGSizeMake(612, 792); // 8.5 x 11
 	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setFormatterBehavior:NSDateFormatterBehavior10_4]; 
@@ -123,6 +122,9 @@
 // ----------------------------------------------------------------------------------------------------------------
 - (void) drawImages:(Items *)item
 {
+	// TODO: images need to be resized or else the PDF file size will be huge
+	// Images should be resized to specific dimensions, and drawInRect should use constants for the bounds
+	//		instead of being based on the size of the image.
 	NSEnumerator *e = [item.images objectEnumerator];
 	Images* image;
 	while (image = [e nextObject])

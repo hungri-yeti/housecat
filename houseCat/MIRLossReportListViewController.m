@@ -16,6 +16,10 @@
 
 @interface MIRLossReportListViewController (Private)
 	- (void)drawPageNumber:(NSInteger)pageNum;
+	-(void)showActionSheet;
+	-(void)actionSendEmail;
+	-(void)actionPrintPDF;
+	-(void)actionDropBox;
 
 @end
 
@@ -25,12 +29,116 @@
 
 
 
+#pragma mark - actions
+
+-(void)actionSendEmail
+{
+	if ([MFMailComposeViewController canSendMail])
+	{
+		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+		mailer.mailComposeDelegate = self;
+		[mailer setSubject:@"Inventory for claim"];
+		
+		NSData *pdfData = [NSData dataWithContentsOfFile:self.pdfFilePath]; 
+		[mailer addAttachmentData:pdfData mimeType:@"application/pdf" fileName:[self.pdfFilePath lastPathComponent]];
+
+		NSString *emailBody = @"Attached is an inventory of the items for my claim.";
+		[mailer setMessageBody:emailBody isHTML:NO];
+		[self presentViewController:mailer
+								 animated:YES completion:nil];
+	}
+	else
+	{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Problem"
+																		message:@"Your device doesn't support email at this time."
+																	  delegate:nil
+														  cancelButtonTitle:@"OK"
+														  otherButtonTitles:nil];
+		[alert show];
+	}	
+}
+
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			NSLog(@"Mail cancelled");
+			break;
+		case MFMailComposeResultSaved:
+			NSLog(@"Mail saved");
+			break;
+		case MFMailComposeResultSent:
+			NSLog(@"Mail sent");
+			break;
+		case MFMailComposeResultFailed:
+			NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+			break;
+		default:
+			break;
+	}
+	
+	// Close the Mail Interface
+	[self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+-(void) actionPrintPDF
+{
+
+}
+
+
+#pragma mark - action sheet
+
+-(void) showActionSheet
+{
+	UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"choose"
+																  delegate:self
+													  cancelButtonTitle:@"Cancel"
+												destructiveButtonTitle:nil
+													  otherButtonTitles:@"Email", @"Print", @"DropBox", nil];
+	
+	// This seems kind of convuluted, [as showInView:self.view] is simpler but results in:
+	// Presenting action sheet clipped by its superview. Some controls might not respond to touches. 
+	[as showInView:[self.parentViewController view]];
+}
+
+
+
+#pragma mark - UIActionSheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	//NSLog(@"btnIdx: %ld", (long)buttonIndex );
+
+	switch (buttonIndex) {
+		case 0:
+			NSLog(@"Email");
+			[self actionSendEmail];
+			break;
+		case 1:
+			NSLog(@"Print");
+			break;
+		case 2:
+			NSLog(@"DropBox");
+			break;
+		case 3:
+			NSLog(@"Cancel");
+			break;
+		default:
+			break;
+	}
+}
+
+
 #pragma mark - loss info delegate
 -(void)readLossInfo:(NSArray*)results
 {
 	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
 	
 	NSString* resultsString = [[NSString alloc] initWithFormat:@"Policy: %@, Date of Loss: %@", [results objectAtIndex:0], [results objectAtIndex:1]];
+	[self->infoRequestVC dismissViewControllerAnimated:NO completion:nil];
 	
 	// get the data for the pdf generator:
 	NSManagedObjectContext *context = [self managedObjectContext]; 
@@ -57,11 +165,13 @@
 	MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
 	// TODO: this file will need to be deleted at some point, when is it safe/advisable to do so?
 	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:resultsString];	
+	self.pdfFilePath = pdfPath;
 	
 	// provide the file path to the preview controller:
 	NSLog(@"pdfPath: %@", pdfPath );
 	
-	[self performSegueWithIdentifier:@"selectItemsToPreview" sender:self];
+	//[self showActivityViewController];
+	[self showActionSheet];
 }
 
 
@@ -297,8 +407,9 @@
 	}
 	else if([segue.identifier isEqualToString:@"requestInfo"])
 	{
-		UIViewController *newController = segue.destinationViewController;
-		MIRLossReportInfoRequestController *mlrVC = (MIRLossReportInfoRequestController *) newController;
+		//UIViewController *newController = segue.destinationViewController;
+		self->infoRequestVC = segue.destinationViewController;
+		MIRLossReportInfoRequestController *mlrVC = (MIRLossReportInfoRequestController *) self->infoRequestVC;
 		mlrVC.delegate = self;
 	}
 }

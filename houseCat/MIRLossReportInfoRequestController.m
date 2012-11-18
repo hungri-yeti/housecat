@@ -15,6 +15,7 @@
 @implementation MIRLossReportInfoRequestController
 
 
+// TODO: need to implement keyboard actions, date picker
 
 -(void)callDelegate
 {
@@ -28,7 +29,7 @@
 -(IBAction)cancel:(id)sender
 {
 	[self callDelegate];
-   [self dismissViewControllerAnimated:YES completion:nil];
+   //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -38,7 +39,7 @@
 	[self callDelegate];
 	
 	// the delegate will handle this:
-   [self dismissViewControllerAnimated:YES completion:nil];
+   //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
