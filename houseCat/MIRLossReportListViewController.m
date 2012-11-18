@@ -86,7 +86,27 @@
 
 -(void) actionPrintPDF
 {
+	NSMutableArray* marr = [NSMutableArray array];
+	NSURL* url = [NSURL fileURLWithPath: self.pdfFilePath];
+	[marr addObject: url];
+	self.pdfs = marr; // retain policy
+	
+	QLPreviewController* preview = [[QLPreviewController alloc] init];
+	// FIXME: Assigning to 'id<QLPreviewControllerDataSource>' from incompatible type 'MIRLossReportListViewController *const __strong'
+	preview.dataSource = self;
+	[self presentViewController:preview animated:YES completion:nil];
+}
 
+
+- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
+{
+	return 1; 
+}
+
+
+- (id <QLPreviewItem>) previewController: (QLPreviewController *) controller previewItemAtIndex: (NSInteger) index
+{
+	return [self.pdfs objectAtIndex:index];
 }
 
 
@@ -119,6 +139,7 @@
 			break;
 		case 1:
 			NSLog(@"Print");
+			[self actionPrintPDF];
 			break;
 		case 2:
 			NSLog(@"DropBox");
