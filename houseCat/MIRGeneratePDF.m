@@ -13,7 +13,7 @@
 
 @interface MIRGeneratePDF (Private)
 	- (void) generatePdfWithFilePath: (NSString *)thefilePath itemsArray:(NSArray*)items;
-//	- (void)drawPageNumber:(NSInteger)pageNum;
+	- (void)drawPageNumber:(NSInteger)pageNum;
 //	- (void) drawBorder;
 //	- (void) drawText;
 	- (void) drawLine;
@@ -58,7 +58,7 @@
 	//NSLog(@"pdfFilePath: %@", pdfFilePath );
 	
 	[self generatePdfWithFilePath:pdfFilePath itemsArray:items];
-	return pdfFilePath;
+	return pdfFilePath;	
 }
 
 
@@ -123,8 +123,8 @@
 - (void) drawImages:(Items *)item
 {
 	// TODO: images need to be resized or else the PDF file size will be huge
-	// Images should be resized to specific dimensions, and drawInRect should use constants for the bounds
-	//		instead of being based on the size of the image.
+	// Images should be resized to specific dimensions used on the PDF page, and drawInRect should use constants 
+	// for the bounds instead of being based on the size of the image.
 	NSEnumerator *e = [item.images objectEnumerator];
 	Images* image;
 	while (image = [e nextObject])
@@ -164,7 +164,6 @@
 
 - (void) drawPurchaseCost:(Items*)item
 {	
-	// TODO: needs to be formatted with localized currency symbol:
 	NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:item.cost
 																			 numberStyle:NSNumberFormatterCurrencyStyle];
 

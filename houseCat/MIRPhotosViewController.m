@@ -30,13 +30,13 @@ NSString *kCellID = @"uicollection_cell";
 -(void)updateParentThumbPath
 {
 	// Update Item.thumbPath 
-	//   Get all of the Image objects that are shown
-	//   If at least 1 Image found
+	//   Get the first photo (according to sortOrder)
+	//   If an Image found
 	//		Set parentItem.thumbPath to results[0].thumbPath
 	//   else set parentItem.thumbPath = nil
 	NSManagedObjectContext *context = [self managedObjectContext]; 
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-   request.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
+   request.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@ AND sortOrder = %d", self.item, 0];
    
    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Images" 
 															inManagedObjectContext:self.managedObjectContext];
@@ -46,7 +46,6 @@ NSString *kCellID = @"uicollection_cell";
                                        ascending:YES];
    NSArray *sortDescriptors = @[sortDescriptor];
    [request setSortDescriptors:sortDescriptors];
-	// TODO: is there any way to get just the first image (results[0] instead of the entire set?
 	NSArray *results = [context executeFetchRequest:request error:nil];
 
 	if ([results count]) 
@@ -386,7 +385,8 @@ NSString *kCellID = @"uicollection_cell";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	// TODO: the nav bar at the top obscures the top of the collection until the collection is pulled down, it then bounces back to the proper top (under the bottom edge of the navbar)
+	// Note: the nav bar at the top obscures the top of the collection until the collection 
+	// is pulled down, it then bounces back to the proper top (under the bottom edge of the navbar)
 	
 
 	UIBarButtonItem* btnCamera = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addImage:)];

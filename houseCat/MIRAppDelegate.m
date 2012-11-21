@@ -21,6 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	// TODO: add action sounds (will also need a preference for muting them?)
+	// TODO: help system, or at least a set of instructions
    // Override point for customization after application launch.
    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
    MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;
@@ -45,7 +47,6 @@
          [room setName:roomName];
       }
       
-      //Get all the projects in the data store
       NSFetchRequest *request = [[NSFetchRequest alloc] init];
       NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms"
                                                 inManagedObjectContext:[self managedObjectContext]];

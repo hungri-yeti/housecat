@@ -244,7 +244,7 @@
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		for (Images *image in results)
 		{
-			NSLog(@"thumbPath: %@, imagePath: %@", [image thumbPath], [image imagePath] );
+			//NSLog(@"thumbPath: %@, imagePath: %@", [image thumbPath], [image imagePath] );
 			
 			// delete the image files so we don't fill up the file system:
 			error = nil;

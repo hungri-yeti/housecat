@@ -15,7 +15,7 @@
 
 
 @interface MIRLossReportListViewController (Private)
-	- (void)drawPageNumber:(NSInteger)pageNum;
+//	- (void)drawPageNumber:(NSInteger)pageNum;
 	-(void)showActionSheet;
 	-(void)actionSendEmail;
 	-(void)actionPrintPDF;
@@ -29,7 +29,7 @@
 
 
 
-#pragma mark - actions
+#pragma mark - action email
 
 -(void)actionSendEmail
 {
@@ -84,15 +84,16 @@
 }
 
 
+#pragma mark - action print
+// TODO: pull this out into it's own class?
 -(void) actionPrintPDF
 {
 	NSMutableArray* marr = [NSMutableArray array];
 	NSURL* url = [NSURL fileURLWithPath: self.pdfFilePath];
 	[marr addObject: url];
-	self.pdfs = marr; // retain policy
+	self.pdfs = marr;
 	
 	QLPreviewController* preview = [[QLPreviewController alloc] init];
-	// FIXME: Assigning to 'id<QLPreviewControllerDataSource>' from incompatible type 'MIRLossReportListViewController *const __strong'
 	preview.dataSource = self;
 	[self presentViewController:preview animated:YES completion:nil];
 }
@@ -114,13 +115,14 @@
 
 -(void) showActionSheet
 {
+	// TODO: add dropBox support
 	UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"choose"
 																  delegate:self
 													  cancelButtonTitle:@"Cancel"
 												destructiveButtonTitle:nil
-													  otherButtonTitles:@"Email", @"Print", @"DropBox", nil];
+													  otherButtonTitles:@"Email", @"Print", nil];
 	
-	// This seems kind of convuluted, [as showInView:self.view] is simpler but results in:
+	// This seems kind of convoluted, [as showInView:self.view] is simpler but results in:
 	// Presenting action sheet clipped by its superview. Some controls might not respond to touches. 
 	[as showInView:[self.parentViewController view]];
 }
@@ -130,8 +132,6 @@
 #pragma mark - UIActionSheet delegate
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	//NSLog(@"btnIdx: %ld", (long)buttonIndex );
-
 	switch (buttonIndex) {
 		case 0:
 			NSLog(@"Email");
@@ -142,9 +142,6 @@
 			[self actionPrintPDF];
 			break;
 		case 2:
-			NSLog(@"DropBox");
-			break;
-		case 3:
 			NSLog(@"Cancel");
 			break;
 		default:
@@ -183,15 +180,21 @@
 	//}
 	
 	// generate the PDF:
+	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	spinner.center = CGPointMake(160, 240);
+	spinner.hidesWhenStopped = YES;
+	[self.view addSubview:spinner];   
+	[spinner startAnimating];	
+	
 	MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
 	// TODO: this file will need to be deleted at some point, when is it safe/advisable to do so?
 	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:resultsString];	
 	self.pdfFilePath = pdfPath;
+
+	[spinner stopAnimating];
 	
-	// provide the file path to the preview controller:
-	NSLog(@"pdfPath: %@", pdfPath );
+	//NSLog(@"pdfPath: %@", pdfPath );
 	
-	//[self showActivityViewController];
 	[self showActionSheet];
 }
 
