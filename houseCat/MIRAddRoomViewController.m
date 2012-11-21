@@ -85,7 +85,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
    
-   //TODO: should automatically activate text field & kb
+	[self.roomNameField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

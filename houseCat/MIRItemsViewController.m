@@ -248,10 +248,16 @@
 			
 			// delete the image files so we don't fill up the file system:
 			error = nil;
-			[fileManager removeItemAtPath:[image thumbPath] error:&error];
+			if ([fileManager removeItemAtPath:[image thumbPath] error:&error])
+			{
+				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete thumbPath %@: error: %@", image.thumbPath, [error domain]);
+			}
+			
 			error = nil;
-			[fileManager removeItemAtPath:[image imagePath] error:&error];
-			// TODO: do we care about any errors here?
+			if ([fileManager removeItemAtPath:[image imagePath] error:&error])
+			{
+				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete imagePath %@: error: %@", image.imagePath, [error domain]);
+			}
 		}
 		
       NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];

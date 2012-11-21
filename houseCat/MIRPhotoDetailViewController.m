@@ -22,14 +22,19 @@
 	NSError* error;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 
-	NSLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
+	//NSLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
 		
 	// delete the image files so we don't fill up the file system:
+	if ([fileManager removeItemAtPath:[self.image thumbPath] error:&error])
+	{
+		NSLog(@"ERROR: MIRPhotoDetailViewController:deleteImage: unable to delete thumbPath %@: error: %@", [self.image thumbPath], [error domain]);
+	}
+	
 	error = nil;
-	[fileManager removeItemAtPath:[self.image thumbPath] error:&error];
-	error = nil;
-	[fileManager removeItemAtPath:[self.image imagePath] error:&error];
-	// TODO: do we care about any errors here?
+	if ([fileManager removeItemAtPath:[self.image imagePath] error:&error])
+	{
+		NSLog(@"ERROR: MIRPhotoDetailViewController:deleteImage: unable to delete imagePath %@: error: %@", [self.image imagePath], [error domain]);
+	}
 	
 	// then delete the obj:
 	error = nil;
