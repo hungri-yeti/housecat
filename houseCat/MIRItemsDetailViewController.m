@@ -18,6 +18,9 @@
 @end
 
 @implementation MIRItemsDetailViewController
+// TODO: need to implement serial number scanner
+// this will be a button next to the serial number field that will take a picture
+// using the camera and then OCR the serial.
 
 
 // This is used in a couple of different places, edit here to change globally (file scope)
@@ -30,8 +33,6 @@ bool newItem;
 
 -(void)updatePurchaseDateField:(id)sender
 {
-	// TODO: double-check that this still works; I think it null-ed out the date when I was fiddling with
-	//	something else, but I'm not sure.
    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
    [dateFormatter setDateStyle:kDateFormatStyle];
    
@@ -254,7 +255,7 @@ bool newItem;
 	// want to save the edits:
 	if( YES == newItem )
 	{ 
-		NSLog(@"   newItem");
+		//NSLog(@"   newItem");
 		
 		[self.parent removeItemsObject:self.item];
 		[self.managedObjectContext deleteObject:self.item];
@@ -277,8 +278,9 @@ bool newItem;
 {
    //NSLog(@"textViewDidBeginEditing");
    
-   // TODO: this comparison will cause a problem when localized:
+   // TODO: this comparison will cause a problem when localized,
    // will probably need to use localizedCompare:.
+	// TODO: placeholder text is getting stored in the db, it probably shouldn't.
    // remove the placeholder text:
    if( [textView.text isEqualToString:@"(enter notes here)"] )
    {
@@ -301,8 +303,10 @@ bool newItem;
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-   //NSLog(@"textViewDidEndEditing");
-   
+	// FIXME: edit description and then tab from description to date to cost, button changes from save > done > save
+	// FIXME: save button should be activated the instant text in description is edited, not when tabbing out
+   // TODO: keyboard should use Next instead of Done?
+	
    // change the Done button to Save:
    UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
    self.navigationItem.rightBarButtonItem = btnSave;
@@ -311,22 +315,41 @@ bool newItem;
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-   //NSLog(@"textFieldShouldEndEditing, textField: %@", textField.text );
-   
    if( self.itemCost == textField)
    {
-      // There may or may not be a currency symbol included in the string.
-      // If not, add it:
-      if( [textField.text floatValue] != 0.0 )
-      {	// TODO: use NSScanner for localized scan instead of the above comparison
-         NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithFloat:[textField.text floatValue]]
-                                                                numberStyle:NSNumberFormatterCurrencyStyle];
-         // FIXME: stopped showing cents after text input, just the dollars. Cents appear correctly after refresh
-			// This problem occurs when you just type in the dollar amount, e.g. 42
+		// If the user just typed the number in, e.g. 12.34 or 42, prepend the currency symbol:
+		// TODO: hasPrefix needs to be localized:
+		BOOL hasCurrencyPrefix = [textField.text hasPrefix:@"$"];
+		if( !hasCurrencyPrefix )
+		{
+			NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSDecimalNumber numberWithFloat:[textField.text floatValue]]
+																					 numberStyle:NSNumberFormatterCurrencyStyle];
 			self.itemCost.text = numberStr;
-      }
-   }
-   
+			textField.text = numberStr;
+		}
+		else
+		{
+			// begins with a currency symbol, but we don't know if it's in the form $xx.nn or just $xx.
+			// If it's $xx, we want to change it to $xx.00:
+			NSRange rangeToSearch = [textField.text rangeOfString:textField.text];
+			// TODO: rangeOfString needs to be localized:
+			NSRange resultsRange = [textField.text rangeOfString:@"."
+																		options:NSCaseInsensitiveSearch
+																		  range:rangeToSearch];
+			if(resultsRange.location == NSNotFound)
+			{
+				// number is in form $XX, change it to $XX.00:
+				NSNumberFormatter *costFmt = [[NSNumberFormatter alloc] init];
+				[costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+				NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:textField.text] floatValue]];
+				
+				// TODO: stringWithFormat needs to be localized:
+				NSString* costStr = [NSString stringWithFormat:@"%@%@.00", @"$", costNum];
+				textField.text = costStr;
+			}
+		}
+	}
+	
    // activate the Save button:
    self.navigationItem.rightBarButtonItem.enabled = YES;
    
@@ -337,8 +360,6 @@ bool newItem;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-   //NSLog(@"textFieldDidBeginEditing");
-   
    activeField = textField;
 }
 
