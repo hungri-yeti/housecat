@@ -215,10 +215,12 @@ NSString *kCellID = @"uicollection_cell";
 		});
 	});
    
-   // generate & save the thumb:
-   // TODO: this should query the cell size on the subview and set the size from that:
-   CGSize newThumbSize = CGSizeMake(100, 100);   
-   UIImage* thumbImage = [self imageWithImage:image scaledToSize:newThumbSize];
+   // generate & save the thumb. Base the thumb's size on the frame
+	// of the UIImageView that it will be inserted into.
+	UIImageView* thumbView = (UIImageView*)[self.view viewWithTag:100];
+	CGSize thumbSize = thumbView.frame.size;
+	
+   UIImage* thumbImage = [self imageWithImage:image scaledToSize:thumbSize];
    NSData *pngThumbData = UIImagePNGRepresentation(thumbImage);
    [pngThumbData writeToFile:thumbPath atomically:YES];
    
