@@ -15,8 +15,6 @@
 @implementation MIRLossReportInfoRequestController
 
 
-// TODO: need to implement keyboard actions, date picker
-
 -(void)callDelegate
 {
 	// delegate is responsible for not freaking out if policyNumber and/or lossDate are empty:
@@ -28,6 +26,7 @@
 #pragma mark - Actions
 -(IBAction)cancel:(id)sender
 {
+	// FIXME: the actionsheet still appears when tapping on Cancel
 	[self callDelegate];
    //[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -43,6 +42,16 @@
 }
 
 
+-(void)updateTextField:(id)sender
+{
+	
+   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+   [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	
+	UIDatePicker *picker = (UIDatePicker*)self.lossDate.inputView;
+	//	self.lossDate.text = [NSString stringWithFormat:@"%@",picker.date];
+	self.lossDate.text = [dateFormatter stringFromDate:picker.date];
+}
 
 
 
@@ -57,11 +66,20 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+	
+	UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+	datePicker.datePickerMode = UIDatePickerModeDate;
+	[datePicker setDate:[NSDate date]];
+	[datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];       
+	[self.lossDate setInputView:datePicker];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -70,3 +88,4 @@
 }
 
 @end
+

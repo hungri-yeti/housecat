@@ -14,8 +14,9 @@
    UIView *activeField;
    NSDate *purchaseDate;
 }
-
 @end
+
+NSString *const PlaceHolderText = @"(enter notes here)";
 
 @implementation MIRItemsDetailViewController
 // TODO: need to implement serial number scanner
@@ -183,6 +184,9 @@ bool newItem;
 		// -
       self.itemPurchaseDate.text = [dateFormatter stringFromDate:[NSDate date]];
       purchaseDate = [NSDate date];
+		
+		self.itemNotes.text = PlaceHolderText;
+      self.itemNotes.textColor = [UIColor lightGrayColor];
    }
    else
    {
@@ -222,6 +226,9 @@ bool newItem;
    [self.itemPurchaseDate setInputView:datePicker];
    
    [self registerForKeyboardNotifications];
+	
+	// This seems like the 'right' thing to do but it looks odd when implemented:
+	//[self.itemName becomeFirstResponder];
 }
 
 
@@ -267,25 +274,26 @@ bool newItem;
 			NSLog(@"MIRItemsDetailViewController:cancelButton: unresolved error %@, %@", error, [error userInfo]);
 		}
 	}
-	
 }
 
 
 
 #pragma mark - Edit actions
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
-   //NSLog(@"textViewDidBeginEditing");
-   
-   // TODO: this comparison will cause a problem when localized,
-   // will probably need to use localizedCompare:.
-	// TODO: placeholder text is getting stored in the db, it probably shouldn't.
-   // remove the placeholder text:
-   if( [textView.text isEqualToString:@"(enter notes here)"] )
+	// remove placeholder text:
+	NSComparisonResult ncr = [textView.text localizedCompare:PlaceHolderText];
+   if( NSOrderedSame == ncr )
    {
       textView.text = nil;
+		textView.textColor = [UIColor blackColor];
    }
+	return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
    // change the Save button to Done:
    UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:0 target:nil action:@selector(doneButtonPressed:)];
    self.navigationItem.rightBarButtonItem = btnDone;
@@ -303,9 +311,7 @@ bool newItem;
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-	// FIXME: edit description and then tab from description to date to cost, button changes from save > done > save
-	// FIXME: save button should be activated the instant text in description is edited, not when tabbing out
-   // TODO: keyboard should use Next instead of Done?
+   // FIXME: keyboard should use Next instead of Done?
 	
    // change the Done button to Save:
    UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
@@ -318,7 +324,6 @@ bool newItem;
    if( self.itemCost == textField)
    {
 		// If the user just typed the number in, e.g. 12.34 or 42, prepend the currency symbol:
-		// TODO: hasPrefix needs to be localized:
 		BOOL hasCurrencyPrefix = [textField.text hasPrefix:@"$"];
 		if( !hasCurrencyPrefix )
 		{
@@ -332,7 +337,7 @@ bool newItem;
 			// begins with a currency symbol, but we don't know if it's in the form $xx.nn or just $xx.
 			// If it's $xx, we want to change it to $xx.00:
 			NSRange rangeToSearch = [textField.text rangeOfString:textField.text];
-			// TODO: rangeOfString needs to be localized:
+			// TODO: rangeOfString needs to be localized (decimal separator)
 			NSRange resultsRange = [textField.text rangeOfString:@"."
 																		options:NSCaseInsensitiveSearch
 																		  range:rangeToSearch];
@@ -343,7 +348,7 @@ bool newItem;
 				[costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
 				NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:textField.text] floatValue]];
 				
-				// TODO: stringWithFormat needs to be localized:
+				// TODO: stringWithFormat needs to be localized (currency char):
 				NSString* costStr = [NSString stringWithFormat:@"%@%@.00", @"$", costNum];
 				textField.text = costStr;
 			}
@@ -361,6 +366,10 @@ bool newItem;
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
    activeField = textField;
+	
+	// activate the Save btn as soon as we start editing:
+   UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
+   self.navigationItem.rightBarButtonItem = btnSave;
 }
 
 
@@ -369,10 +378,6 @@ bool newItem;
    //NSLog(@"textFieldDidEndEditing");
    
    activeField = nil;
-
-   // change the Done button to Save:
-   UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
-   self.navigationItem.rightBarButtonItem = btnSave;
 }
 
 

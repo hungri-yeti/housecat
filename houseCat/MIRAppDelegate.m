@@ -40,7 +40,6 @@
       
       // Add our default Room list in Core Data
       NSArray *defaultRooms = [NSArray arrayWithObjects:@"Kitchen",@"Dining Room",@"Living Room",@"Garage",@"Master Bedroom",@"Den/Office",@"Car",nil];
-      // TODO: the room names should be easily localizeable
       for(NSString *roomName in defaultRooms)
       {
          Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
