@@ -14,17 +14,17 @@
 @interface MIRGeneratePDF (Private)
 	- (void) generatePdfWithFilePath: (NSString *)thefilePath itemsArray:(NSArray*)items;
 	- (void)drawPageNumber:(NSInteger)pageNum;
-//	- (void) drawBorder;
-//	- (void) drawText;
 	- (void) drawLine;
 	- (void) drawHeader;
 	- (void) drawHeaderWithText:(NSString*)textToDraw;
-//	- (void) drawImage;
 	- (void) drawItemName:(Items*)item;
 	- (void) drawPurchaseDate:(Items*)item;
 	- (void) drawPurchaseCost:(Items*)item;
 	- (void) drawSerialNumber:(Items*)item;
 	- (void) drawImages:(Items*)item;
+//	- (void) drawBorder;
+//	- (void) drawText;
+//	- (void) drawImage;
 @end
 
 
@@ -34,14 +34,10 @@
 #pragma mark - PDF generation
 - (NSString*)generatePDF: (NSArray*)items headerText:(NSString*)resultsString
 {
-	//NSLog(@"generatePDF: resultsString: %@", resultsString );
-	
 	self.itemArray = items;
 	self.headerText = resultsString;
 	
-	
-	// TODO: this will need to be localized (e.g. A4)
-	pageSize = CGSizeMake(612, 792); // 8.5 x 11
+	pageSize = CGSizeMake(kPageWidth, kPageHeight);
 	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setFormatterBehavior:NSDateFormatterBehavior10_4]; 
@@ -54,8 +50,6 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *pdfFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-	
-	//NSLog(@"pdfFilePath: %@", pdfFilePath );
 	
 	[self generatePdfWithFilePath:pdfFilePath itemsArray:items];
 	return pdfFilePath;	
@@ -95,12 +89,6 @@
 			[self drawSerialNumber:item];
 			// draw the first two images (or fewer if not found)
 			[self drawImages:item];
-			
-			//		//Draw some text for the page.
-			//		[self drawText];
-			//		
-			//		//Draw an image
-			//		[self drawImage];
 		}
 		done = YES;
 	}
@@ -120,24 +108,33 @@
 // ordered, this isn't the most efficient function. However, the quantity of images for each item will
 //	probably be low so it shouldn't be a real-world issue.
 // ----------------------------------------------------------------------------------------------------------------
-- (void) drawImages:(Items *)item
+- (void) drawImages:(Items*)item
 {
-	// TODO: images need to be resized or else the PDF file size will be huge
-	// Images should be resized to specific dimensions used on the PDF page, and drawInRect should use constants 
-	// for the bounds instead of being based on the size of the image.
+	// two images placed side-by-side, portrait orientation, margin on the outside, gutter between.
+	// Based on pageSize = CGSizeMake(612, 792); // 8.5 x 11
+	
 	NSEnumerator *e = [item.images objectEnumerator];
 	Images* image;
 	while (image = [e nextObject])
 	{
 		if( 0 == [image.sortOrder intValue])
 		{
+			// left img:
 			UIImage* img1 = [UIImage imageWithContentsOfFile:image.imagePath];
-			[img1 drawInRect:CGRectMake( kBorderInset + kMarginInset, 150, img1.size.width/4, img1.size.height/4)];
+			[img1 drawInRect:CGRectMake( kBorderInset + kMarginInset, 150, 
+												 (pageSize.width/2)-(3*kBorderInset), 
+												 (pageSize.height/2)-(2*kBorderInset))
+			 ];
 		}
 		if( 1 == [image.sortOrder intValue])
 		{
+			// right img:
 			UIImage* img2 = [UIImage imageWithContentsOfFile:image.imagePath];
-			[img2 drawInRect:CGRectMake( kBorderInset + kMarginInset + (pageSize.width/2), 150, img2.size.width/4, img2.size.height/4)];
+			[img2 drawInRect:CGRectMake( kBorderInset + kMarginInset + (pageSize.width/2), 
+												 150, 
+												 (pageSize.width/2)-(3*kBorderInset), 
+												 (pageSize.height/2)-(2*kBorderInset) )
+			 ];
 		}
 	}
 }
@@ -187,7 +184,7 @@
 - (void) drawPurchaseDate:(Items*)item
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-   [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	NSString* dateText = [dateFormatter stringFromDate:item.purchaseDate];
 	NSString* textToDraw = [[NSString alloc] initWithFormat:@"Purchased: %@", dateText ];
 
@@ -208,7 +205,7 @@
 
 - (void) drawItemName:(Items*)item
 {
-	//CGContextRef    currentContext = UIGraphicsGetCurrentContext();
+	// If I ever want to fiddle with the text color:
 	//CGContextSetRGBFillColor(currentContext, 0.0, 0.0, 0.0, 1.0);
 	
 	//NSString *textToDraw = @"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
@@ -265,11 +262,6 @@
 
 - (void) drawHeaderWithText: (NSString*)textToDraw
 {
-	//CGContextRef    currentContext = UIGraphicsGetCurrentContext();
-	//CGContextSetRGBFillColor(currentContext, 0.3, 0.7, 0.2, 1.0);
-	
-	//NSString *textToDraw = @"Pdf Demo - iOSLearner.com";
-	
 	UIFont *font = [UIFont systemFontOfSize:18.0];
 	
 	CGSize stringSize = [textToDraw sizeWithFont:font 
@@ -289,9 +281,6 @@
 
 - (void) drawHeader
 {
-	//CGContextRef    currentContext = UIGraphicsGetCurrentContext();
-	//CGContextSetRGBFillColor(currentContext, 0.3, 0.7, 0.2, 1.0);
-	
 	NSString *textToDraw = @"houseCat";
 	
 	UIFont *font = [UIFont systemFontOfSize:24.0];
@@ -310,36 +299,11 @@
 }
 
 
-//- (void) drawText
-//{
-//	CGContextRef    currentContext = UIGraphicsGetCurrentContext();
-//	CGContextSetRGBFillColor(currentContext, 0.0, 0.0, 0.0, 1.0);
-//	
-//	NSString *textToDraw = @"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
-//	
-//	UIFont *font = [UIFont systemFontOfSize:14.0];
-//	
-//	CGSize stringSize = [textToDraw sizeWithFont:font
-//										constrainedToSize:CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-//											 lineBreakMode:UILineBreakModeWordWrap];
-//	
-//	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset, kBorderInset + kMarginInset + 50.0, pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
-//	
-//	[textToDraw drawInRect:renderingRect 
-//					  withFont:font
-//				lineBreakMode:UILineBreakModeWordWrap
-//					 alignment:UITextAlignmentLeft];
-//	
-//}
-
-
 - (void) drawLine
 {
 	CGContextRef    currentContext = UIGraphicsGetCurrentContext();
 	
 	CGContextSetLineWidth(currentContext, kLineWidth);
-	
-	//CGContextSetStrokeColorWithColor(currentContext, [UIColor blueColor].CGColor);
 	
 	CGPoint startPoint = CGPointMake(kMarginInset + kBorderInset, kMarginInset + kBorderInset + 40.0);
 	CGPoint endPoint = CGPointMake(pageSize.width - 2*kMarginInset -2*kBorderInset, kMarginInset + kBorderInset + 40.0);
@@ -351,14 +315,6 @@
 	CGContextClosePath(currentContext);    
 	CGContextDrawPath(currentContext, kCGPathFillStroke);
 }
-
-
-//- (void) drawImage
-//{
-//	UIImage * demoImage = [UIImage imageNamed:@"demo.png"];
-//	[demoImage drawInRect:CGRectMake( (pageSize.width - demoImage.size.width/2)/2, 350, demoImage.size.width/2, demoImage.size.height/2)];
-//}
-
 
 
 @end

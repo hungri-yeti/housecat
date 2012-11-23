@@ -12,6 +12,10 @@
 #import "MIRCell.h"
 #import "MIRPhotoDetailViewController.h"
 
+#define kBorderInset 20.0
+// TODO: currently 8.5x11, this will need to be a variable that can be localized (e.g. A4).
+#define kPageWidth 612
+#define kPageHeight 792
 
 
 NSString *kCellID = @"uicollection_cell";      
@@ -205,7 +209,8 @@ NSString *kCellID = @"uicollection_cell";
 	dispatch_queue_t resizeBigImage = dispatch_queue_create("resize", NULL);
 	dispatch_async(resizeBigImage, ^{
 		// do our long running process here:
-		CGSize newSize = CGSizeMake(720, 960);   
+		// new image size should be the same as what will be rendered in MIRGeneratePDF.
+		CGSize newSize = CGSizeMake( (kPageWidth/2)-(3*kBorderInset), (kPageHeight/2)-(2*kBorderInset) );   
 		UIImage* mainImage = [self imageWithImage:image scaledToSize:newSize];	
 		NSData *pngBigData = UIImagePNGRepresentation(mainImage);
 		[pngBigData writeToFile:imagePath atomically:YES];
@@ -217,9 +222,7 @@ NSString *kCellID = @"uicollection_cell";
    
    // generate & save the thumb. Base the thumb's size on the frame
 	// of the UIImageView that it will be inserted into.
-	UIImageView* thumbView = (UIImageView*)[self.view viewWithTag:100];
-	CGSize thumbSize = thumbView.frame.size;
-	
+	CGSize thumbSize = [self.view viewWithTag:100].frame.size;
    UIImage* thumbImage = [self imageWithImage:image scaledToSize:thumbSize];
    NSData *pngThumbData = UIImagePNGRepresentation(thumbImage);
    [pngThumbData writeToFile:thumbPath atomically:YES];

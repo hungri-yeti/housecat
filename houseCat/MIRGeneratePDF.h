@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#define kBorderInset            20.0
-#define kBorderWidth            1.0
-#define kMarginInset            10.0
+#define kBorderInset 20.0
+#define kBorderWidth 1.0
+#define kMarginInset 10.0
+// TODO: currently 8.5x11, this will need to be a variable that can be localized (e.g. A4).
+#define kPageWidth 612
+#define kPageHeight 792
 
 //Line drawing
 #define kLineWidth              1.0
