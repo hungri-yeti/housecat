@@ -250,7 +250,7 @@
 																  lineBreakMode:NSLineBreakByWordWrapping];
 	
 	CGRect stringRenderingRect = CGRectMake(kBorderInset,
-														 pageSize.height - 40.0,
+														 pageSize.height - kBottomMargin,
 														 pageSize.width - 2*kBorderInset,
 														 pageNumberStringSize.height);
 	

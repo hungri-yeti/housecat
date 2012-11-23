@@ -25,7 +25,7 @@
 //-(IBAction)done:(id)sender;
 //-(IBAction)addImage:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 

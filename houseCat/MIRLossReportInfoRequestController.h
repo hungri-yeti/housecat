@@ -14,11 +14,11 @@
 
 
 @interface MIRLossReportInfoRequestController : UIViewController
-@property (nonatomic, weak) id <MIRLossReportInfoRequestDelegate> delegate;
+@property (strong, nonatomic) id <MIRLossReportInfoRequestDelegate> delegate;
 
 
-@property (weak, nonatomic) IBOutlet UITextField *policyNumber;
-@property (weak, nonatomic) IBOutlet UITextField *lossDate;
+@property (strong, nonatomic) IBOutlet UITextField *policyNumber;
+@property (strong, nonatomic) IBOutlet UITextField *lossDate;
 
 
 

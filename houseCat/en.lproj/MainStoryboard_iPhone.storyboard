@@ -32,6 +32,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem title="info" style="plain" id="oii-GU-SmE"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="gMg-C4-WAv"/>
                         <barButtonItem title="loss" id="ktb-hh-eZB">
                             <connections>

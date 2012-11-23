@@ -20,14 +20,14 @@
 @property( strong, nonatomic ) Items *item;
 
 
-@property (weak, nonatomic) IBOutlet UITextField *itemName;
-@property (weak, nonatomic) IBOutlet UITextField *itemPurchaseDate;
-@property (weak, nonatomic) IBOutlet UITextField *itemCost;
-@property (weak, nonatomic) IBOutlet UITextField *itemSerialNumber;
-@property (weak, nonatomic) IBOutlet UITextView *itemNotes;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UITextField *itemName;
+@property (strong, nonatomic) IBOutlet UITextField *itemPurchaseDate;
+@property (strong, nonatomic) IBOutlet UITextField *itemCost;
+@property (strong, nonatomic) IBOutlet UITextField *itemSerialNumber;
+@property (strong, nonatomic) IBOutlet UITextView *itemNotes;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (weak, nonatomic) IBOutlet UIButton *photoButton;
+@property (strong, nonatomic) IBOutlet UIButton *photoButton;
 
 - (IBAction)saveButton:(id)sender;
 
