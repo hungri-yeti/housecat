@@ -44,7 +44,6 @@
 
 -(void)updateTextField:(id)sender
 {
-	
    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
 	

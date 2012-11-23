@@ -14,15 +14,8 @@
 
 
 
-@interface MIRLossReportListViewController (Private)
-//	- (void)drawPageNumber:(NSInteger)pageNum;
-	-(void)showActionSheet;
-	-(void)actionSendEmail;
-	-(void)actionPrintPDF;
-	-(void)actionDropBox;
-
+@interface MIRLossReportListViewController ()
 @end
-
 
 
 @implementation MIRLossReportListViewController
@@ -85,30 +78,47 @@
 
 
 #pragma mark - action print
-// TODO: pull this out into it's own class?
+
 -(void) actionPrintPDF
 {
-	NSMutableArray* marr = [NSMutableArray array];
-	NSURL* url = [NSURL fileURLWithPath: self.pdfFilePath];
-	[marr addObject: url];
-	self.pdfs = marr;
+	// The quicklook sheet also has actions for emailing as well as printing. I
+	// feel that the duplicate functionality might confuse the user so I'll just 
+	// go straight to a print controller.
+	//	NSMutableArray* marr = [NSMutableArray array];
+	//	NSURL* url = [NSURL fileURLWithPath: self.pdfFilePath];
+	//	[marr addObject: url];
+	//	self.pdfs = marr;
+	//	
+	//	QLPreviewController* preview = [[QLPreviewController alloc] init];
+	//	preview.dataSource = self;
+	//	[self presentViewController:preview animated:YES completion:nil];
 	
-	QLPreviewController* preview = [[QLPreviewController alloc] init];
-	preview.dataSource = self;
-	[self presentViewController:preview animated:YES completion:nil];
+	if ([UIPrintInteractionController isPrintingAvailable] )
+	{
+		UIPrintInteractionController *pic = [UIPrintInteractionController sharedPrintController];
+		UIPrintInfo *printInfo = [UIPrintInfo printInfo]; 
+		printInfo.outputType = UIPrintInfoOutputGeneral; 
+		printInfo.jobName = self.resultsString;
+		
+		pic.printInfo = printInfo; 
+		pic.showsPageRange = NO;
+		
+		NSData *pdfData = [NSData dataWithContentsOfFile:self.pdfFilePath];
+		pic.printingItem = pdfData;
+		
+		void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) =
+		^(UIPrintInteractionController *printController, BOOL completed, NSError *error)
+		{
+			if (!completed && error)
+			{
+				NSLog(@"Printing could not complete because of error: %@", error);
+			}
+		};
+		
+		[pic presentAnimated:YES completionHandler:completionHandler];
+	}
 }
 
-
-- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
-{
-	return 1; 
-}
-
-
-- (id <QLPreviewItem>) previewController: (QLPreviewController *) controller previewItemAtIndex: (NSInteger) index
-{
-	return [self.pdfs objectAtIndex:index];
-}
 
 
 #pragma mark - action sheet
@@ -155,7 +165,7 @@
 {
 	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
 	
-	NSString* resultsString = [[NSString alloc] initWithFormat:@"Policy: %@, Date of Loss: %@", [results objectAtIndex:0], [results objectAtIndex:1]];
+	self.resultsString = [[NSString alloc] initWithFormat:@"Policy: %@, Date of Loss: %@", [results objectAtIndex:0], [results objectAtIndex:1]];
 	[self->infoRequestVC dismissViewControllerAnimated:NO completion:nil];
 	
 	// get the data for the pdf generator:
@@ -188,7 +198,7 @@
 	
 	MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
 	// TODO: this file will need to be deleted at some point, when is it safe/advisable to do so?
-	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:resultsString];	
+	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:self.resultsString];	
 	self.pdfFilePath = pdfPath;
 
 	[spinner stopAnimating];

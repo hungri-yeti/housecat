@@ -12,28 +12,32 @@
 #import "MIRLossReportInfoRequestController.h"
 
 
+// TODO: refactor some of these delegates out, 
+// maybe have one class for each output action (email, print, dropbox)?
 @interface MIRLossReportListViewController : UITableViewController 
 <	MIRLossReportInfoRequestDelegate, 
 	UITableViewDelegate, 
 	UITableViewDataSource, 
 	NSFetchedResultsControllerDelegate, 
 	UIActionSheetDelegate, 
-	MFMailComposeViewControllerDelegate, 
-	QLPreviewControllerDelegate
+	MFMailComposeViewControllerDelegate
 >
 {
 	@private
 	UIViewController *infoRequestVC;
 }
 
--(NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller;
-- (id <QLPreviewItem>) previewController: (QLPreviewController *) controller previewItemAtIndex: (NSInteger) index;
+-(void)showActionSheet;
+-(void)actionSendEmail;
+-(void)actionPrintPDF;
+//-(void)actionDropBox;
 
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic)	NSString* pdfFilePath;
 @property (strong, nonatomic) NSMutableArray* pdfs;
+@property (strong, nonatomic) NSString* resultsString;
 
 
 @end
