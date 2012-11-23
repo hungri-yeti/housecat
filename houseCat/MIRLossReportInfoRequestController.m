@@ -26,9 +26,7 @@
 #pragma mark - Actions
 -(IBAction)cancel:(id)sender
 {
-	// FIXME: the actionsheet still appears when tapping on Cancel
-	[self callDelegate];
-   //[self dismissViewControllerAnimated:YES completion:nil];
+   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
