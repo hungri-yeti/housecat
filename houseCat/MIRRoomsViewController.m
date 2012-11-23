@@ -83,9 +83,8 @@
    }
    else if ([segue.identifier isEqualToString:@"addRoomName"])
    {
-      // pass the moc to the child view: (destination is embeded in NavigationController)
-      UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
-      MIRAddRoomViewController *vc = (MIRAddRoomViewController *)[[navController viewControllers] lastObject];
+      // pass the moc to the child view: 
+		MIRAddRoomViewController *vc = [segue destinationViewController];
       vc.managedObjectContext = self.managedObjectContext;
    }
 	else if( [segue.identifier isEqualToString:@"lossReport"])
