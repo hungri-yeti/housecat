@@ -29,6 +29,5 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *photoButton;
 
-- (IBAction)saveButton:(id)sender;
 
 @end

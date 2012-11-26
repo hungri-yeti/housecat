@@ -91,7 +91,7 @@
 	{
       // pass the moc to the child view:
       MIRLossReportListViewController *vc = [segue destinationViewController];
-      vc.managedObjectContext = self.managedObjectContext; // < crash here	
+      vc.managedObjectContext = self.managedObjectContext;
 	}
 }
 

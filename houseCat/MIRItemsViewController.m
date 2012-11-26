@@ -120,8 +120,12 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-   NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-   cell.textLabel.text = [[object valueForKey:@"name"] description];
+	Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	cell.textLabel.text = item.name;
+	
+	NSString* thumbPath = item.thumbPath;
+	UIImage *thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
+	cell.imageView.image = thumbImage;
 }
 
 
@@ -238,7 +242,7 @@
 		[fetchRequest setEntity:[NSEntityDescription entityForName:@"Images"
 												 inManagedObjectContext:self.managedObjectContext]];
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", item];
-		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil]; // crash here?
+		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
 		
 		NSError* error;
 		NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -250,13 +254,13 @@
 			error = nil;
 			if ([fileManager removeItemAtPath:[image thumbPath] error:&error])
 			{
-				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete thumbPath %@: error: %@", image.thumbPath, [error domain]);
+				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete file thumbPath %@: error: %@", image.thumbPath, [error domain]);
 			}
 			
 			error = nil;
 			if ([fileManager removeItemAtPath:[image imagePath] error:&error])
 			{
-				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete imagePath %@: error: %@", image.imagePath, [error domain]);
+				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete file imagePath %@: error: %@", image.imagePath, [error domain]);
 			}
 		}
 		

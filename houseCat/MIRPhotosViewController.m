@@ -59,10 +59,8 @@ NSString *kCellID = @"uicollection_cell";
 	}
 	else
 	{
-		[self.item setThumbPath:nil];
+		[self.item setThumbPath:@""];
 	}
-
-	NSLog(@"image.thumbPath: %@", [self.item thumbPath]);
 
    NSError *error;
    if (![context save:&error])
@@ -152,7 +150,7 @@ NSString *kCellID = @"uicollection_cell";
    UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
 
    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-   if( ! cameraAvailable )
+   if( !cameraAvailable )
    {
       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera"
                                                       message:@"The camera is not available, using Photo Library"
@@ -222,7 +220,18 @@ NSString *kCellID = @"uicollection_cell";
    
    // generate & save the thumb. Base the thumb's size on the frame
 	// of the UIImageView that it will be inserted into.
-	CGSize thumbSize = [self.view viewWithTag:100].frame.size;
+	// if this is the first Image for the Item, the tagged view won't exist
+	// so we'll use some defaults.
+	CGSize thumbSize;
+	if( NULL == [self.view viewWithTag:100] )
+	{
+		thumbSize = CGSizeMake(100.0f, 100.0f);
+	}
+	else
+	{
+		thumbSize = [self.view viewWithTag:100].frame.size;		
+	}	
+	
    UIImage* thumbImage = [self imageWithImage:image scaledToSize:thumbSize];
    NSData *pngThumbData = UIImagePNGRepresentation(thumbImage);
    [pngThumbData writeToFile:thumbPath atomically:YES];
@@ -298,7 +307,7 @@ NSString *kCellID = @"uicollection_cell";
    if (_fetchedResultsController != nil) {
       return _fetchedResultsController;
    }
-   
+	
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", self.item];
    
@@ -324,10 +333,9 @@ NSString *kCellID = @"uicollection_cell";
 																				cacheName:nil];
    aFetchedResultsController.delegate = self;
    self.fetchedResultsController = aFetchedResultsController;
-   
 	
 	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {	// < crash here
+	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -375,30 +383,14 @@ NSString *kCellID = @"uicollection_cell";
 
 #pragma mark - init
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	// Note: the nav bar at the top obscures the top of the collection until the collection 
-	// is pulled down, it then bounces back to the proper top (under the bottom edge of the navbar)
-	
-
 	UIBarButtonItem* btnCamera = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addImage:)];
    self.navigationItem.rightBarButtonItem = btnCamera;
 	self.title = @"Photos";
-   
-   NSLog(@"item: %@", [[self.item valueForKey:@"name"] description]);
 }
 
 

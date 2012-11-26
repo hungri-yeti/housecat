@@ -26,7 +26,6 @@ NSString *const PlaceHolderText = @"(enter notes here)";
 
 // This is used in a couple of different places, edit here to change globally (file scope)
 NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
-bool newItem;
 
 
 
@@ -44,9 +43,12 @@ bool newItem;
 }
 
 
--(void)setupPurchaseDateField:(id)sender
+-(void)setupKeyboardDoneButton:(id)sender
 {
-   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:0 target:nil action:@selector(doneButtonPressed:)];
+   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" 
+																					style:0 
+																				  target:nil 
+																				  action:@selector(doneButtonPressed:)];
    self.navigationItem.rightBarButtonItem = btnDone;
 }
 
@@ -54,41 +56,13 @@ bool newItem;
 
 #pragma mark - buttons
 
-- (IBAction)saveButton:(id)sender
-{
-   //NSLog(@"saveButton, itemName.text: %@", self.itemName.text);
-
-   // set attributes from view:
-   [self.item setValue:self.itemName.text forKey:@"name"];
-   [self.item setValue:purchaseDate forKey:@"purchaseDate"];
-
-   // this works only if they use the currency symbol at the begining of the number,
-   // so we need to check for it and, if necessary, add it in textFieldShouldEndEditing
-   NSNumberFormatter *costFmt = [[NSNumberFormatter alloc] init];
-   [costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
-   NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:self.itemCost.text] floatValue]];
-   [self.item setValue:costNum forKey:@"cost"];
-   
-   [self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
-   [self.item setValue:self.itemNotes.text forKey:@"notes"];
-
-   NSError *error;
-   if (![self.managedObjectContext save:&error])
-   {
-      // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRItemsDetailViewController:saveButton: unresolved error %@, %@", error, [error userInfo]);
-   }
-   
-	newItem = NO;	// otherwise this new Item will be deleted in viewWillDisappear
-   [self.navigationController popViewControllerAnimated:YES];
-}
-
-
 - (IBAction)doneButtonPressed:(id)sender
 {
-   [self.itemNotes resignFirstResponder];
+	[self.itemName resignFirstResponder];
    [self.itemPurchaseDate resignFirstResponder];
+	[self.itemCost resignFirstResponder];
+	[self.itemSerialNumber resignFirstResponder];
+   [self.itemNotes resignFirstResponder];
 }
 
 
@@ -99,20 +73,12 @@ bool newItem;
    // pass the moc & parent obj to the child view:
    MIRItemsDetailViewController *vc = [segue destinationViewController];
    vc.managedObjectContext = self.managedObjectContext;
+	
    vc.item = self.item;
 }
 
 
-
 #pragma mark - init
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-   if (self) {
-      // Custom initialization
-   }
-   return self;
-}
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -121,8 +87,6 @@ bool newItem;
 	// as we might be returning from a newly selected photo via MIRPhotosViewController
 	NSString *imgPath = [self.item thumbPath];
 	UIImage *image = nil;
-	
-	//NSLog(@"viewWillAppear: imgPath: %@", imgPath );
 	
 	if( nil != imgPath )
 	{
@@ -137,7 +101,7 @@ bool newItem;
 		image = nil;
 		[self.photoButton setTitle:@"Click to set photo" forState:(UIControlStateNormal && UIControlStateHighlighted)];
 	}
-	[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];		
+	[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];
 }
 
 
@@ -153,16 +117,13 @@ bool newItem;
 	
    if( self.item == nil )
    {
-      //NSLog(@"viewDidLoad: self.item == nil");
-		
-		newItem = YES;
-		
 		// create new empty Item and store it:
       Items *item = (Items *)[NSEntityDescription
                               insertNewObjectForEntityForName:@"Items"
                               inManagedObjectContext:self.managedObjectContext];
       self.item = item;
 		[self.parent addItemsObject:self.item];
+		
 		NSError *error;
 		if (![self.managedObjectContext save:&error])
 		{
@@ -190,9 +151,6 @@ bool newItem;
    }
    else
    {
-      //NSLog(@"viewDidLoad: self.item != nil");
-		
-		newItem = NO;
 		self.itemName.text = self.item.name;
       
 		// date may or may not have been set:
@@ -221,7 +179,11 @@ bool newItem;
       self.itemNotes.text = self.item.notes;
 	}
    [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
-   [self.itemPurchaseDate addTarget:self action:@selector(setupPurchaseDateField:) forControlEvents:UIControlEventEditingDidBegin];
+
+	[self.itemName addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
+   [self.itemPurchaseDate addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
+   [self.itemCost addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
+   [self.itemSerialNumber addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
    
    [self.itemPurchaseDate setInputView:datePicker];
    
@@ -252,28 +214,11 @@ bool newItem;
 }
 
 
-// since we can't tap in to the nav bar's back button we will see if we need to do
-// the equivalent of a Cancel (and delete new item) operation here
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidUnload
 {
-	//NSLog(@"viewWillDisappear");
-	
-	// If this is a new Item and they click on the back button, assume that they do not
-	// want to save the edits:
-	if( YES == newItem )
-	{ 
-		//NSLog(@"   newItem");
-		
-		[self.parent removeItemsObject:self.item];
-		[self.managedObjectContext deleteObject:self.item];
-		NSError *error;
-		if (![self.managedObjectContext save:&error])
-		{
-			// Replace this implementation with code to handle the error appropriately.
-			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-			NSLog(@"MIRItemsDetailViewController:cancelButton: unresolved error %@, %@", error, [error userInfo]);
-		}
-	}
+	[super viewDidUnload];
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -292,18 +237,19 @@ bool newItem;
 	return YES;
 }
 
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-   // change the Save button to Done:
-   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:0 target:nil action:@selector(doneButtonPressed:)];
+   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" 
+																					style:0 
+																				  target:nil 
+																				  action:@selector(doneButtonPressed:)];
    self.navigationItem.rightBarButtonItem = btnDone;
 }
 
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-   //NSLog(@"textViewShouldEndEditing");
-   
    [textView resignFirstResponder];
    return YES;
 }
@@ -311,11 +257,24 @@ bool newItem;
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-   // FIXME: keyboard should use Next instead of Done?
+	if( self.itemNotes == textView )
+	{
+		[self.item setValue:self.itemNotes.text forKey:@"notes"];
+	}
+}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+   activeField = textField;
 	
-   // change the Done button to Save:
-   UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
-   self.navigationItem.rightBarButtonItem = btnSave;
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+   [textField resignFirstResponder];
+   return NO;
 }
 
 
@@ -355,38 +314,43 @@ bool newItem;
 		}
 	}
 	
-   // activate the Save button:
-   self.navigationItem.rightBarButtonItem.enabled = YES;
-   
    [textField resignFirstResponder];
    return YES;
 }
 
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-   activeField = textField;
-	
-	// activate the Save btn as soon as we start editing:
-   UIBarButtonItem* btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:0 target:self action:@selector(saveButton:)];
-   self.navigationItem.rightBarButtonItem = btnSave;
-}
-
-
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-   //NSLog(@"textFieldDidEndEditing");
-   
-   activeField = nil;
-}
+	if( self.itemName == textField )
+	{
+		[self.item setValue:self.itemName.text forKey:@"name"];
+	}
+	else if( self.itemPurchaseDate == textField )
+	{
+		[self.item setValue:purchaseDate forKey:@"purchaseDate"];
+	}
+	else if( self.itemCost == textField )
+	{
+		// this works only if they use the currency symbol at the begining of the number,
+		// so we need to check for it and, if necessary, add it in textFieldShouldEndEditing
+		NSNumberFormatter *costFmt = [[NSNumberFormatter alloc] init];
+		[costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+		NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:self.itemCost.text] floatValue]];
+		[self.item setValue:costNum forKey:@"cost"];
+	}
+	else if( self.itemSerialNumber == textField )
+	{
+		[self.item setValue:self.itemSerialNumber.text forKey:@"serialNumber"];
+	}
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-   //NSLog(@"textFieldShouldReturn");
-   
-   [textField resignFirstResponder];
-   return NO;
+   NSError *error;
+   if (![self.managedObjectContext save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"MIRItemsDetailViewController:saveButton: unresolved error %@, %@", error, [error userInfo]);
+   }
+	activeField = nil;
 }
 
 
@@ -395,8 +359,6 @@ bool newItem;
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-   //NSLog(@"keyboardWasShown");
-   
    float kToolBarHeight = 44;
    
    NSDictionary* info = [aNotification userInfo];
@@ -425,11 +387,12 @@ bool newItem;
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-   //NSLog(@"keyboardWillBeHidden");
-   
    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
    self.scrollView.contentInset = contentInsets;
    self.scrollView.scrollIndicatorInsets = contentInsets;
+	
+	// remove the Done button:
+   self.navigationItem.rightBarButtonItem = nil;	
 }
 
 

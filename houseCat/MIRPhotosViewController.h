@@ -17,16 +17,10 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 // Used to pass the parent (Item) in:
 @property( strong, nonatomic ) Items *item;
-
-
-//-(IBAction)done:(id)sender;
-//-(IBAction)addImage:(id)sender;
-
-@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-
 
 
 -(NSString*)uniqueImagePath;
