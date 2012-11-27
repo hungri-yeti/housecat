@@ -32,9 +32,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="info" style="plain" id="oii-GU-SmE"/>
+                        <barButtonItem image="0017.png" style="plain" id="oii-GU-SmE">
+                            <connections>
+                                <segue destination="365-um-9Bf" kind="modal" id="c4e-EN-X00"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="gMg-C4-WAv"/>
-                        <barButtonItem title="loss" id="ktb-hh-eZB">
+                        <barButtonItem title="Claim" id="ktb-hh-eZB">
                             <connections>
                                 <segue destination="dHk-Oe-t2u" kind="push" identifier="lossReport" id="Fr5-yu-Apq"/>
                             </connections>
@@ -53,7 +57,49 @@
             </objects>
             <point key="canvasLocation" x="517" y="50"/>
         </scene>
-        <!--Items View Controller - Items-->
+        <!--Info View Controller-->
+        <scene sceneID="XMD-Fa-OO9">
+            <objects>
+                <viewController id="365-um-9Bf" customClass="MIRInfoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="88n-WP-cSW">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4M-xf-yuG">
+                                <items>
+                                    <navigationItem title="Info" id="pCX-nA-iHh">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="4Kc-vR-Fo7">
+                                            <connections>
+                                                <action selector="done:" destination="365-um-9Bf" id="LIL-Gf-eKu"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1a-WM-31P">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I1a-WM-31P" firstAttribute="top" secondItem="n4M-xf-yuG" secondAttribute="bottom" type="default" id="1Tg-AK-1uM"/>
+                            <constraint firstItem="I1a-WM-31P" firstAttribute="bottom" secondItem="88n-WP-cSW" secondAttribute="bottom" type="default" id="90L-pT-YYw"/>
+                            <constraint firstItem="I1a-WM-31P" firstAttribute="trailing" secondItem="88n-WP-cSW" secondAttribute="trailing" type="default" id="CDL-6P-dPy"/>
+                            <constraint firstItem="n4M-xf-yuG" firstAttribute="leading" secondItem="88n-WP-cSW" secondAttribute="leading" type="default" id="Lgf-Bj-GeW"/>
+                            <constraint firstItem="n4M-xf-yuG" firstAttribute="trailing" secondItem="88n-WP-cSW" secondAttribute="trailing" type="default" id="b8I-cJ-0fP"/>
+                            <constraint firstItem="I1a-WM-31P" firstAttribute="leading" secondItem="88n-WP-cSW" secondAttribute="leading" type="default" id="itS-sb-aej"/>
+                            <constraint firstItem="n4M-xf-yuG" firstAttribute="top" secondItem="88n-WP-cSW" secondAttribute="top" type="default" id="vhj-tN-Cdb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="I1a-WM-31P" id="1rR-mh-f3u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQ0-tl-2AD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="517" y="686"/>
+        </scene>
+        <!--Items View Controller-->
         <scene sceneID="O8X-hx-f77">
             <objects>
                 <tableViewController id="KJY-oH-eDV" customClass="MIRItemsViewController" sceneMemberID="viewController">
@@ -92,7 +138,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="RKi-kB-TW4"/>
                         <barButtonItem systemItem="action" id="Uz3-fV-AAk"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Items" id="tHT-vn-cR0">
+                    <navigationItem key="navigationItem" id="tHT-vn-cR0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="WaO-I9-QhX">
                             <connections>
                                 <segue destination="OtP-iz-ePn" kind="push" identifier="itemAdd" id="nF7-np-XY7"/>
@@ -110,7 +156,7 @@
             <objects>
                 <tableViewController id="dHk-Oe-t2u" customClass="MIRLossReportListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Uel-ZT-1PP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -137,16 +183,15 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="4nq-Rd-bae"/>
-                        <barButtonItem systemItem="action" id="LQh-mx-WQj">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="NLu-3H-bVt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="LQh-mx-WQj">
                             <connections>
                                 <segue destination="v7r-4t-m8w" kind="modal" identifier="requestInfo" id="aos-7l-JkD"/>
                             </connections>
                         </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" id="NLu-3H-bVt"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRU-WB-Xfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,7 +215,7 @@
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKi-FJ-vKW">
                                 <items>
-                                    <navigationItem title="Title" id="Xfh-sN-FrG">
+                                    <navigationItem title="Claim Information" id="Xfh-sN-FrG">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gA1-IW-yuX">
                                             <connections>
                                                 <action selector="cancel:" destination="v7r-4t-m8w" id="Fg7-e7-6KC"/>
@@ -189,7 +234,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="EN8-sF-IGD"/>
                                 </constraints>
-                                <string key="text">Enter the date of loss and your insurance policy number. This information will be added to the header of every page. This information is optional. Click Save when you are done.</string>
+                                <string key="text">Enter the date of loss and your insurance policy number. This information will be added to the header of every page. This information is optional. Tap Save when you are done.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -547,6 +592,88 @@
             <point key="canvasLocation" x="-9" y="50"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="0017.png" width="35" height="35"/>
+    </resources>
+    <classes>
+        <class className="MIRAddRoomViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRAddRoomViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="endEditing:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="roomNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MIRCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MIRInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRInfoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="MIRItemsDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="itemCost" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="itemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="itemNotes" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="itemPurchaseDate" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="itemSerialNumber" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="photoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="MIRItemsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRItemsViewController.h"/>
+        </class>
+        <class className="MIRLossReportInfoRequestController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRLossReportInfoRequestController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="lossDate" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="policyNumber" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MIRLossReportListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRLossReportListViewController.h"/>
+        </class>
+        <class className="MIRPhotoDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRPhotoDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteImage:"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MIRPhotosViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRPhotosViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+            </relationships>
+        </class>
+        <class className="MIRRoomsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRRoomsViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

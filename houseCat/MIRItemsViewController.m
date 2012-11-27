@@ -34,6 +34,8 @@
 {
    [super viewDidLoad];
    [self.navigationController setToolbarHidden:YES];
+
+	[self setTitle:[[self.parent valueForKey:@"name"] description]];
 	
 
    // Uncomment the following line to preserve selection between presentations.

@@ -23,6 +23,10 @@
 {
 	// TODO: add action sounds (will also need a preference for muting them?)
 	// TODO: help system, or at least a set of instructions
+	// TODO: password protection
+	// TODO: some way to edit a room name
+	// TODO: test on retina simulator
+	
    // Override point for customization after application launch.
    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
    MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;

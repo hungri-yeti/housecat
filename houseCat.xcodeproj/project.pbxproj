@@ -11,6 +11,17 @@
 		3B08245A16581C02000221B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B08245916581C01000221B6 /* MessageUI.framework */; };
 		3B08245C1658937C000221B6 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B08245B1658937C000221B6 /* QuickLook.framework */; };
 		3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BFD0D16480D3B00CEE99A /* MIRCell.m */; };
+		3B213F4D16648A6900BF2114 /* 0100.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F4C16648A6900BF2114 /* 0100.png */; };
+		3B213F5016648DEF00BF2114 /* 0101.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F4E16648DEF00BF2114 /* 0101.png */; };
+		3B213F5116648DEF00BF2114 /* 0102.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F4F16648DEF00BF2114 /* 0102.png */; };
+		3B213F5316648F7D00BF2114 /* 0200.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F5216648F7D00BF2114 /* 0200.png */; };
+		3B213F551664904B00BF2114 /* 0300.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F541664904B00BF2114 /* 0300.png */; };
+		3B213F571664957A00BF2114 /* 0500.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F561664957A00BF2114 /* 0500.png */; };
+		3B213F5D1664A0EF00BF2114 /* 0700.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F581664A0EF00BF2114 /* 0700.png */; };
+		3B213F5E1664A0EF00BF2114 /* 0701.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F591664A0EF00BF2114 /* 0701.png */; };
+		3B213F5F1664A0EF00BF2114 /* 0702.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F5A1664A0EF00BF2114 /* 0702.png */; };
+		3B213F601664A0EF00BF2114 /* 0703.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F5B1664A0EF00BF2114 /* 0703.png */; };
+		3B213F611664A0EF00BF2114 /* 0704.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F5C1664A0EF00BF2114 /* 0704.png */; };
 		3B50B6AE16430F0E005BA6B8 /* MIRPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */; };
 		3B50B6B1164391A5005BA6B8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */; };
 		3B5CB41B164CB611005B19FC /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB41A164CB611005B19FC /* Images.m */; };
@@ -22,6 +33,11 @@
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
 		3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */; };
 		3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */; };
+		3B8C000E16640F540074EB4B /* help.html in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C000D16640F540074EB4B /* help.html */; };
+		3B8C001016640FB40074EB4B /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C000F16640FB40074EB4B /* info.html */; };
+		3B8C0018166413EF0074EB4B /* 0017.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C0016166413EF0074EB4B /* 0017.png */; };
+		3B8C0019166413EF0074EB4B /* 0017@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C0017166413EF0074EB4B /* 0017@2x.png */; };
+		3B8C001F166414CC0074EB4B /* MIRInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C001E166414CC0074EB4B /* MIRInfoViewController.m */; };
 		3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
@@ -57,14 +73,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = houseCat_002.xcdatamodel; sourceTree = "<group>"; };
+		3B082452165575BD000221B6 /* houseCat_002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat_002.xcdatamodel; sourceTree = "<group>"; };
 		3B08245516557E11000221B6 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
 		3B08245616557E11000221B6 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
-		3B08245816557F36000221B6 /* houseCat_003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = houseCat_003.xcdatamodel; sourceTree = "<group>"; };
+		3B08245816557F36000221B6 /* houseCat_003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat_003.xcdatamodel; sourceTree = "<group>"; };
 		3B08245916581C01000221B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3B08245B1658937C000221B6 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		3B1BFD0C16480D3B00CEE99A /* MIRCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRCell.h; sourceTree = "<group>"; };
 		3B1BFD0D16480D3B00CEE99A /* MIRCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRCell.m; sourceTree = "<group>"; };
+		3B213F4C16648A6900BF2114 /* 0100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0100.png; sourceTree = "<group>"; };
+		3B213F4E16648DEF00BF2114 /* 0101.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0101.png; sourceTree = "<group>"; };
+		3B213F4F16648DEF00BF2114 /* 0102.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0102.png; sourceTree = "<group>"; };
+		3B213F5216648F7D00BF2114 /* 0200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0200.png; sourceTree = "<group>"; };
+		3B213F541664904B00BF2114 /* 0300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0300.png; sourceTree = "<group>"; };
+		3B213F561664957A00BF2114 /* 0500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0500.png; sourceTree = "<group>"; };
+		3B213F581664A0EF00BF2114 /* 0700.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0700.png; sourceTree = "<group>"; };
+		3B213F591664A0EF00BF2114 /* 0701.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0701.png; sourceTree = "<group>"; };
+		3B213F5A1664A0EF00BF2114 /* 0702.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0702.png; sourceTree = "<group>"; };
+		3B213F5B1664A0EF00BF2114 /* 0703.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0703.png; sourceTree = "<group>"; };
+		3B213F5C1664A0EF00BF2114 /* 0704.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0704.png; sourceTree = "<group>"; };
 		3B50B6AC16430F0E005BA6B8 /* MIRPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotosViewController.h; sourceTree = "<group>"; };
 		3B50B6AD16430F0E005BA6B8 /* MIRPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotosViewController.m; sourceTree = "<group>"; };
 		3B50B6B0164391A5005BA6B8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -82,6 +109,12 @@
 		3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossReportInfoRequestController.m; sourceTree = "<group>"; };
 		3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRGeneratePDF.h; sourceTree = "<group>"; };
 		3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRGeneratePDF.m; sourceTree = "<group>"; };
+		3B8C000D16640F540074EB4B /* help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help.html; sourceTree = "<group>"; };
+		3B8C000F16640FB40074EB4B /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
+		3B8C0016166413EF0074EB4B /* 0017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0017.png; sourceTree = "<group>"; };
+		3B8C0017166413EF0074EB4B /* 0017@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0017@2x.png"; sourceTree = "<group>"; };
+		3B8C001D166414CC0074EB4B /* MIRInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIRInfoViewController.h; path = ../houseCat/MIRInfoViewController.h; sourceTree = "<group>"; };
+		3B8C001E166414CC0074EB4B /* MIRInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIRInfoViewController.m; path = ../houseCat/MIRInfoViewController.m; sourceTree = "<group>"; };
 		3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotoDetailViewController.h; sourceTree = "<group>"; };
 		3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotoDetailViewController.m; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +216,24 @@
 			name = "loss reporting";
 			sourceTree = "<group>";
 		};
+		3B213F4B16648A0E00BF2114 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				3B213F581664A0EF00BF2114 /* 0700.png */,
+				3B213F591664A0EF00BF2114 /* 0701.png */,
+				3B213F5A1664A0EF00BF2114 /* 0702.png */,
+				3B213F5B1664A0EF00BF2114 /* 0703.png */,
+				3B213F5C1664A0EF00BF2114 /* 0704.png */,
+				3B213F561664957A00BF2114 /* 0500.png */,
+				3B213F541664904B00BF2114 /* 0300.png */,
+				3B213F5216648F7D00BF2114 /* 0200.png */,
+				3B213F4E16648DEF00BF2114 /* 0101.png */,
+				3B213F4F16648DEF00BF2114 /* 0102.png */,
+				3B213F4C16648A6900BF2114 /* 0100.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		3B702FF2162D18C400EE6C36 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,9 +248,32 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		3B8C000C16640F540074EB4B /* info */ = {
+			isa = PBXGroup;
+			children = (
+				3B8C001D166414CC0074EB4B /* MIRInfoViewController.h */,
+				3B8C001E166414CC0074EB4B /* MIRInfoViewController.m */,
+				3B8C000F16640FB40074EB4B /* info.html */,
+				3B8C000D16640F540074EB4B /* help.html */,
+				3B213F4B16648A0E00BF2114 /* images */,
+			);
+			path = info;
+			sourceTree = "<group>";
+		};
+		3B8C0015166413EF0074EB4B /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				3B8C0016166413EF0074EB4B /* 0017.png */,
+				3B8C0017166413EF0074EB4B /* 0017@2x.png */,
+			);
+			path = icons;
+			sourceTree = "<group>";
+		};
 		3BAF8B7D161E8D5900B23848 = {
 			isa = PBXGroup;
 			children = (
+				3B8C0015166413EF0074EB4B /* icons */,
+				3B8C000C16640F540074EB4B /* info */,
 				3BAF8B92161E8D5900B23848 /* houseCat */,
 				3BAF8BB9161E8D5900B23848 /* houseCatTests */,
 				3BAF8B8B161E8D5900B23848 /* Frameworks */,
@@ -236,12 +310,12 @@
 		3BAF8B92161E8D5900B23848 /* houseCat */ = {
 			isa = PBXGroup;
 			children = (
-				3B702FF2162D18C400EE6C36 /* CoreData */,
 				3BAF8B9B161E8D5900B23848 /* MIRAppDelegate.h */,
 				3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */,
 				3BE3854F16379EE90023747A /* Storyboards */,
 				3B0824531655789A000221B6 /* view controllers */,
 				3B082454165578DC000221B6 /* loss reporting */,
+				3B702FF2162D18C400EE6C36 /* CoreData */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
 			);
 			path = houseCat;
@@ -368,6 +442,21 @@
 				3BAF8BA3161E8D5900B23848 /* Default-568h@2x.png in Resources */,
 				3BAF8BA6161E8D5900B23848 /* MainStoryboard_iPhone.storyboard in Resources */,
 				3BAF8BA9161E8D5900B23848 /* MainStoryboard_iPad.storyboard in Resources */,
+				3B8C000E16640F540074EB4B /* help.html in Resources */,
+				3B8C001016640FB40074EB4B /* info.html in Resources */,
+				3B8C0018166413EF0074EB4B /* 0017.png in Resources */,
+				3B8C0019166413EF0074EB4B /* 0017@2x.png in Resources */,
+				3B213F4D16648A6900BF2114 /* 0100.png in Resources */,
+				3B213F5016648DEF00BF2114 /* 0101.png in Resources */,
+				3B213F5116648DEF00BF2114 /* 0102.png in Resources */,
+				3B213F5316648F7D00BF2114 /* 0200.png in Resources */,
+				3B213F551664904B00BF2114 /* 0300.png in Resources */,
+				3B213F571664957A00BF2114 /* 0500.png in Resources */,
+				3B213F5D1664A0EF00BF2114 /* 0700.png in Resources */,
+				3B213F5E1664A0EF00BF2114 /* 0701.png in Resources */,
+				3B213F5F1664A0EF00BF2114 /* 0702.png in Resources */,
+				3B213F601664A0EF00BF2114 /* 0703.png in Resources */,
+				3B213F611664A0EF00BF2114 /* 0704.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +521,7 @@
 				3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */,
 				3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */,
 				3B08245716557E11000221B6 /* Items.m in Sources */,
+				3B8C001F166414CC0074EB4B /* MIRInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
