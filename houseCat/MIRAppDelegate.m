@@ -22,26 +22,57 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// TODO: add action sounds (will also need a preference for muting them?)
-	// TODO: help system, or at least a set of instructions
 	// TODO: password protection
 	// TODO: some way to edit a room name
 	// TODO: test on retina simulator
+	// TODO: test: what happens if you have multiple items with the same name in the same room?
+	
+	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
    // Override point for customization after application launch.
    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
    MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;
    controller.managedObjectContext = self.managedObjectContext;
-   
+	
    // Get a reference to the stardard user defaults
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+	NSError* error;
+	NSFileManager *fileManager;
    
    // Check if the app has run before by checking a key in user defaults
    if ([prefs boolForKey:@"hasRunBefore"] != YES)
    {
+
       // Set flag so we know not to run this next time
       [prefs setBool:YES forKey:@"hasRunBefore"];
       [prefs synchronize];
-      
+		
+		// create subdirs in Documents:
+		fileManager = [NSFileManager defaultManager]; 
+		
+		NSURL *pdfURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"pdf"];
+		BOOL results = [fileManager createDirectoryAtURL:pdfURL 
+									 withIntermediateDirectories:NO 
+															attributes:nil 
+																  error:&error
+							 ];
+		if( NO == results )
+		{
+			NSLog(@"Unable to create pdf dir, error: %@", error);
+		}
+		
+		error = nil;
+		NSURL *imgURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"img"];
+		results = [fileManager createDirectoryAtURL:imgURL 
+									 withIntermediateDirectories:NO 
+															attributes:nil 
+																  error:&error
+							 ];
+		if( NO == results )
+		{
+			NSLog(@"Unable to create image dir, error: %@", error);
+		}
+		
       // Add our default Room list in Core Data
       NSArray *defaultRooms = [NSArray arrayWithObjects:@"Kitchen",@"Dining Room",@"Living Room",@"Garage",@"Master Bedroom",@"Den/Office",@"Car",nil];
       for(NSString *roomName in defaultRooms)
@@ -66,10 +97,31 @@
       //}
       
       // Commit to core data
-      NSError *error;
       if (![self.managedObjectContext save:&error])
          NSLog(@"ERROR: didFinishLaunchingWithOptions: save default Rooms: error: %@", [error domain]);
    }
+	else
+	{
+		// clean out the pdf directory:
+		error = nil;
+		
+		// get the list of all files and directories
+		// List the files in the sandbox Documents folder
+		NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/pdf"]; 
+		fileManager = [NSFileManager defaultManager];
+		NSArray* files = [fileManager contentsOfDirectoryAtPath:path error:nil];
+
+		for( NSString* file in files )
+		{
+			NSString* pdfPath = [NSString stringWithFormat:@"%@/%@", path, file];
+			[fileManager removeItemAtPath:pdfPath error:&error];
+			
+			if( error != nil)
+			{
+				NSLog(@"MIRAppDelegate:didFinishLaunchingWithOptions:removeItemAtPath failed, error: %@", [error localizedDescription] );
+			}
+		}
+	}
    return YES;
 }
 

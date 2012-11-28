@@ -51,7 +51,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self.tableView reloadData];
-	
 }
 
 
@@ -237,7 +236,6 @@
 	{
 		// DRY: some of this code is repeated in MIRPhotoDetailVC:deleteImage
 		Items* item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-		NSLog(@"preparing to delete images for: %@", item.name );
 
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		// get all of the Images for this Item:
@@ -250,17 +248,15 @@
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		for (Images *image in results)
 		{
-			//NSLog(@"thumbPath: %@, imagePath: %@", [image thumbPath], [image imagePath] );
-			
 			// delete the image files so we don't fill up the file system:
 			error = nil;
-			if ([fileManager removeItemAtPath:[image thumbPath] error:&error])
+			if ( NO == [fileManager removeItemAtPath:[image thumbPath] error:&error])
 			{
 				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete file thumbPath %@: error: %@", image.thumbPath, [error domain]);
 			}
 			
 			error = nil;
-			if ([fileManager removeItemAtPath:[image imagePath] error:&error])
+			if ( NO == [fileManager removeItemAtPath:[image imagePath] error:&error])
 			{
 				NSLog(@"ERROR: MIRItemsViewController:commitEditingStyle: unable to delete file imagePath %@: error: %@", image.imagePath, [error domain]);
 			}

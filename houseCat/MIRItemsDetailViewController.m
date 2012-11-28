@@ -214,6 +214,17 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	// If the user is currently editing a text field/vew and taps the Items nav button,
+	// the parent's viewWillAppear (which is where I refresh the table) is called before textFieldDidEndEditing.
+	// This means that the edits are saved after the parent table is refreshed, resulting in an
+	// incorrect view.
+	// Force endEditing here which makes sure that textFieldDidEndEditing is called prior to table refresh.
+	[self.view endEditing:YES];
+}
+
+
 - (void)viewDidUnload
 {
 	[super viewDidUnload];
@@ -323,6 +334,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 {
 	if( self.itemName == textField )
 	{
+		
 		[self.item setValue:self.itemName.text forKey:@"name"];
 	}
 	else if( self.itemPurchaseDate == textField )

@@ -49,7 +49,7 @@
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *pdfFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+	NSString* pdfFilePath = [NSString stringWithFormat:@"%@/pdf/%@", documentsDirectory, fileName];
 	
 	[self generatePdfWithFilePath:pdfFilePath itemsArray:items];
 	return pdfFilePath;	

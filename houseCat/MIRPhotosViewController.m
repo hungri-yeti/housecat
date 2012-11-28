@@ -111,6 +111,9 @@ NSString *kCellID = @"uicollection_cell";
 - (NSString*)uniqueImagePath
 {
    NSMutableString *imageName = [[NSMutableString alloc] initWithCapacity:0];
+	// all images (thumbs & full-size) will be stored in this dir:
+	[imageName appendString:@"img/" ];
+	
    CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
    if (theUUID)
    {
@@ -122,7 +125,7 @@ NSString *kCellID = @"uicollection_cell";
    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
    NSString *documentsPath = [paths objectAtIndex:0];
    NSString *filePath = [documentsPath stringByAppendingPathComponent:imageName];
-   NSLog(@"filePath: %@", filePath);
+   //NSLog(@"filePath: %@", filePath);
    
    return filePath;
 }
