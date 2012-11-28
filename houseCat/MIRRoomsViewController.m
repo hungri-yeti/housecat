@@ -12,6 +12,7 @@
 #import "MIRAddRoomViewController.h"
 #import "Rooms.h"
 #import "MIRLossReportListViewController.h"
+#import "MIRChangeRoomViewController.h"
 
 
 @interface MIRRoomsViewController ()
@@ -64,21 +65,21 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    //DebugLog(@"segue.id: %@", segue.identifier );
-
+	Rooms *room;
+	
    if ([segue.identifier isEqualToString:@"roomsToItems"])
    {
+		// This actually hides the toolbar in the child view
+		// that will appear soon:
       [self.navigationController setToolbarHidden:YES];
       
-      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      //NSUInteger row = [indexPath row];
-      //DebugLog(@"   row: %u", row );
-      
       // pass the moc to the child view:
-      MIRItemsViewController *vc = [segue destinationViewController];
+		MIRItemsViewController *vc = [segue destinationViewController];
       vc.managedObjectContext = self.managedObjectContext;
       
       // pass the Room obj to the child view:
-      Rooms *room = [self.fetchedResultsController objectAtIndexPath:indexPath];
+      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+      room = [self.fetchedResultsController objectAtIndexPath:indexPath];
       vc.parent = room;
    }
    else if ([segue.identifier isEqualToString:@"addRoomName"])
@@ -90,7 +91,16 @@
 	else if( [segue.identifier isEqualToString:@"lossReport"])
 	{
       // pass the moc to the child view:
-      MIRLossReportListViewController *vc = [segue destinationViewController];
+		MIRLossReportListViewController *vc = [segue destinationViewController];
+      vc.managedObjectContext = self.managedObjectContext;
+	}
+	else if( [segue.identifier isEqualToString:@"changeRoomName"])
+	{
+      // pass the Room obj to the child view:
+      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+      room = [self.fetchedResultsController objectAtIndexPath:indexPath];
+		MIRChangeRoomViewController *vc = [segue destinationViewController];
+      vc.room = room;
       vc.managedObjectContext = self.managedObjectContext;
 	}
 }
@@ -180,12 +190,17 @@
    // Pass the selected object to the new view controller.
    [self.navigationController pushViewController:detailViewController animated:YES];
    */
+	
+	// Deselect the row.
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
    // Do something here
+	
+	[self performSegueWithIdentifier:@"roomsToItems" sender:self];
 }
 
 

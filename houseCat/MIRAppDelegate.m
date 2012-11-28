@@ -19,13 +19,12 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// TODO: add action sounds (will also need a preference for muting them?)
 	// TODO: password protection
-	// TODO: some way to edit a room name
-	// TODO: test on retina simulator
-	// TODO: test: what happens if you have multiple items with the same name in the same room?
 	
 	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	

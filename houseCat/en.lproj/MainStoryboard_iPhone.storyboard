@@ -13,16 +13,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roomsCell" id="K5J-2W-8Og">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roomsCell" id="K5J-2W-8Og">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="KJY-oH-eDV" kind="push" identifier="roomsToItems" id="nm0-fG-c1B"/>
+                                    <segue destination="mQL-sg-X1e" kind="modal" identifier="changeRoomName" id="PRX-RS-E2R"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -34,7 +34,7 @@
                     <toolbarItems>
                         <barButtonItem image="0017.png" style="plain" id="oii-GU-SmE">
                             <connections>
-                                <segue destination="365-um-9Bf" kind="modal" id="c4e-EN-X00"/>
+                                <segue destination="365-um-9Bf" kind="modal" identifier="showInfo" id="c4e-EN-X00"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="gMg-C4-WAv"/>
@@ -52,6 +52,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="KJY-oH-eDV" kind="push" identifier="roomsToItems" id="gxJ-Tx-eLN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mz3-P3-IoK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -457,6 +460,7 @@
                             <constraint firstItem="5zE-JM-Gi6" firstAttribute="leading" secondItem="YxG-my-MOR" secondAttribute="leading" type="default" id="dPO-c3-iQP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aEt-Hu-Pe0"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="5zE-JM-Gi6" id="AoF-S6-CxL"/>
@@ -501,6 +505,7 @@
                             <constraint firstItem="NyA-IZ-eal" firstAttribute="trailing" secondItem="WBC-Ct-ee6" secondAttribute="trailing" type="default" id="tVa-Fr-5FP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="nov-Kx-hhE"/>
                     <connections>
                         <outlet property="imageView" destination="NyA-IZ-eal" id="OuD-hH-6Px"/>
                     </connections>
@@ -566,7 +571,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtT-DU-P18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="517" y="-647"/>
+            <point key="canvasLocation" x="517" y="-592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZJD-zs-VHw">
@@ -590,6 +595,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ab6-vO-lLF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-9" y="50"/>
+        </scene>
+        <!--Change Room View Controller-->
+        <scene sceneID="t3a-Ts-ui4">
+            <objects>
+                <viewController id="mQL-sg-X1e" customClass="MIRChangeRoomViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O1M-DQ-Jjo">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="New Room Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nl-9t-Uie">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ky5-VG-ss8">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="endEditing:" destination="mQL-sg-X1e" eventType="editingDidEndOnExit" id="SBZ-Jp-F8g"/>
+                                    <outlet property="delegate" destination="O1M-DQ-Jjo" id="C7p-0b-WpF"/>
+                                </connections>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sW6-N0-AJa">
+                                <items>
+                                    <navigationItem title="Room" id="VGh-4n-Ttw">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="MtY-lf-aNZ"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="WWo-kz-ra8">
+                                            <connections>
+                                                <action selector="cancel:" destination="mQL-sg-X1e" id="Gjv-0s-khS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="Hjw-kT-uOg">
+                                            <connections>
+                                                <action selector="save:" destination="mQL-sg-X1e" id="tp7-wq-p7C"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ky5-VG-ss8" firstAttribute="leading" secondItem="O1M-DQ-Jjo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="38r-Ca-pcm"/>
+                            <constraint firstItem="2nl-9t-Uie" firstAttribute="top" secondItem="O1M-DQ-Jjo" secondAttribute="top" constant="53" id="5hd-ql-J7F"/>
+                            <constraint firstItem="2nl-9t-Uie" firstAttribute="leading" secondItem="O1M-DQ-Jjo" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="62m-C9-59x"/>
+                            <constraint firstItem="sW6-N0-AJa" firstAttribute="top" secondItem="O1M-DQ-Jjo" secondAttribute="top" type="default" id="ErI-OC-pnL"/>
+                            <constraint firstItem="sW6-N0-AJa" firstAttribute="trailing" secondItem="O1M-DQ-Jjo" secondAttribute="trailing" type="default" id="RTh-6N-Sej"/>
+                            <constraint firstItem="sW6-N0-AJa" firstAttribute="leading" secondItem="O1M-DQ-Jjo" secondAttribute="leading" type="default" id="Wqh-tW-hbd"/>
+                            <constraint firstItem="ky5-VG-ss8" firstAttribute="top" secondItem="2nl-9t-Uie" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="fuu-VF-Mhy"/>
+                            <constraint firstAttribute="trailing" secondItem="ky5-VG-ss8" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uq6-fQ-OuP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="roomNameField" destination="ky5-VG-ss8" id="90D-tU-1ht"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WDs-MN-pYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="-592"/>
         </scene>
     </scenes>
     <resources>
