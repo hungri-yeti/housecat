@@ -46,8 +46,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-   //DebugLog(@"viewWillAppear");
-   
    [self.navigationController setToolbarHidden:NO];
 }
 
@@ -64,7 +62,7 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   //DebugLog(@"segue.id: %@", segue.identifier );
+   DebugLog(@"segue.id: %@", segue.identifier );
 	Rooms *room;
 	
    if ([segue.identifier isEqualToString:@"roomsToItems"])

@@ -48,7 +48,7 @@
 {
    if([self.roomNameField.text length]<=0)
    {
-      //DebugLog(@"MIRAddRoomViewController: you have not entered a Room name %@",self.roomNameField.text);
+		NSLog(@"MIRAddRoomViewController: you have not entered a Room name %@", self.roomNameField.text);
    }
    else
    {
@@ -70,15 +70,6 @@
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {

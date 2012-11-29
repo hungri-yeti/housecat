@@ -197,7 +197,6 @@
 	[spinner startAnimating];	
 	
 	MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
-	// TODO: this file will need to be deleted at some point, when is it safe/advisable to do so?
 	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:self.resultsString];	
 	self.pdfFilePath = pdfPath;
 

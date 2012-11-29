@@ -25,6 +25,7 @@
 {
 	// TODO: add action sounds (will also need a preference for muting them?)
 	// TODO: password protection
+	// TODO: iPad storyboard
 	
 	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
@@ -69,7 +70,7 @@
 							 ];
 		if( NO == results )
 		{
-			NSLog(@"Unable to create image dir, error: %@", error);
+			NSLog(@"Unable to create img dir, error: %@", error);
 		}
 		
       // Add our default Room list in Core Data
@@ -80,10 +81,10 @@
          [room setName:roomName];
       }
       
-      NSFetchRequest *request = [[NSFetchRequest alloc] init];
-      NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms"
-                                                inManagedObjectContext:[self managedObjectContext]];
-      request.entity = entity;
+      //NSFetchRequest *request = [[NSFetchRequest alloc] init];
+      //NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms"
+      //                                          inManagedObjectContext:[self managedObjectContext]];
+      //request.entity = entity;
       //NSArray *listOfRooms = [[self managedObjectContext] executeFetchRequest:request error:nil];
       //List out contents of each project
       //if([listOfRooms count] == 0)
@@ -104,8 +105,7 @@
 		// clean out the pdf directory:
 		error = nil;
 		
-		// get the list of all files and directories
-		// List the files in the sandbox Documents folder
+		// List the files in the sandbox Documents/pdf folder
 		NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/pdf"]; 
 		fileManager = [NSFileManager defaultManager];
 		NSArray* files = [fileManager contentsOfDirectoryAtPath:path error:nil];

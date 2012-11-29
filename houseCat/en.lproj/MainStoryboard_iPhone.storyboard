@@ -532,7 +532,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                 <connections>
                                     <action selector="endEditing:" destination="rW4-s0-5so" eventType="editingDidEndOnExit" id="V0X-T2-OEe"/>
-                                    <outlet property="delegate" destination="qrR-BJ-d8m" id="dww-tc-s3C"/>
+                                    <outlet property="delegate" destination="qrR-BJ-d8m" id="es5-fw-71M"/>
                                 </connections>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5aR-tf-Ju4">
@@ -566,7 +566,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="roomNameField" destination="rKr-xP-xRN" id="gcO-ke-akc"/>
+                        <outlet property="roomNameField" destination="rKr-xP-xRN" id="hHe-MR-faV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtT-DU-P18" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -653,7 +653,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDs-MN-pYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="-592"/>
+            <point key="canvasLocation" x="517" y="-1211"/>
         </scene>
     </scenes>
     <resources>
