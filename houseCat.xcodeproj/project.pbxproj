@@ -262,7 +262,8 @@
 				3B8C000D16640F540074EB4B /* help.html */,
 				3B213F4B16648A0E00BF2114 /* images */,
 			);
-			path = info;
+			name = info;
+			path = ../info;
 			sourceTree = "<group>";
 		};
 		3B8C0015166413EF0074EB4B /* icons */ = {
@@ -271,14 +272,13 @@
 				3B8C0016166413EF0074EB4B /* 0017.png */,
 				3B8C0017166413EF0074EB4B /* 0017@2x.png */,
 			);
-			path = icons;
+			name = icons;
+			path = ../icons;
 			sourceTree = "<group>";
 		};
 		3BAF8B7D161E8D5900B23848 = {
 			isa = PBXGroup;
 			children = (
-				3B8C0015166413EF0074EB4B /* icons */,
-				3B8C000C16640F540074EB4B /* info */,
 				3BAF8B92161E8D5900B23848 /* houseCat */,
 				3BAF8BB9161E8D5900B23848 /* houseCatTests */,
 				3BAF8B8B161E8D5900B23848 /* Frameworks */,
@@ -329,6 +329,8 @@
 		3BAF8B93161E8D5900B23848 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B8C000C16640F540074EB4B /* info */,
+				3B8C0015166413EF0074EB4B /* icons */,
 				3BAF8B94161E8D5900B23848 /* houseCat-Info.plist */,
 				3BAF8B95161E8D5900B23848 /* InfoPlist.strings */,
 				3BAF8B98161E8D5900B23848 /* main.m */,

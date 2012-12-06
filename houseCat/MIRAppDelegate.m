@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 kl. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "MIRAppDelegate.h"
 #import "MIRRoomsViewController.h"
 #import "Rooms.h"
@@ -30,9 +31,24 @@
 	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
    // Override point for customization after application launch.
-   UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-   MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;
-   controller.managedObjectContext = self.managedObjectContext;
+	MIRRoomsViewController *controller;
+	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+	{
+		UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+		controller = (MIRRoomsViewController *)navigationController.topViewController;
+	}
+	else if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+	{
+		// from Apple's template:
+		UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+		UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+		splitViewController.delegate = (id)navigationController.topViewController;
+		// ^ -[UIViewController topViewController]: unrecognized selector sent to instance 0xa373ec0 (which is the navigationController)
+
+		UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+		controller = (MIRRoomsViewController *)masterNavigationController.topViewController;
+	}
+	controller.managedObjectContext = self.managedObjectContext;		
 	
    // Get a reference to the stardard user defaults
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];

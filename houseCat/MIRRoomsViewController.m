@@ -62,7 +62,8 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   DebugLog(@"segue.id: %@", segue.identifier );
+   //DebugLog(@"segue.id: %@", segue.identifier );
+	
 	Rooms *room;
 	
    if ([segue.identifier isEqualToString:@"roomsToItems"])
@@ -181,14 +182,17 @@
 //   NSUInteger row = [indexPath row];
 //   NSLog(@"didSelectRowAtIndexPath: row: %u", row );
    
-   // Navigation logic may go here. Create and push another view controller.
-   /*
-   ￼ *detailViewController = [[￼ alloc] initWithNibName:@"￼" bundle:nil];
-   // ...
-   // Pass the selected object to the new view controller.
-   [self.navigationController pushViewController:detailViewController animated:YES];
-   */
-	
+//	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad"
+//																bundle:nil];
+//	UITableViewController *detailController = [sb instantiateViewControllerWithIdentifier:@"TableSettingDetails"];
+//	
+//	self.popoverController = [[UIPopoverController alloc] initWithContentViewController:detailController];
+//	
+//	self.popoverController.popoverContentSize = CGSizeMake(256, 128);
+//	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//	[self.popoverController presentPopoverFromRect:cell.bounds inView:cell.contentView
+//								 permittedArrowDirections:UIPopoverArrowDirectionAny
+//													  animated:YES];
 	// Deselect the row.
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -212,6 +216,7 @@
    
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
    // Edit the entity name as appropriate.
+	// FIXME: moc is nil in line below:
    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
    [fetchRequest setEntity:entity];
    
