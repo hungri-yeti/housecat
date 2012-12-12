@@ -27,7 +27,6 @@
 		3B5CB41B164CB611005B19FC /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB41A164CB611005B19FC /* Images.m */; };
 		3B5CB41E164F2B19005B19FC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CB41C164F2B19005B19FC /* AddressBook.framework */; };
 		3B5CB41F164F2B19005B19FC /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5CB41D164F2B19005B19FC /* AddressBookUI.framework */; };
-		3B5CB422164F32C2005B19FC /* MIRLossComposeMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */; };
 		3B702FED162D187A00EE6C36 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B702FEC162D187A00EE6C36 /* CoreData.framework */; };
 		3B702FF1162D18BB00EE6C36 /* houseCat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FEF162D18BB00EE6C36 /* houseCat.xcdatamodeld */; };
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
@@ -100,8 +99,6 @@
 		3B5CB41A164CB611005B19FC /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
 		3B5CB41C164F2B19005B19FC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3B5CB41D164F2B19005B19FC /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		3B5CB420164F32C2005B19FC /* MIRLossComposeMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRLossComposeMsgViewController.h; sourceTree = "<group>"; };
-		3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossComposeMsgViewController.m; sourceTree = "<group>"; };
 		3B702FEC162D187A00EE6C36 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3B702FF0162D18BB00EE6C36 /* houseCat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseCat.xcdatamodel; sourceTree = "<group>"; };
 		3B702FF8162D192100EE6C36 /* Rooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rooms.h; sourceTree = "<group>"; };
@@ -213,8 +210,6 @@
 				3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */,
 				3B83C6151651D7CC006C7D50 /* MIRLossReportInfoRequestController.h */,
 				3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */,
-				3B5CB420164F32C2005B19FC /* MIRLossComposeMsgViewController.h */,
-				3B5CB421164F32C2005B19FC /* MIRLossComposeMsgViewController.m */,
 				3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */,
 				3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */,
 			);
@@ -524,7 +519,6 @@
 				3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */,
 				3BF0BA70164B5AE800269D1A /* MIRLossReportListViewController.m in Sources */,
 				3B5CB41B164CB611005B19FC /* Images.m in Sources */,
-				3B5CB422164F32C2005B19FC /* MIRLossComposeMsgViewController.m in Sources */,
 				3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */,
 				3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */,
 				3B08245716557E11000221B6 /* Items.m in Sources */,

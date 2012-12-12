@@ -22,6 +22,7 @@
 
 @interface MIRGeneratePDF : NSObject
 {
+	// this isn't an object type so it can't be a property:
 	CGSize pageSize;
 }
 

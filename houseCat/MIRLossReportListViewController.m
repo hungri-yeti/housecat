@@ -15,6 +15,7 @@
 
 
 @interface MIRLossReportListViewController ()
+	@property (strong, nonatomic) UIViewController *infoRequestVC;
 @end
 
 
@@ -166,7 +167,7 @@
 	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
 	
 	self.resultsString = [[NSString alloc] initWithFormat:@"Policy: %@, Date of Loss: %@", [results objectAtIndex:0], [results objectAtIndex:1]];
-	[self->infoRequestVC dismissViewControllerAnimated:NO completion:nil];
+	[self.infoRequestVC dismissViewControllerAnimated:NO completion:nil];
 	
 	// get the data for the pdf generator:
 	NSManagedObjectContext *context = [self managedObjectContext]; 
@@ -441,8 +442,8 @@
 	else if([segue.identifier isEqualToString:@"requestInfo"])
 	{
 		//UIViewController *newController = segue.destinationViewController;
-		self->infoRequestVC = segue.destinationViewController;
-		MIRLossReportInfoRequestController *mlrVC = (MIRLossReportInfoRequestController *) self->infoRequestVC;
+		self.infoRequestVC = segue.destinationViewController;
+		MIRLossReportInfoRequestController *mlrVC = (MIRLossReportInfoRequestController *) self.infoRequestVC;
 		mlrVC.delegate = self;
 	}
 }

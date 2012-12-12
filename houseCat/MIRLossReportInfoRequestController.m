@@ -9,7 +9,6 @@
 #import "MIRLossReportInfoRequestController.h"
 
 @interface MIRLossReportInfoRequestController ()
-
 @end
 
 @implementation MIRLossReportInfoRequestController

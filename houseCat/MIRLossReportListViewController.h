@@ -22,10 +22,7 @@
 	UIActionSheetDelegate, 
 	MFMailComposeViewControllerDelegate
 >
-{
-	@private
-	UIViewController *infoRequestVC;
-}
+
 
 -(void)showActionSheet;
 -(void)actionSendEmail;
