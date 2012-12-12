@@ -31,24 +31,51 @@
 	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
    // Override point for customization after application launch.
-	MIRRoomsViewController *controller;
-	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
-	{
-		UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-		controller = (MIRRoomsViewController *)navigationController.topViewController;
-	}
-	else if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-	{
-		// from Apple's template:
-		UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-		UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-		splitViewController.delegate = (id)navigationController.topViewController;
-		// ^ -[UIViewController topViewController]: unrecognized selector sent to instance 0xa373ec0 (which is the navigationController)
+   UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+   MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;
+   controller.managedObjectContext = self.managedObjectContext;
 
-		UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-		controller = (MIRRoomsViewController *)masterNavigationController.topViewController;
-	}
-	controller.managedObjectContext = self.managedObjectContext;		
+	
+	//	MIRRoomsViewController *controller;
+//	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+//	{
+//		UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+//		controller = (MIRRoomsViewController *)navigationController.topViewController;
+//	}
+//	else if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+//	{
+////		// from Apple's template:
+////		UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+////		UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+////		splitViewController.delegate = (id)navigationController.topViewController;
+////		// ^ -[UIViewController topViewController]: unrecognized selector sent to instance 0xa373ec0 (which is the navigationController)
+////
+////		UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+////		controller = (MIRRoomsViewController *)masterNavigationController.topViewController;
+//		
+//		//UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+//		
+//		//controller = (MIRRoomsViewController *)self.window.rootViewController;
+//		// this doesn't work:
+//		//controller = (MIRRoomsViewController *)[self.window.rootViewController.childViewControllers objectAtIndex:0];
+//		
+//		// I need to make a master view controller for the storyboard that contains the container views, then
+//		//	that class will have a valid childViewControllers property that can be used
+//		NSLog(@"child count: %i", [self.window.rootViewController.childViewControllers count] );
+//		for (id object in self.window.rootViewController.childViewControllers)
+//		{
+//			if ([object isKindOfClass:[UINavigationController class]])
+//			{
+//				NSLog(@"found UINavCon");
+////            UINavigationController *navController = object;
+////            navController.navigationBar.tintColor = [UIColor colorWithRed:0.107 green:0.360 blue:0.668 alpha:1.000];
+//			}
+//			else
+//			{
+//				NSLog(@"found something else...");
+//			}
+//		}
+//	}
 	
    // Get a reference to the stardard user defaults
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];

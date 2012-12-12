@@ -77,7 +77,7 @@
    if ([segue.identifier isEqualToString:@"itemEdit"])
    {
       // pass the existing Item obj to the child view:
-      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+      NSIndexPath *indexPath = sender;
       Items *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
       vc.item = item;
    }
@@ -91,6 +91,21 @@
 
    // pass the Room obj to the child view:
    vc.parent = self.parent;
+}
+
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
+-(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+	[self performSegueWithIdentifier:@"itemEdit" sender:indexPath];
 }
 
 

@@ -60,6 +60,7 @@
 
 
 #pragma mark - Segue
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    //DebugLog(@"segue.id: %@", segue.identifier );
@@ -77,7 +78,7 @@
       vc.managedObjectContext = self.managedObjectContext;
       
       // pass the Room obj to the child view:
-      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+		NSIndexPath *indexPath = sender;
       room = [self.fetchedResultsController objectAtIndexPath:indexPath];
       vc.parent = room;
    }
@@ -103,6 +104,7 @@
       vc.managedObjectContext = self.managedObjectContext;
 	}
 }
+
 
 
 #pragma mark - Table view data source
@@ -202,7 +204,7 @@
 {
    // Do something here
 	
-	[self performSegueWithIdentifier:@"roomsToItems" sender:self];
+	[self performSegueWithIdentifier:@"roomsToItems" sender:indexPath];
 }
 
 
@@ -216,7 +218,6 @@
    
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
    // Edit the entity name as appropriate.
-	// FIXME: moc is nil in line below:
    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
    [fetchRequest setEntity:entity];
    
