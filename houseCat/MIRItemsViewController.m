@@ -77,7 +77,18 @@
    if ([segue.identifier isEqualToString:@"itemEdit"])
    {
       // pass the existing Item obj to the child view:
-      NSIndexPath *indexPath = sender;
+		NSIndexPath *indexPath;
+		if([sender isKindOfClass:[UITableViewCell class]])
+		{
+			indexPath = [self.tableView indexPathForSelectedRow];			
+		}
+		else if ([sender isKindOfClass:[NSIndexPath class]])
+		{
+			// The segue may be called from accessoryButtonTappedForRowWithIndexPath, in which case
+			// sender will already be NSIndexPath.
+			indexPath = sender;
+		}
+		
       Items *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
       vc.item = item;
    }
