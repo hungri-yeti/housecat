@@ -27,6 +27,8 @@
 	// TODO: add action sounds (will also need a preference for muting them?)
 	// TODO: password protection
 	// TODO: iPad storyboard
+	// TODO: implement Contact the developer in info.html
+	// TODO: implement Report a problem in info.html
 	
 	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	

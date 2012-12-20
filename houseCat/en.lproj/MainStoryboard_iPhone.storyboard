@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3081" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7AN-Ko-20e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3083" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7AN-Ko-20e">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2080"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Rooms View Controller - Rooms-->
@@ -309,14 +309,6 @@
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="9dx-qs-Sfp"/>
                                         </connections>
                                     </textView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(logo?)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFF-p6-ld2">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="NHm-mB-nBb"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Description (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BXE-OC-s8t">
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -358,7 +350,6 @@
                                     <constraint firstItem="oJS-ZE-5A9" firstAttribute="top" secondItem="BXE-OC-s8t" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="A25-91-bte"/>
                                     <constraint firstItem="mBG-7R-x5g" firstAttribute="top" secondItem="oJS-ZE-5A9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="BDW-Cn-Dmd"/>
                                     <constraint firstItem="oJS-ZE-5A9" firstAttribute="baseline" secondItem="kgv-KP-btj" secondAttribute="baseline" type="default" id="C6o-uy-Nbe"/>
-                                    <constraint firstItem="JPZ-fX-JMJ" firstAttribute="centerY" secondItem="QFF-p6-ld2" secondAttribute="centerY" type="default" id="CLj-eF-eY0"/>
                                     <constraint firstItem="JPZ-fX-JMJ" firstAttribute="leading" secondItem="QqW-Uq-xz7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Im1-LB-aQu"/>
                                     <constraint firstItem="oJS-ZE-5A9" firstAttribute="leading" secondItem="QqW-Uq-xz7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LtA-Mi-mwt"/>
                                     <constraint firstItem="MaW-CY-eiB" firstAttribute="leading" secondItem="QqW-Uq-xz7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="OAA-ZQ-yAu"/>
@@ -370,7 +361,6 @@
                                     <constraint firstItem="BXE-OC-s8t" firstAttribute="top" secondItem="QqW-Uq-xz7" secondAttribute="top" constant="156" id="jcq-YI-H5w"/>
                                     <constraint firstItem="MaW-CY-eiB" firstAttribute="top" secondItem="mBG-7R-x5g" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="lmC-n5-I02"/>
                                     <constraint firstItem="mBG-7R-x5g" firstAttribute="leading" secondItem="QqW-Uq-xz7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="mU1-HG-NIX"/>
-                                    <constraint firstItem="QFF-p6-ld2" firstAttribute="centerX" secondItem="kgv-KP-btj" secondAttribute="centerX" type="default" id="o8a-qs-q8v"/>
                                     <constraint firstItem="BXE-OC-s8t" firstAttribute="leading" secondItem="QqW-Uq-xz7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sIx-yR-lZO"/>
                                 </constraints>
                             </scrollView>

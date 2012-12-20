@@ -60,6 +60,11 @@
 		3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */; };
 		3BE3855316379F6F0023747A /* MIRItemsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */; };
 		3BF0BA70164B5AE800269D1A /* MIRLossReportListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */; };
+		3BF89CDA1682B1AA008D7BD3 /* 0400.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CD71682B1AA008D7BD3 /* 0400.png */; };
+		3BF89CDB1682B1AA008D7BD3 /* 0401.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CD81682B1AA008D7BD3 /* 0401.png */; };
+		3BF89CDC1682B1AA008D7BD3 /* 0402.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CD91682B1AA008D7BD3 /* 0402.png */; };
+		3BF89CDE1682B32F008D7BD3 /* 0403.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CDD1682B32E008D7BD3 /* 0403.png */; };
+		3BF89CE01682BE39008D7BD3 /* 0600.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CDF1682BE39008D7BD3 /* 0600.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +153,11 @@
 		3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsDetailViewController.m; sourceTree = "<group>"; };
 		3BF0BA6E164B5AE800269D1A /* MIRLossReportListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRLossReportListViewController.h; sourceTree = "<group>"; };
 		3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossReportListViewController.m; sourceTree = "<group>"; };
+		3BF89CD71682B1AA008D7BD3 /* 0400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0400.png; sourceTree = "<group>"; };
+		3BF89CD81682B1AA008D7BD3 /* 0401.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0401.png; sourceTree = "<group>"; };
+		3BF89CD91682B1AA008D7BD3 /* 0402.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0402.png; sourceTree = "<group>"; };
+		3BF89CDD1682B32E008D7BD3 /* 0403.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0403.png; sourceTree = "<group>"; };
+		3BF89CDF1682BE39008D7BD3 /* 0600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0600.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,17 +229,22 @@
 		3B213F4B16648A0E00BF2114 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3B213F4C16648A6900BF2114 /* 0100.png */,
+				3B213F4E16648DEF00BF2114 /* 0101.png */,
+				3B213F4F16648DEF00BF2114 /* 0102.png */,
+				3B213F5216648F7D00BF2114 /* 0200.png */,
+				3B213F541664904B00BF2114 /* 0300.png */,
+				3BF89CD71682B1AA008D7BD3 /* 0400.png */,
+				3BF89CD81682B1AA008D7BD3 /* 0401.png */,
+				3BF89CD91682B1AA008D7BD3 /* 0402.png */,
+				3BF89CDD1682B32E008D7BD3 /* 0403.png */,
+				3B213F561664957A00BF2114 /* 0500.png */,
+				3BF89CDF1682BE39008D7BD3 /* 0600.png */,
 				3B213F581664A0EF00BF2114 /* 0700.png */,
 				3B213F591664A0EF00BF2114 /* 0701.png */,
 				3B213F5A1664A0EF00BF2114 /* 0702.png */,
 				3B213F5B1664A0EF00BF2114 /* 0703.png */,
 				3B213F5C1664A0EF00BF2114 /* 0704.png */,
-				3B213F561664957A00BF2114 /* 0500.png */,
-				3B213F541664904B00BF2114 /* 0300.png */,
-				3B213F5216648F7D00BF2114 /* 0200.png */,
-				3B213F4E16648DEF00BF2114 /* 0101.png */,
-				3B213F4F16648DEF00BF2114 /* 0102.png */,
-				3B213F4C16648A6900BF2114 /* 0100.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -459,6 +474,11 @@
 				3B213F5F1664A0EF00BF2114 /* 0702.png in Resources */,
 				3B213F601664A0EF00BF2114 /* 0703.png in Resources */,
 				3B213F611664A0EF00BF2114 /* 0704.png in Resources */,
+				3BF89CDA1682B1AA008D7BD3 /* 0400.png in Resources */,
+				3BF89CDB1682B1AA008D7BD3 /* 0401.png in Resources */,
+				3BF89CDC1682B1AA008D7BD3 /* 0402.png in Resources */,
+				3BF89CDE1682B32F008D7BD3 /* 0403.png in Resources */,
+				3BF89CE01682BE39008D7BD3 /* 0600.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

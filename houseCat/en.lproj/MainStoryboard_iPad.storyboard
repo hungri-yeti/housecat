@@ -104,7 +104,7 @@
                     <navigationItem key="navigationItem" id="wVh-R2-23L"/>
                     <connections>
                         <outlet property="view" destination="xr7-Cq-l5e" id="DOh-4x-d4H"/>
-                        <segue destination="zAN-Ke-1GH" kind="push" id="uGN-CZ-GHo"/>
+                        <segue destination="zAN-Ke-1GH" kind="push" identifier="roomsToItems" id="uGN-CZ-GHo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7r8-po-fRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -121,7 +121,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="BPb-To-0ak">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemsCell" id="BPb-To-0ak">
                                 <rect key="frame" x="0.0" y="22" width="341" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -196,6 +196,14 @@
     <resources>
         <image name="0017.png" width="35" height="35"/>
     </resources>
+    <classes>
+        <class className="MIRRoomsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIRRoomsViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
