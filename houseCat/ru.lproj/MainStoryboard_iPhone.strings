@@ -1,0 +1,84 @@
+
+/* Class = "IBUILabel"; text = "Room Name:"; ObjectID = "2nl-9t-Uie"; */
+"2nl-9t-Uie.text" = "Room Name:";
+
+/* Class = "IBUIBarButtonItem"; title = "Done"; ObjectID = "4Kc-vR-Fo7"; */
+"4Kc-vR-Fo7.title" = "Done";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "4OX-FW-LyC"; */
+"4OX-FW-LyC.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "Rooms"; ObjectID = "584-cg-cAo"; */
+"584-cg-cAo.title" = "Rooms";
+
+/* Class = "IBUITextField"; placeholder = "Item Description (REQUIRED)"; ObjectID = "BXE-OC-s8t"; */
+"BXE-OC-s8t.placeholder" = "Item Description (REQUIRED)";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "CFF-wA-J91"; */
+"CFF-wA-J91.text" = "Title";
+
+/* Class = "IBUILabel"; text = "New Room Name:"; ObjectID = "Etc-gM-R7T"; */
+"Etc-gM-R7T.text" = "New Room Name:";
+
+/* Class = "IBUIBarButtonItem"; title = "Save"; ObjectID = "Hjw-kT-uOg"; */
+"Hjw-kT-uOg.title" = "Save";
+
+/* Class = "IBUIBarButtonItem"; title = "loss"; ObjectID = "I94-f9-e9f"; */
+"I94-f9-e9f.title" = "loss";
+
+/* Class = "IBUIBarButtonItem"; title = "loss"; ObjectID = "LvX-1b-gke"; */
+"LvX-1b-gke.title" = "loss";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "MtY-lf-aNZ"; */
+"MtY-lf-aNZ.title" = "Back";
+
+/* Class = "IBUIBarButtonItem"; title = "Save"; ObjectID = "Oyw-aj-lE1"; */
+"Oyw-aj-lE1.title" = "Save";
+
+/* Class = "IBUILabel"; text = "Subtitle"; ObjectID = "V8h-I3-5h6"; */
+"V8h-I3-5h6.text" = "Subtitle";
+
+/* Class = "IBUINavigationItem"; title = "Room"; ObjectID = "VGh-4n-Ttw"; */
+"VGh-4n-Ttw.title" = "Room";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "WWo-kz-ra8"; */
+"WWo-kz-ra8.title" = "Cancel";
+
+/* Class = "IBUINavigationItem"; title = "Claim Information"; ObjectID = "Xfh-sN-FrG"; */
+"Xfh-sN-FrG.title" = "Claim Information";
+
+/* Class = "IBUINavigationItem"; title = "Add Room"; ObjectID = "gsh-Ub-oyb"; */
+"gsh-Ub-oyb.title" = "Add Room";
+
+/* Class = "IBUITextField"; placeholder = "Policy Number"; ObjectID = "ino-2e-bFg"; */
+"ino-2e-bFg.placeholder" = "Policy Number";
+
+/* Class = "IBUITextField"; placeholder = "Date of Loss"; ObjectID = "kLl-ay-U09"; */
+"kLl-ay-U09.placeholder" = "Date of Loss";
+
+/* Class = "IBUITextField"; placeholder = "Purchase Price"; ObjectID = "kgv-KP-btj"; */
+"kgv-KP-btj.placeholder" = "Purchase Price";
+
+/* Class = "IBUIBarButtonItem"; title = "Claim"; ObjectID = "ktb-hh-eZB"; */
+"ktb-hh-eZB.title" = "Claim";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "l6h-Ry-jN7"; */
+"l6h-Ry-jN7.title" = "Back";
+
+/* Class = "IBUITextField"; placeholder = "Serial Number"; ObjectID = "mBG-7R-x5g"; */
+"mBG-7R-x5g.placeholder" = "Serial Number";
+
+/* Class = "IBUILabel"; text = "see me?"; ObjectID = "mBN-TE-6cX"; */
+"mBN-TE-6cX.text" = "see me?";
+
+/* Class = "IBUITextField"; placeholder = "Purchase Date"; ObjectID = "oJS-ZE-5A9"; */
+"oJS-ZE-5A9.placeholder" = "Purchase Date";
+
+/* Class = "IBUINavigationItem"; title = "Info"; ObjectID = "pCX-nA-iHh"; */
+"pCX-nA-iHh.title" = "Info";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "pSh-yY-c9i"; */
+"pSh-yY-c9i.title" = "Cancel";
+
+/* Class = "IBUITextView"; text = "Enter the date of loss and your insurance policy number. This information will be added to the header of every page. This information is optional. Tap Save when you are done."; ObjectID = "yNX-cd-6Mf"; */
+"yNX-cd-6Mf.text" = "Enter the date of loss and your insurance policy number. This information will be added to the header of every page. This information is optional. Tap Save when you are done.";

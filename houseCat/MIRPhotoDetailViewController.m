@@ -22,18 +22,18 @@
 	NSError* error;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 
-	//NSLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
+	DebugLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
 		
 	// delete the image files so we don't fill up the file system:
 	if ([fileManager removeItemAtPath:[self.image thumbPath] error:&error])
 	{
-		NSLog(@"ERROR: MIRPhotoDetailViewController:deleteImage: unable to delete thumbPath %@: error: %@", [self.image thumbPath], [error domain]);
+		ReleaseLog(@"ERROR: unable to delete thumbPath %@: error: %@", [self.image thumbPath], [error localizedDescription]);
 	}
 	
 	error = nil;
 	if ([fileManager removeItemAtPath:[self.image imagePath] error:&error])
 	{
-		NSLog(@"ERROR: MIRPhotoDetailViewController:deleteImage: unable to delete imagePath %@: error: %@", [self.image imagePath], [error domain]);
+		ReleaseLog(@"ERROR: unable to delete imagePath %@: error: %@", [self.image imagePath], [error localizedDescription]);
 	}
 	
 	// then delete the obj:
@@ -43,7 +43,7 @@
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotoDetailViewController: unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
    }
 	
 	// my work here is done:
@@ -72,8 +72,6 @@
 	NSString *imgPath = [self.image imagePath];
 	UIImage *image = [UIImage imageWithContentsOfFile:imgPath];
 	[self.imageView setImage:image];
-	
-	//NSLog(@"%@", [self displayViews:self.view] );
 }
 
 
@@ -81,30 +79,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-	
-	NSLog(@"didReceiveMemoryWarning");
-}
-
-
-
-#pragma mark - utilites
-
-// Recursively travel down the view tree, increasing the 
-// indentation level for children
-- (void) dumpView: (UIView *) aView atIndent: (int) indent
-				 into:(NSMutableString *) outstring
-{
-	for (int i = 0; i < indent; i++) [outstring appendString:@"--"];
-	[outstring appendFormat:@"[%2d] %@\n", indent, [[aView class] description]];
-	for (UIView *view in [aView subviews])
-		[self dumpView:view atIndent:indent + 1 into:outstring];
-}
-
-// Start the tree recursion at level 0 with the root view 
-- (NSString *) displayViews: (UIView *) aView
-{
-	NSMutableString *outstring = [[NSMutableString alloc] init]; [self dumpView:aView atIndent:0 into:outstring];
-	return outstring;
 }
 
 

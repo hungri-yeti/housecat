@@ -31,22 +31,22 @@
 	{
 		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
 		mailer.mailComposeDelegate = self;
-		[mailer setSubject:@"Inventory for claim"];
+		[mailer setSubject:NSLocalizedString(@"Inventory for claim", @"Loss report email subject")];
 		
 		NSData *pdfData = [NSData dataWithContentsOfFile:self.pdfFilePath]; 
 		[mailer addAttachmentData:pdfData mimeType:@"application/pdf" fileName:[self.pdfFilePath lastPathComponent]];
 
-		NSString *emailBody = @"Attached is an inventory of the items for my claim.";
+		NSString *emailBody = NSLocalizedString(@"Attached is an inventory of the items for my claim.", @"Loss report email body");
 		[mailer setMessageBody:emailBody isHTML:NO];
 		[self presentViewController:mailer
 								 animated:YES completion:nil];
 	}
 	else
 	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Problem"
-																		message:@"Your device doesn't support email at this time."
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Problem", @"Problem")
+																		message:NSLocalizedString(@"Your device doesn't support email at this time.", @"Device doesn't support email error message")
 																	  delegate:nil
-														  cancelButtonTitle:@"OK"
+														  cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
 														  otherButtonTitles:nil];
 		[alert show];
 	}	
@@ -58,16 +58,13 @@
 	switch (result)
 	{
 		case MFMailComposeResultCancelled:
-			NSLog(@"Mail cancelled");
 			break;
 		case MFMailComposeResultSaved:
-			NSLog(@"Mail saved");
 			break;
 		case MFMailComposeResultSent:
-			NSLog(@"Mail sent");
 			break;
 		case MFMailComposeResultFailed:
-			NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+			ReleaseLog(@"ERROR: MFMailComposeResultFailed: %@", [error localizedDescription]);
 			break;
 		default:
 			break;
@@ -112,7 +109,7 @@
 		{
 			if (!completed && error)
 			{
-				NSLog(@"Printing could not complete because of error: %@", error);
+				ReleaseLog(@"ERROR: Unable to print: %@", [error localizedDescription]);
 			}
 		};
 		
@@ -127,14 +124,16 @@
 -(void) showActionSheet
 {
 	// TODO: add dropBox support
-	UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"choose"
+	UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Choose", @"Choose action sheet title")
 																  delegate:self
-													  cancelButtonTitle:@"Cancel"
+													  cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
 												destructiveButtonTitle:nil
-													  otherButtonTitles:@"Email", @"Print", nil];
+													  otherButtonTitles:	NSLocalizedString(@"Email", @"Email"),
+																				NSLocalizedString(@"Print", @"Print"),
+																				nil];
 	
 	// This seems kind of convoluted, [as showInView:self.view] is simpler but results in:
-	// Presenting action sheet clipped by its superview. Some controls might not respond to touches. 
+	// "Presenting action sheet clipped by its superview. Some controls might not respond to touches."
 	[as showInView:[self.parentViewController view]];
 }
 
@@ -145,17 +144,15 @@
 {
 	switch (buttonIndex) {
 		case 0:
-			NSLog(@"Email");
 			[self actionSendEmail];
 			break;
 		case 1:
-			NSLog(@"Print");
 			[self actionPrintPDF];
 			break;
 		case 2:
-			NSLog(@"Cancel");
 			break;
 		default:
+			ReleaseLog(@"ERROR: unhandled switch case: %d", buttonIndex);
 			break;
 	}
 }
@@ -164,9 +161,11 @@
 #pragma mark - loss info delegate
 -(void)readLossInfo:(NSArray*)results
 {
-	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
+	DebugLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
 	
-	self.resultsString = [[NSString alloc] initWithFormat:@"Policy: %@, Date of Loss: %@", [results objectAtIndex:0], [results objectAtIndex:1]];
+	self.resultsString = [[NSString alloc] initWithFormat:NSLocalizedString(@"Policy: %@, Date of Loss: %@", @"PDF header"), 
+								 [results objectAtIndex:0], 
+								 [results objectAtIndex:1]];
 	[self.infoRequestVC dismissViewControllerAnimated:NO completion:nil];
 	
 	// get the data for the pdf generator:
@@ -179,6 +178,7 @@
 	[fetchRequest setPredicate:predicate];
 	NSArray *items = [context executeFetchRequest:fetchRequest error:nil];
 
+	// debug: iterate through each checked item and all its child images:
 	//for( Items* item in items )
 	//{
 	//	NSLog(@"name: %@", item.name );
@@ -194,16 +194,15 @@
 	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	spinner.center = CGPointMake(160, 240);
 	spinner.hidesWhenStopped = YES;
-	[self.view addSubview:spinner];   
-	[spinner startAnimating];	
+	[self.view addSubview:spinner];
 	
-	MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
-	NSString* pdfPath = [pdfGenerator generatePDF:items headerText:self.resultsString];	
-	self.pdfFilePath = pdfPath;
-
+	[spinner startAnimating];	
+		MIRGeneratePDF* pdfGenerator = [[MIRGeneratePDF alloc]init];
+		NSString* pdfPath = [pdfGenerator generatePDF:items headerText:self.resultsString];	
+		self.pdfFilePath = pdfPath;
 	[spinner stopAnimating];
 	
-	//NSLog(@"pdfPath: %@", pdfPath );
+	DebugLog(@"pdfPath: %@", pdfPath );
 	
 	[self showActionSheet];
 }
@@ -233,7 +232,7 @@
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRLossReportListViewController: didSelectRowAtIndexPath: unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
    }
 }
 
@@ -285,7 +284,7 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed:%@", [error localizedDescription]);
       abort();
 	}
    
@@ -346,33 +345,6 @@
    [self.tableView endUpdates];
 }
 
-/*
- // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
- {
- // In the simplest, most efficient, case, reload the table view.
- [self.tableView reloadData];
- }
- */
-
-
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//   if (editingStyle == UITableViewCellEditingStyleDelete) {
-//      NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-//      [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-//      
-//      NSError *error = nil;
-//      if (![context save:&error]) {
-//         // Replace this implementation with code to handle the error appropriately.
-//         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//         abort();
-//      }
-//   }
-//}
-
 
 
 #pragma mark - tableView
@@ -431,15 +403,7 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {	
-   if ([segue.identifier isEqualToString:@"selectItemsToPreview"])
-	{
-		// generate the PDF:
-		//NSString* pdfPath = [self generatePDF];
-
-		// provide the file path to the preview controller:
-		//NSLog(@"pdfPath: %@", pdfPath );
-	}
-	else if([segue.identifier isEqualToString:@"requestInfo"])
+   if([segue.identifier isEqualToString:@"requestInfo"])
 	{
 		//UIViewController *newController = segue.destinationViewController;
 		self.infoRequestVC = segue.destinationViewController;

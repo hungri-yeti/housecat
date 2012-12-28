@@ -32,8 +32,8 @@
 	if (UIWebViewNavigationTypeLinkClicked == navigationType)
 	{
 		[[UIApplication sharedApplication] openURL:[request URL]];
-		//NSURL *url = [request URL];
-		//NSLog(@"url: %@", [url absoluteString]);
+		
+		DebugLog(@"url: %@", [[request URL] absoluteString]);
 	}
 	return YES; 
 }
@@ -49,6 +49,7 @@
 	
 	self.webView.delegate = self;
 	
+	// FIXME: this needs to be localized, separate copy of info.html in the app bundle?
 	NSURL *url = [[NSBundle mainBundle] URLForResource:@"info" withExtension:@"html"];
 	NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];
 	[self.webView loadRequest:requestURL];

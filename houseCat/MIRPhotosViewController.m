@@ -67,7 +67,7 @@ NSString *kCellID = @"uicollection_cell";
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotosViewController: updateParentThumbPath: unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
    }
 }
 
@@ -104,9 +104,10 @@ NSString *kCellID = @"uicollection_cell";
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotosViewController: viewWillDisappear: unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
    }
 }
+
 
 - (NSString*)uniqueImagePath
 {
@@ -125,7 +126,6 @@ NSString *kCellID = @"uicollection_cell";
    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
    NSString *documentsPath = [paths objectAtIndex:0];
    NSString *filePath = [documentsPath stringByAppendingPathComponent:imageName];
-   //NSLog(@"filePath: %@", filePath);
    
    return filePath;
 }
@@ -155,9 +155,9 @@ NSString *kCellID = @"uicollection_cell";
    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if( !cameraAvailable )
    {
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera"
-                                                      message:@"The camera is not available, using Photo Library"
-                                                     delegate:self cancelButtonTitle:@"OK"
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Camera", @"Camera")
+                                                      message:NSLocalizedString(@"The camera is not available, using Photo Library", @"Camera unavailable message")
+                                                     delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
                                             otherButtonTitles:nil, nil];
       [alert show];
       
@@ -174,8 +174,8 @@ NSString *kCellID = @"uicollection_cell";
 
    //This method inherit from UIView,show imagePicker with animation
    [self presentViewController:imagePickController animated:YES completion:nil];      
-
 }
+
 
 
 #pragma mark - image picker
@@ -256,7 +256,7 @@ NSString *kCellID = @"uicollection_cell";
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRPhotosViewController: didFinishPickingMediaWithInfo: unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
    }
    [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -341,7 +341,7 @@ NSString *kCellID = @"uicollection_cell";
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
       abort();
 	}
    
@@ -393,7 +393,7 @@ NSString *kCellID = @"uicollection_cell";
 	
 	UIBarButtonItem* btnCamera = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addImage:)];
    self.navigationItem.rightBarButtonItem = btnCamera;
-	self.title = @"Photos";
+	self.title = NSLocalizedString(@"Photos", @"Photos");
 }
 
 

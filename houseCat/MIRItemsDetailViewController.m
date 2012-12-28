@@ -13,10 +13,12 @@
    // used when scrolling above kb:
    UIView *activeField;
    NSDate *purchaseDate;
+	
+	NSString *placeHolderText;
 }
 @end
 
-NSString *const PlaceHolderText = @"(enter notes here)";
+
 
 @implementation MIRItemsDetailViewController
 // TODO: need to implement serial number scanner
@@ -45,7 +47,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 -(void)setupKeyboardDoneButton:(id)sender
 {
-   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" 
+   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Item detail bar done button")
 																					style:0 
 																				  target:nil 
 																				  action:@selector(doneButtonPressed:)];
@@ -93,13 +95,13 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 		image = [UIImage imageWithContentsOfFile:imgPath];
 		if( nil == image )
 		{
-			[self.photoButton setTitle:@"Click to set photo" forState:(UIControlStateNormal && UIControlStateHighlighted)];			
+			[self.photoButton setTitle:NSLocalizedString(@"Click to set photo", @"Click to set photo") forState:(UIControlStateNormal && UIControlStateHighlighted)];			
 		}
 	}
 	else
 	{
 		image = nil;
-		[self.photoButton setTitle:@"Click to set photo" forState:(UIControlStateNormal && UIControlStateHighlighted)];
+		[self.photoButton setTitle:NSLocalizedString(@"Click to set photo", @"Click to set photo") forState:(UIControlStateNormal && UIControlStateHighlighted)];
 	}
 	[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];
 }
@@ -110,6 +112,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    [super viewDidLoad];
    // Do any additional setup after loading the view.
    [self.navigationController setToolbarHidden:YES];
+	placeHolderText = NSLocalizedString(@"(enter notes here)", @"Item notes placeholder");
    
    // setup date picker:
    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
@@ -129,7 +132,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 		{
 			// Replace this implementation with code to handle the error appropriately.
 			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-			NSLog(@"MIRItemsDetailViewController:viewDidLoad: unresolved error %@, %@", error, [error userInfo]);
+			ReleaseLog(@"ERROR: [self.managedObjectContext] failed: %@", [error localizedDescription]);
 		}
       // this is a new item so date isn't set yet:
       [datePicker setDate:[NSDate date]];
@@ -146,7 +149,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
       self.itemPurchaseDate.text = [dateFormatter stringFromDate:[NSDate date]];
       purchaseDate = [NSDate date];
 		
-		self.itemNotes.text = PlaceHolderText;
+		self.itemNotes.text = placeHolderText;
       self.itemNotes.textColor = [UIColor lightGrayColor];
    }
    else
@@ -239,7 +242,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
 	// remove placeholder text:
-	NSComparisonResult ncr = [textView.text localizedCompare:PlaceHolderText];
+	NSComparisonResult ncr = [textView.text localizedCompare:placeHolderText];
    if( NSOrderedSame == ncr )
    {
       textView.text = nil;
@@ -251,7 +254,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" 
+   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Item detail bar done button") 
 																					style:0 
 																				  target:nil 
 																				  action:@selector(doneButtonPressed:)];
@@ -294,7 +297,8 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    if( self.itemCost == textField)
    {
 		// If the user just typed the number in, e.g. 12.34 or 42, prepend the currency symbol:
-		BOOL hasCurrencyPrefix = [textField.text hasPrefix:@"$"];
+		NSString *currencySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
+		BOOL hasCurrencyPrefix = [textField.text hasPrefix:currencySymbol];
 		if( !hasCurrencyPrefix )
 		{
 			NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSDecimalNumber numberWithFloat:[textField.text floatValue]]
@@ -307,8 +311,8 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 			// begins with a currency symbol, but we don't know if it's in the form $xx.nn or just $xx.
 			// If it's $xx, we want to change it to $xx.00:
 			NSRange rangeToSearch = [textField.text rangeOfString:textField.text];
-			// TODO: rangeOfString needs to be localized (decimal separator)
-			NSRange resultsRange = [textField.text rangeOfString:@"."
+			NSString *decimalSeparator = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];			
+			NSRange resultsRange = [textField.text rangeOfString:decimalSeparator
 																		options:NSCaseInsensitiveSearch
 																		  range:rangeToSearch];
 			if(resultsRange.location == NSNotFound)
@@ -318,8 +322,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 				[costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
 				NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:textField.text] floatValue]];
 				
-				// TODO: stringWithFormat needs to be localized (currency char):
-				NSString* costStr = [NSString stringWithFormat:@"%@%@.00", @"$", costNum];
+				NSString* costStr = [NSString stringWithFormat:@"%@%@.00", currencySymbol, costNum];
 				textField.text = costStr;
 			}
 		}
@@ -334,7 +337,6 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 {
 	if( self.itemName == textField )
 	{
-		
 		[self.item setValue:self.itemName.text forKey:@"name"];
 	}
 	else if( self.itemPurchaseDate == textField )
@@ -360,7 +362,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"MIRItemsDetailViewController:saveButton: unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
    }
 	activeField = nil;
 }
@@ -406,7 +408,5 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 	// remove the Done button:
    self.navigationItem.rightBarButtonItem = nil;	
 }
-
-
 
 @end

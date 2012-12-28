@@ -63,8 +63,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   //DebugLog(@"segue.id: %@", segue.identifier );
-	
 	Rooms *room;
 	
    if ([segue.identifier isEqualToString:@"roomsToItems"])
@@ -181,20 +179,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//   NSUInteger row = [indexPath row];
-//   NSLog(@"didSelectRowAtIndexPath: row: %u", row );
-   
-//	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad"
-//																bundle:nil];
-//	UITableViewController *detailController = [sb instantiateViewControllerWithIdentifier:@"TableSettingDetails"];
-//	
-//	self.popoverController = [[UIPopoverController alloc] initWithContentViewController:detailController];
-//	
-//	self.popoverController.popoverContentSize = CGSizeMake(256, 128);
-//	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//	[self.popoverController presentPopoverFromRect:cell.bounds inView:cell.contentView
-//								 permittedArrowDirections:UIPopoverArrowDirectionAny
-//													  animated:YES];
 	// Deselect the row.
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -243,7 +227,7 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
       abort();
 	}
    
@@ -325,7 +309,7 @@
       if (![context save:&error]) {
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+         ReleaseLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
          abort();
       }
    }

@@ -16,6 +16,7 @@
    NSArray *roomsItems;
 }
 
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -24,62 +25,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	// FIXME: UIColor results in memory leak
+	// TODO: @synthesize isn't necessary?
 	// TODO: add action sounds (will also need a preference for muting them?)
 	// TODO: password protection
 	// TODO: iPad storyboard
 	// TODO: implement Contact the developer in info.html
 	// TODO: implement Report a problem in info.html
+	// TODO: remove all NSLog, replace with DebugLog or ReleaseLog as appropo
+	// TODO: all error logging should use [error localizedDescription]
+	// TODO: add error number back into all ERROR messages
 	
-	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
+	DebugLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
    // Override point for customization after application launch.
    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
    MIRRoomsViewController *controller = (MIRRoomsViewController *)navigationController.topViewController;
    controller.managedObjectContext = self.managedObjectContext;
 
-	
-	//	MIRRoomsViewController *controller;
-//	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
-//	{
-//		UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-//		controller = (MIRRoomsViewController *)navigationController.topViewController;
-//	}
-//	else if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-//	{
-////		// from Apple's template:
-////		UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-////		UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-////		splitViewController.delegate = (id)navigationController.topViewController;
-////		// ^ -[UIViewController topViewController]: unrecognized selector sent to instance 0xa373ec0 (which is the navigationController)
-////
-////		UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-////		controller = (MIRRoomsViewController *)masterNavigationController.topViewController;
-//		
-//		//UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-//		
-//		//controller = (MIRRoomsViewController *)self.window.rootViewController;
-//		// this doesn't work:
-//		//controller = (MIRRoomsViewController *)[self.window.rootViewController.childViewControllers objectAtIndex:0];
-//		
-//		// I need to make a master view controller for the storyboard that contains the container views, then
-//		//	that class will have a valid childViewControllers property that can be used
-//		NSLog(@"child count: %i", [self.window.rootViewController.childViewControllers count] );
-//		for (id object in self.window.rootViewController.childViewControllers)
-//		{
-//			if ([object isKindOfClass:[UINavigationController class]])
-//			{
-//				NSLog(@"found UINavCon");
-////            UINavigationController *navController = object;
-////            navController.navigationBar.tintColor = [UIColor colorWithRed:0.107 green:0.360 blue:0.668 alpha:1.000];
-//			}
-//			else
-//			{
-//				NSLog(@"found something else...");
-//			}
-//		}
-//	}
-	
-   // Get a reference to the stardard user defaults
+	// Get a reference to the stardard user defaults
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 	NSError* error;
 	NSFileManager *fileManager;
@@ -103,7 +67,7 @@
 							 ];
 		if( NO == results )
 		{
-			NSLog(@"Unable to create pdf dir, error: %@", error);
+			ReleaseLog(@"ERROR: unable to create pdf directory, error: %@", [error localizedDescription]);
 		}
 		
 		error = nil;
@@ -115,17 +79,26 @@
 							 ];
 		if( NO == results )
 		{
-			NSLog(@"Unable to create img dir, error: %@", error);
+			ReleaseLog(@"ERROR: unable to create img directory, error: %@", [error localizedDescription]);
 		}
 		
       // Add our default Room list in Core Data
-      NSArray *defaultRooms = [NSArray arrayWithObjects:@"Kitchen",@"Dining Room",@"Living Room",@"Garage",@"Master Bedroom",@"Den/Office",@"Car",nil];
+      NSArray *defaultRooms = [NSArray arrayWithObjects:
+										 NSLocalizedString(@"Kitchen",@"default kitch room name"),
+										 NSLocalizedString(@"Dining Room",@"default dining room name"),
+										 NSLocalizedString(@"Living Room",@"default living room name"),
+										 NSLocalizedString(@"Garage",@"default garage room name"),
+										 NSLocalizedString(@"Master Bedroom",@"default master bedroom room name"),
+										 NSLocalizedString(@"Den/Office",@"default den/office room name"),
+										 NSLocalizedString(@"Car",@"default car room name"),
+										 nil];
       for(NSString *roomName in defaultRooms)
       {
          Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
          [room setName:roomName];
       }
       
+		// debug: list out all rooms to log
       //NSFetchRequest *request = [[NSFetchRequest alloc] init];
       //NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rooms"
       //                                          inManagedObjectContext:[self managedObjectContext]];
@@ -143,7 +116,7 @@
       
       // Commit to core data
       if (![self.managedObjectContext save:&error])
-         NSLog(@"ERROR: didFinishLaunchingWithOptions: save default Rooms: error: %@", [error domain]);
+         ReleaseLog(@"ERROR: save default Rooms: error: %@", [error localizedDescription]);
    }
 	else
 	{
@@ -162,7 +135,7 @@
 			
 			if( error != nil)
 			{
-				NSLog(@"MIRAppDelegate:didFinishLaunchingWithOptions:removeItemAtPath failed, error: %@", [error localizedDescription] );
+				ReleaseLog(@"ERROR: removeItemAtPath failed, error: %@", [error localizedDescription] );
 			}
 		}
 	}
@@ -205,7 +178,7 @@
       if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+         ReleaseLog(@"ERROR: [managedObjectContext save] failed: %@", [error localizedDescription]);
          abort();
       }
    }
@@ -251,8 +224,6 @@
    }
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"houseCat"];
-   //NSLog(@"MIRApDelegate: psc: storeURL: %@", storeURL);
-   
    NSError *error = nil;
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
@@ -284,7 +255,7 @@
        Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
        
        */
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      ReleaseLog(@"ERROR: [persistentStoreCoordinator addPersistentStoreWithType] failed: %@", [error localizedDescription]);
       abort();
    }
    return _persistentStoreCoordinator;

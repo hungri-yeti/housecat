@@ -19,9 +19,4 @@
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 - (IBAction)deleteImage:(id)sender;
 
-
-- (NSString *) displayViews: (UIView *) aView;
-- (void) dumpView: (UIView *) aView atIndent: (int) indent into:(NSMutableString *) outstring;
-
-
 @end

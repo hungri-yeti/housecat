@@ -40,7 +40,8 @@
 	pageSize = CGSizeMake(kPageWidth, kPageHeight);
 	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setFormatterBehavior:NSDateFormatterBehavior10_4]; 
+	[formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	// TODO: does this need to be localized?
 	[formatter setDateFormat:@"yyyyMMddHmmss"];
 	NSDate* date = [[NSDate alloc] init];
 	NSString* dateStr = [formatter stringFromDate:date];
@@ -142,7 +143,9 @@
 
 - (void) drawSerialNumber:(Items*)item
 {
-	NSString* textToDraw = [[NSString alloc] initWithFormat:@"Serial Number: %@", item.serialNumber];
+	NSString* textToDraw = [[NSString alloc] initWithFormat:
+									NSLocalizedString(@"Serial Number: %@", @"Loss Report serial number"), 
+									item.serialNumber];
 	
 	UIFont *font = [UIFont systemFontOfSize:14.0];
 	CGSize stringSize = [textToDraw sizeWithFont:font
@@ -164,7 +167,9 @@
 	NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:item.cost
 																			 numberStyle:NSNumberFormatterCurrencyStyle];
 
-	NSString* textToDraw = [[NSString alloc] initWithFormat:@"Cost: %@", numberStr];
+	NSString* textToDraw = [[NSString alloc] initWithFormat:
+									NSLocalizedString(@"Cost: %@", @"Loss Report cost"), 
+									numberStr];
 	
 	UIFont *font = [UIFont systemFontOfSize:14.0];
 	CGSize stringSize = [textToDraw sizeWithFont:font
@@ -186,7 +191,9 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	NSString* dateText = [dateFormatter stringFromDate:item.purchaseDate];
-	NSString* textToDraw = [[NSString alloc] initWithFormat:@"Purchased: %@", dateText ];
+	NSString* textToDraw = [[NSString alloc] initWithFormat:
+									NSLocalizedString(@"Purchased: %@", @"Loss Report purchased date"), 
+									dateText ];
 
 	UIFont *font = [UIFont systemFontOfSize:14.0];
 	CGSize stringSize = [textToDraw sizeWithFont:font
@@ -208,7 +215,6 @@
 	// If I ever want to fiddle with the text color:
 	//CGContextSetRGBFillColor(currentContext, 0.0, 0.0, 0.0, 1.0);
 	
-	//NSString *textToDraw = @"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
 	NSString* textToDraw = item.name;
 	
 	UIFont *font = [UIFont systemFontOfSize:14.0];
@@ -242,7 +248,9 @@
 
 - (void)drawPageNumber:(NSInteger)pageNumber
 {
-	NSString* pageNumberString = [NSString stringWithFormat:@"Page %d", pageNumber];
+	NSString* pageNumberString = [NSString stringWithFormat:
+											NSLocalizedString(@"Page %d", @"Loss Report page number"),
+											pageNumber];
 	UIFont* theFont = [UIFont systemFontOfSize:12];
 	
 	CGSize pageNumberStringSize = [pageNumberString sizeWithFont:theFont
@@ -281,7 +289,7 @@
 
 - (void) drawHeader
 {
-	NSString *textToDraw = @"houseCat";
+	NSString *textToDraw = NSLocalizedString(@"houseCat", @"Loss Report header app name");
 	
 	UIFont *font = [UIFont systemFontOfSize:24.0];
 	
