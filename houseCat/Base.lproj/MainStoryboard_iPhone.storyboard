@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="bfa-8Z-5rh" customClass="MIRRoomsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OI0-WU-QyK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -21,9 +21,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="mQL-sg-X1e" kind="modal" identifier="changeRoomName" id="PRX-RS-E2R"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -32,31 +29,113 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem image="0017.png" style="plain" id="oii-GU-SmE">
+                        <barButtonItem image="0017.png" style="plain" id="oii-GU-SmE"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="gMg-C4-WAv"/>
+                        <barButtonItem title="Claim" id="ktb-hh-eZB"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Rooms" id="584-cg-cAo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bBt-nR-fbg"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mz3-P3-IoK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-139" y="-773"/>
+        </scene>
+        <!--Rooms View Controller-->
+        <scene sceneID="kTw-iJ-BVG">
+            <objects>
+                <viewController id="eXv-3Q-8Ru" customClass="MIRRoomsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BWL-4Y-Jla">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="left" image="logo_statefarm_print.gif" translatesAutoresizingMaskIntoConstraints="NO" id="t4W-Et-zET">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="FwX-xZ-ZkD"/>
+                                </constraints>
+                            </imageView>
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5VE-TR-agW">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="zOf-YB-Ima"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="roomsCell" id="i4p-L4-Rhe">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="mQL-sg-X1e" kind="modal" identifier="changeRoomName" id="Onm-zP-Wfv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eXv-3Q-8Ru" id="RsA-fS-WAG"/>
+                                    <outlet property="delegate" destination="eXv-3Q-8Ru" id="a7y-ma-FaW"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCL-c5-Vhu">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="3qj-jA-eOM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="www.johnnogueira.net">
+                                    <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="gotoUrl:" destination="eXv-3Q-8Ru" eventType="touchUpInside" id="fXo-hG-gYv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TCL-c5-Vhu" firstAttribute="top" secondItem="BWL-4Y-Jla" secondAttribute="top" constant="22" id="0eA-5U-GfR"/>
+                            <constraint firstItem="t4W-Et-zET" firstAttribute="top" secondItem="BWL-4Y-Jla" secondAttribute="top" type="default" id="IDT-ut-8j4"/>
+                            <constraint firstItem="5VE-TR-agW" firstAttribute="leading" secondItem="BWL-4Y-Jla" secondAttribute="leading" type="default" id="If3-DX-yFC"/>
+                            <constraint firstItem="5VE-TR-agW" firstAttribute="trailing" secondItem="BWL-4Y-Jla" secondAttribute="trailing" type="default" id="Xks-HZ-7r9"/>
+                            <constraint firstItem="t4W-Et-zET" firstAttribute="leading" secondItem="BWL-4Y-Jla" secondAttribute="leading" type="default" id="Yh7-pi-Euh"/>
+                            <constraint firstItem="TCL-c5-Vhu" firstAttribute="leading" secondItem="t4W-Et-zET" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="bx3-Km-VGz"/>
+                            <constraint firstAttribute="trailing" secondItem="TCL-c5-Vhu" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="mQ9-pI-gH7"/>
+                            <constraint firstItem="5VE-TR-agW" firstAttribute="bottom" secondItem="BWL-4Y-Jla" secondAttribute="bottom" type="default" id="zwE-J6-sWo"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem image="0017.png" style="plain" id="7U3-hm-biy">
                             <connections>
-                                <segue destination="365-um-9Bf" kind="modal" identifier="showInfo" id="c4e-EN-X00"/>
+                                <segue destination="365-um-9Bf" kind="modal" identifier="showInfo" id="Ton-oD-268"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="gMg-C4-WAv"/>
-                        <barButtonItem title="Claim" id="ktb-hh-eZB">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jb9-Qd-KoF"/>
+                        <barButtonItem title="Claim" id="TZz-k4-181">
                             <connections>
-                                <segue destination="dHk-Oe-t2u" kind="push" identifier="lossReport" id="Fr5-yu-Apq"/>
+                                <segue destination="dHk-Oe-t2u" kind="push" identifier="lossReport" id="j79-FC-jAh"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Rooms" id="584-cg-cAo">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bBt-nR-fbg">
+                    <navigationItem key="navigationItem" id="brF-gF-dcn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wn0-hh-oE0">
                             <connections>
-                                <segue destination="rW4-s0-5so" kind="modal" identifier="addRoomName" id="8w9-55-dMw"/>
+                                <segue destination="rW4-s0-5so" kind="modal" identifier="addRoomName" id="jNj-p4-pTU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="KJY-oH-eDV" kind="push" identifier="roomsToItems" id="gxJ-Tx-eLN"/>
+                        <outlet property="tableView" destination="5VE-TR-agW" id="6f0-NQ-raV"/>
+                        <segue destination="KJY-oH-eDV" kind="push" identifier="roomsToItems" id="Fob-Pr-6jK"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mz3-P3-IoK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c3d-8c-wdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="517" y="50"/>
         </scene>
@@ -269,7 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKe-al-4dh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="1384"/>
+            <point key="canvasLocation" x="1530" y="686"/>
         </scene>
         <!--Items Detail View Controller-->
         <scene sceneID="3Du-sY-dGz">
@@ -561,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtT-DU-P18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="517" y="-592"/>
+            <point key="canvasLocation" x="517" y="-522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZJD-zs-VHw">
@@ -579,12 +658,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="bfa-8Z-5rh" kind="relationship" relationship="rootViewController" id="rzT-CW-bcb"/>
+                        <segue destination="eXv-3Q-8Ru" kind="relationship" relationship="rootViewController" id="zmU-lC-34Y"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ab6-vO-lLF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="50"/>
+            <point key="canvasLocation" x="-566" y="50"/>
         </scene>
         <!--Change Room View Controller-->
         <scene sceneID="t3a-Ts-ui4">
@@ -643,11 +722,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDs-MN-pYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="517" y="-1211"/>
+            <point key="canvasLocation" x="517" y="-1092"/>
         </scene>
     </scenes>
     <resources>
         <image name="0017.png" width="35" height="35"/>
+        <image name="logo_statefarm_print.gif" width="94" height="91"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
