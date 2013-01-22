@@ -39,6 +39,7 @@
 		3B8C001F166414CC0074EB4B /* MIRInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C001E166414CC0074EB4B /* MIRInfoViewController.m */; };
 		3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */; };
 		3BAEAF8B16AF483E001917BB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAEAF8916AF44D3001917BB /* Default.png */; };
+		3BAEAF8E16AF5832001917BB /* John_Nogueira.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3BAEAF8D16AF5832001917BB /* John_Nogueira.jpg */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
 		3BAF8B91161E8D5900B23848 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B90161E8D5900B23848 /* CoreGraphics.framework */; };
@@ -123,6 +124,7 @@
 		3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotoDetailViewController.h; sourceTree = "<group>"; };
 		3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotoDetailViewController.m; sourceTree = "<group>"; };
 		3BAEAF8916AF44D3001917BB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3BAEAF8D16AF5832001917BB /* John_Nogueira.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = John_Nogueira.jpg; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B8C161E8D5900B23848 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BAF8B8E161E8D5900B23848 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -224,6 +226,7 @@
 		3B213F4B16648A0E00BF2114 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3BAEAF8D16AF5832001917BB /* John_Nogueira.jpg */,
 				3B213F4C16648A6900BF2114 /* 0100.png */,
 				3B213F4E16648DEF00BF2114 /* 0101.png */,
 				3B213F4F16648DEF00BF2114 /* 0102.png */,
@@ -460,6 +463,7 @@
 				3BF89CE01682BE39008D7BD3 /* 0600.png in Resources */,
 				3BCC8E67168D789300EC902C /* Localizable.strings in Resources */,
 				3BAEAF8B16AF483E001917BB /* Default.png in Resources */,
+				3BAEAF8E16AF5832001917BB /* John_Nogueira.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
