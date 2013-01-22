@@ -38,14 +38,12 @@
 		3B8C0019166413EF0074EB4B /* 0017@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C0017166413EF0074EB4B /* 0017@2x.png */; };
 		3B8C001F166414CC0074EB4B /* MIRInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C001E166414CC0074EB4B /* MIRInfoViewController.m */; };
 		3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */; };
+		3BAEAF8B16AF483E001917BB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAEAF8916AF44D3001917BB /* Default.png */; };
 		3BAF8B8D161E8D5900B23848 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8C161E8D5900B23848 /* UIKit.framework */; };
 		3BAF8B8F161E8D5900B23848 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B8E161E8D5900B23848 /* Foundation.framework */; };
 		3BAF8B91161E8D5900B23848 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B90161E8D5900B23848 /* CoreGraphics.framework */; };
 		3BAF8B99161E8D5900B23848 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8B98161E8D5900B23848 /* main.m */; };
 		3BAF8B9D161E8D5900B23848 /* MIRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */; };
-		3BAF8B9F161E8D5900B23848 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8B9E161E8D5900B23848 /* Default.png */; };
-		3BAF8BA1161E8D5900B23848 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA0161E8D5900B23848 /* Default@2x.png */; };
-		3BAF8BA3161E8D5900B23848 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA2161E8D5900B23848 /* Default-568h@2x.png */; };
 		3BAF8BA6161E8D5900B23848 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA4161E8D5900B23848 /* MainStoryboard_iPhone.storyboard */; };
 		3BAF8BA9161E8D5900B23848 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */; };
 		3BAF8BB4161E8D5900B23848 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8BB3161E8D5900B23848 /* SenTestingKit.framework */; };
@@ -124,6 +122,7 @@
 		3BA3040A16838DD200189E07 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
 		3BADA7351648C3630094D4B7 /* MIRPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRPhotoDetailViewController.h; sourceTree = "<group>"; };
 		3BADA7361648C3630094D4B7 /* MIRPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRPhotoDetailViewController.m; sourceTree = "<group>"; };
+		3BAEAF8916AF44D3001917BB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3BAF8B88161E8D5900B23848 /* houseCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = houseCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B8C161E8D5900B23848 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BAF8B8E161E8D5900B23848 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -133,9 +132,6 @@
 		3BAF8B9A161E8D5900B23848 /* houseCat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "houseCat-Prefix.pch"; sourceTree = "<group>"; };
 		3BAF8B9B161E8D5900B23848 /* MIRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIRAppDelegate.h; sourceTree = "<group>"; };
 		3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIRAppDelegate.m; sourceTree = "<group>"; };
-		3BAF8B9E161E8D5900B23848 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3BAF8BA0161E8D5900B23848 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3BAF8BA2161E8D5900B23848 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3BAF8BB2161E8D5900B23848 /* houseCatTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = houseCatTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8BB3161E8D5900B23848 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRRoomsViewController.h; sourceTree = "<group>"; };
@@ -285,9 +281,18 @@
 			path = ../icons;
 			sourceTree = "<group>";
 		};
+		3BAEAF8C16AF4AE3001917BB /* launch images */ = {
+			isa = PBXGroup;
+			children = (
+				3BAEAF8916AF44D3001917BB /* Default.png */,
+			);
+			name = "launch images";
+			sourceTree = "<group>";
+		};
 		3BAF8B7D161E8D5900B23848 = {
 			isa = PBXGroup;
 			children = (
+				3BAEAF8C16AF4AE3001917BB /* launch images */,
 				3BAF8B92161E8D5900B23848 /* houseCat */,
 				3BAF8B8B161E8D5900B23848 /* Frameworks */,
 				3BAF8B89161E8D5900B23848 /* Products */,
@@ -343,9 +348,6 @@
 				3BAF8B94161E8D5900B23848 /* houseCat-Info.plist */,
 				3BAF8B98161E8D5900B23848 /* main.m */,
 				3BAF8B9A161E8D5900B23848 /* houseCat-Prefix.pch */,
-				3BAF8B9E161E8D5900B23848 /* Default.png */,
-				3BAF8BA0161E8D5900B23848 /* Default@2x.png */,
-				3BAF8BA2161E8D5900B23848 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -434,9 +436,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BAF8B9F161E8D5900B23848 /* Default.png in Resources */,
-				3BAF8BA1161E8D5900B23848 /* Default@2x.png in Resources */,
-				3BAF8BA3161E8D5900B23848 /* Default-568h@2x.png in Resources */,
 				3BAF8BA6161E8D5900B23848 /* MainStoryboard_iPhone.storyboard in Resources */,
 				3BAF8BA9161E8D5900B23848 /* MainStoryboard_iPad.storyboard in Resources */,
 				3B8C000E16640F540074EB4B /* help.html in Resources */,
@@ -460,6 +459,7 @@
 				3BF89CDE1682B32F008D7BD3 /* 0403.png in Resources */,
 				3BF89CE01682BE39008D7BD3 /* 0600.png in Resources */,
 				3BCC8E67168D789300EC902C /* Localizable.strings in Resources */,
+				3BAEAF8B16AF483E001917BB /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
