@@ -22,20 +22,27 @@
 @implementation MIRRoomsViewController
 
 
-
--(IBAction)gotoUrl:(id)sender
+- (id)initWithStyle:(UITableViewStyle)style
 {
-	NSURL *url = [NSURL URLWithString:@"http://www.johnnogueira.net"];
-	[[UIApplication sharedApplication] openURL:url];
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
-
 
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-}
+//   [self.navigationController setToolbarHidden:NO];
 
+   // Uncomment the following line to preserve selection between presentations.
+   // self.clearsSelectionOnViewWillAppear = NO;
+
+   // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+	// self.navigationItem.leftBarButtonItem = self.editButtonItem;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -230,8 +237,7 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-	[self.tableView beginUpdates];
-	
+   [self.tableView beginUpdates];
 }
 
 

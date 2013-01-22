@@ -8,19 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MIRRoomsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
+@interface MIRRoomsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 // iPad-specific:
 //@property (strong, nonatomic) UIPopoverController* popoverController;
-
-// move the table into a view so we can add an advertising panel:
-@property (nonatomic,retain) IBOutlet UITableView *tableView;
-
--(IBAction)gotoUrl:(id)sender;
-
-
-
 
 @end
