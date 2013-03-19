@@ -11,9 +11,14 @@
 #import "MIRItemsDetailViewController.h"
 #import "Items.h"
 #import "Images.h"
-
+// need this include file and the AudioToolbox framework
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface MIRItemsViewController ()
+{
+	SystemSoundID scrollSound;
+	BOOL scrolling;
+}
 
 
 @end
@@ -38,6 +43,11 @@
 	[self setTitle:[[self.parent valueForKey:@"name"] description]];
 	
 
+	NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"scroll_pip"
+																	withExtension:@"caf"];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &scrollSound);
+	scrolling = FALSE;
+	
    // Uncomment the following line to preserve selection between presentations.
    // self.clearsSelectionOnViewWillAppear = NO;
 
@@ -49,6 +59,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self.tableView reloadData];
+	
+	//scrolling = TRUE;
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	scrolling = TRUE;
 }
 
 
@@ -69,6 +87,8 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	scrolling = FALSE;
+	
    MIRItemsDetailViewController *vc = [segue destinationViewController];
    if ([segue.identifier isEqualToString:@"itemEdit"])
    {
@@ -135,6 +155,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if( scrolling )
+	{
+		AudioServicesPlaySystemSound(scrollSound);		
+	}
+	
    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemsCell" forIndexPath:indexPath];
    [self configureCell:cell atIndexPath:indexPath];
    return cell;

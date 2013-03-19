@@ -17,6 +17,8 @@
 #define kPageWidth 612
 #define kPageHeight 792
 
+// TODO: when user clicks on the photo area in MIRItemsDetailViewController, it should take them directly to the active camera, the collectionView
+
 
 NSString *kCellID = @"uicollection_cell";      
 
