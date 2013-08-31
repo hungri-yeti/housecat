@@ -294,10 +294,14 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+	NSLocale* currentUserLocale = [NSLocale currentLocale];
+	
    if( self.itemCost == textField)
    {
 		// If the user just typed the number in, e.g. 12.34 or 42, prepend the currency symbol:
-		NSString *currencySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
+		NSString *currencySymbol = [currentUserLocale objectForKey:NSLocaleCurrencySymbol];
+		NSLog(@"currencySymbol: %@\n", currencySymbol);	// in the simulator this is null, causes crash
+		
 		BOOL hasCurrencyPrefix = [textField.text hasPrefix:currencySymbol];
 		if( !hasCurrencyPrefix )
 		{
@@ -311,7 +315,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 			// begins with a currency symbol, but we don't know if it's in the form $xx.nn or just $xx.
 			// If it's $xx, we want to change it to $xx.00:
 			NSRange rangeToSearch = [textField.text rangeOfString:textField.text];
-			NSString *decimalSeparator = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];			
+			NSString *decimalSeparator = [currentUserLocale objectForKey:NSLocaleDecimalSeparator];			
 			NSRange resultsRange = [textField.text rangeOfString:decimalSeparator
 																		options:NSCaseInsensitiveSearch
 																		  range:rangeToSearch];

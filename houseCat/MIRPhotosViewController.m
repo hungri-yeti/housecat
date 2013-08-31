@@ -152,6 +152,7 @@ NSString *kCellID = @"uicollection_cell";
 	// of the screen, not below the navbar. After I pull the collection down and let it
 	// pop back up, it snaps to the proper location. This shouldn't be a big deal since it's
 	// only the photo library which is used in the simulator, the device uses the camera.
+	// TODO: but what if they want to add an item image from the library?
    UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
 
    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];

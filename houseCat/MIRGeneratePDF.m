@@ -148,17 +148,25 @@
 									item.serialNumber];
 	
 	UIFont *font = [UIFont systemFontOfSize:14.0];
-	CGSize stringSize = [textToDraw sizeWithFont:font
-										constrainedToSize:CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-											 lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																options: NSStringDrawingUsesLineFragmentOrigin
+															attributes: atts
+																context: nil];
+	CGSize stringSize = contentRect.size;
 	
 	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset, kBorderInset + kMarginInset + 100.0, 
 												 pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
-	
-	[textToDraw drawInRect:renderingRect 
-					  withFont:font
-				lineBreakMode:NSLineBreakByWordWrapping
-					 alignment:NSTextAlignmentLeft];
+
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
 }
 
 
@@ -172,17 +180,25 @@
 									numberStr];
 	
 	UIFont *font = [UIFont systemFontOfSize:14.0];
-	CGSize stringSize = [textToDraw sizeWithFont:font
-										constrainedToSize:CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-											 lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																 options: NSStringDrawingUsesLineFragmentOrigin
+															 attributes: atts
+																 context: nil];
+	CGSize stringSize = contentRect.size;
 	
 	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset + 200, kBorderInset + kMarginInset + 75.0, 
 												 pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
 	
-	[textToDraw drawInRect:renderingRect 
-					  withFont:font
-				lineBreakMode:NSLineBreakByWordWrapping
-					 alignment:NSTextAlignmentLeft];
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
 }
 
 
@@ -196,17 +212,26 @@
 									dateText ];
 
 	UIFont *font = [UIFont systemFontOfSize:14.0];
-	CGSize stringSize = [textToDraw sizeWithFont:font
-										constrainedToSize:CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-											 lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																 options: NSStringDrawingUsesLineFragmentOrigin
+															 attributes: atts
+																 context: nil];
+	CGSize stringSize = contentRect.size;
 	
 	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset, kBorderInset + kMarginInset + 75.0, 
 												 pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
 	
-	[textToDraw drawInRect:renderingRect 
-					  withFont:font
-				lineBreakMode:NSLineBreakByWordWrapping
-					 alignment:NSTextAlignmentLeft];
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
+
 }
 
 
@@ -219,17 +244,26 @@
 	
 	UIFont *font = [UIFont systemFontOfSize:14.0];
 	
-	CGSize stringSize = [textToDraw sizeWithFont:font
-										constrainedToSize:CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-											 lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																 options: NSStringDrawingUsesLineFragmentOrigin
+															 attributes: atts
+																 context: nil];
+	CGSize stringSize = contentRect.size;
 	
 	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset, kBorderInset + kMarginInset + 50.0, 
 												 pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
 	
-	[textToDraw drawInRect:renderingRect 
-					  withFont:font
-				lineBreakMode:NSLineBreakByWordWrapping
-					 alignment:NSTextAlignmentLeft];
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
+
 }
 
 
@@ -248,23 +282,32 @@
 
 - (void)drawPageNumber:(NSInteger)pageNumber
 {
-	NSString* pageNumberString = [NSString stringWithFormat:
+	NSString* textToDraw = [NSString stringWithFormat:
 											NSLocalizedString(@"Page %d", @"Loss Report page number"),
 											pageNumber];
-	UIFont* theFont = [UIFont systemFontOfSize:12];
+	UIFont* font = [UIFont systemFontOfSize:12];
 	
-	CGSize pageNumberStringSize = [pageNumberString sizeWithFont:theFont
-															 constrainedToSize:pageSize
-																  lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																 options: NSStringDrawingUsesLineFragmentOrigin
+															 attributes: atts
+																 context: nil];
+	CGSize stringSize = contentRect.size;
 	
-	CGRect stringRenderingRect = CGRectMake(kBorderInset,
+	CGRect renderingRect = CGRectMake(kBorderInset,
 														 pageSize.height - kBottomMargin,
 														 pageSize.width - 2*kBorderInset,
-														 pageNumberStringSize.height);
+														 stringSize.height);
 	
-	[pageNumberString drawInRect:stringRenderingRect withFont:theFont 
-						lineBreakMode:NSLineBreakByWordWrapping 
-							 alignment:NSTextAlignmentCenter];
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
 }
 
 
@@ -272,18 +315,28 @@
 {
 	UIFont *font = [UIFont systemFontOfSize:18.0];
 	
-	CGSize stringSize = [textToDraw sizeWithFont:font 
-										constrainedToSize:CGSizeMake
-								(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-											 lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																 options: NSStringDrawingUsesLineFragmentOrigin
+															 attributes: atts
+																 context: nil];
+	CGSize stringSize = contentRect.size;
+
+	
 	
 	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset, kBorderInset + kMarginInset, 
 												 pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
-	
-	[textToDraw drawInRect:renderingRect withFont:font 
-				lineBreakMode:NSLineBreakByWordWrapping 
-					 alignment:NSTextAlignmentLeft];
-	
+		
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
+
 }
 
 
@@ -293,17 +346,31 @@
 	
 	UIFont *font = [UIFont systemFontOfSize:24.0];
 	
-	CGSize stringSize = [textToDraw sizeWithFont:font 
-										constrainedToSize:CGSizeMake
-								(pageSize.width - 2*kBorderInset-2*kMarginInset, pageSize.height - 2*kBorderInset - 2*kMarginInset) 
-											 lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize constraint = CGSizeMake(pageSize.width - 2*kBorderInset-2*kMarginInset, 
+											 pageSize.height - 2*kBorderInset - 2*kMarginInset);
+	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
+	[atts setObject:font forKey:NSFontAttributeName];
+	CGRect contentRect = [textToDraw boundingRectWithSize: constraint
+																 options: NSStringDrawingUsesLineFragmentOrigin
+															 attributes: atts
+																 context: nil];
+	CGSize stringSize = contentRect.size;
+
+	
+	
+	
 	
 	CGRect renderingRect = CGRectMake(kBorderInset + kMarginInset, kBorderInset + kMarginInset, 
 												 pageSize.width - 2*kBorderInset - 2*kMarginInset, stringSize.height);
 	
-	[textToDraw drawInRect:renderingRect withFont:font 
-				lineBreakMode:NSLineBreakByWordWrapping 
-					 alignment:NSTextAlignmentLeft];
+	NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setAlignment:NSTextAlignmentLeft];
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+	[attr setObject:font forKey:NSFontAttributeName];
+	[textToDraw drawInRect:renderingRect withAttributes:attr];
+
+
 }
 
 
