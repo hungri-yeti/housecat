@@ -117,6 +117,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    // setup date picker:
    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
    datePicker.datePickerMode = UIDatePickerModeDate;
+	NSDate* currentDate = [NSDate date];
 	
    if( self.item == nil )
    {
@@ -135,7 +136,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 			ReleaseLog(@"ERROR: [self.managedObjectContext] failed: %@", [error localizedDescription]);
 		}
       // this is a new item so date isn't set yet:
-      [datePicker setDate:[NSDate date]];
+      [datePicker setDate:currentDate];
       
       // DRY: there's some duplication here and in the following else clause but
 		// I don't think there's anything I can do about it due to the pre- and post-
@@ -146,8 +147,9 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
       [dateFormatter setDateStyle:kDateFormatStyle];
       [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 		// -
-      self.itemPurchaseDate.text = [dateFormatter stringFromDate:[NSDate date]];
-      purchaseDate = [NSDate date];
+      self.item.purchaseDate = currentDate;
+      self.itemPurchaseDate.text = [dateFormatter stringFromDate:currentDate];
+      purchaseDate = currentDate;
 		
 		self.itemNotes.text = placeHolderText;
       self.itemNotes.textColor = [UIColor lightGrayColor];
@@ -159,11 +161,13 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 		// date may or may not have been set:
 		if( nil == self.item.purchaseDate )
 		{
-			[datePicker setDate:[NSDate date]];			
+			[datePicker setDate:currentDate];
+			purchaseDate = currentDate;
 		}
 		else
 		{
 			[datePicker setDate:self.item.purchaseDate];
+			purchaseDate = self.item.purchaseDate;
 		}
 		
 		// -
