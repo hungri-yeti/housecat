@@ -215,7 +215,7 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed: %@", [error localizedDescription]);
       abort();
 	}
    
@@ -299,13 +299,13 @@
 			error = nil;
 			if ( NO == [fileManager removeItemAtPath:[image thumbPath] error:&error])
 			{
-				ReleaseLog(@"ERROR: unable to delete file thumbPath=%@: error: %@", image.thumbPath, [error localizedDescription]);
+				NSLog(@"ERROR: unable to delete file thumbPath=%@: error: %@", image.thumbPath, [error localizedDescription]);
 			}
 			
 			error = nil;
 			if ( NO == [fileManager removeItemAtPath:[image imagePath] error:&error])
 			{
-				ReleaseLog(@"ERROR: unable to delete file imagePath=%@: error: %@", image.imagePath, [error localizedDescription]);
+				NSLog(@"ERROR: unable to delete file imagePath=%@: error: %@", image.imagePath, [error localizedDescription]);
 			}
 		}
 		
@@ -317,7 +317,7 @@
 		{
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         ReleaseLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
+         NSLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
          abort();
       }
    }

@@ -33,7 +33,7 @@
 	{
 		[[UIApplication sharedApplication] openURL:[request URL]];
 		
-		DebugLog(@"url: %@", [[request URL] absoluteString]);
+		NSLog(@"url: %@", [[request URL] absoluteString]);
 	}
 	return YES; 
 }

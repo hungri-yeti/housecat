@@ -22,18 +22,18 @@
 	NSError* error;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 
-	DebugLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
+	NSLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
 		
 	// delete the image files so we don't fill up the file system:
 	if ([fileManager removeItemAtPath:[self.image thumbPath] error:&error])
 	{
-		ReleaseLog(@"ERROR: unable to delete thumbPath %@: error: %@", [self.image thumbPath], [error localizedDescription]);
+		NSLog(@"ERROR: unable to delete thumbPath %@: error: %@", [self.image thumbPath], [error localizedDescription]);
 	}
 	
 	error = nil;
 	if ([fileManager removeItemAtPath:[self.image imagePath] error:&error])
 	{
-		ReleaseLog(@"ERROR: unable to delete imagePath %@: error: %@", [self.image imagePath], [error localizedDescription]);
+		NSLog(@"ERROR: unable to delete imagePath %@: error: %@", [self.image imagePath], [error localizedDescription]);
 	}
 	
 	// then delete the obj:
@@ -43,7 +43,7 @@
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
    }
 	
 	// my work here is done:

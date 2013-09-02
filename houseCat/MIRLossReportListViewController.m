@@ -64,7 +64,7 @@
 		case MFMailComposeResultSent:
 			break;
 		case MFMailComposeResultFailed:
-			ReleaseLog(@"ERROR: MFMailComposeResultFailed: %@", [error localizedDescription]);
+			NSLog(@"ERROR: MFMailComposeResultFailed: %@", [error localizedDescription]);
 			break;
 		default:
 			break;
@@ -109,7 +109,7 @@
 		{
 			if (!completed && error)
 			{
-				ReleaseLog(@"ERROR: Unable to print: %@", [error localizedDescription]);
+				NSLog(@"ERROR: Unable to print: %@", [error localizedDescription]);
 			}
 		};
 		
@@ -152,7 +152,7 @@
 		case 2:
 			break;
 		default:
-			ReleaseLog(@"ERROR: unhandled switch case: %d", buttonIndex);
+			NSLog(@"ERROR: unhandled switch case: %d", buttonIndex);
 			break;
 	}
 }
@@ -161,7 +161,7 @@
 #pragma mark - loss info delegate
 -(void)readLossInfo:(NSArray*)results
 {
-	DebugLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
+	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
 	
 	self.resultsString = [[NSString alloc] initWithFormat:NSLocalizedString(@"Policy: %@, Date of Loss: %@", @"PDF header"), 
 								 [results objectAtIndex:0], 
@@ -202,7 +202,7 @@
 		self.pdfFilePath = pdfPath;
 	[spinner stopAnimating];
 	
-	DebugLog(@"pdfPath: %@", pdfPath );
+	NSLog(@"pdfPath: %@", pdfPath );
 	
 	[self showActionSheet];
 }
@@ -232,7 +232,7 @@
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
    }
 }
 
@@ -284,7 +284,7 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed:%@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed:%@", [error localizedDescription]);
       abort();
 	}
    

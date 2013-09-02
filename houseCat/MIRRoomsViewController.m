@@ -226,7 +226,7 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
       abort();
 	}
    
@@ -308,7 +308,7 @@
       if (![context save:&error]) {
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         ReleaseLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
+         NSLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
          abort();
       }
    }

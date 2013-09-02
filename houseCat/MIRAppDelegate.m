@@ -32,11 +32,10 @@
 	// TODO: iPad storyboard
 	// TODO: implement Contact the developer in info.html
 	// TODO: implement Report a problem in info.html
-	// TODO: remove all NSLog, replace with DebugLog or ReleaseLog as appropo
 	// TODO: all error logging should use [error localizedDescription]
 	// TODO: add error number back into all ERROR messages
 	
-	DebugLog(@"houseCat dir: %@", NSHomeDirectory() );
+	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
    // Override point for customization after application launch.
    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -67,7 +66,7 @@
 							 ];
 		if( NO == results )
 		{
-			ReleaseLog(@"ERROR: unable to create pdf directory, error: %@", [error localizedDescription]);
+			NSLog(@"ERROR: unable to create pdf directory, error: %@", [error localizedDescription]);
 		}
 		
 		error = nil;
@@ -79,7 +78,7 @@
 							 ];
 		if( NO == results )
 		{
-			ReleaseLog(@"ERROR: unable to create img directory, error: %@", [error localizedDescription]);
+			NSLog(@"ERROR: unable to create img directory, error: %@", [error localizedDescription]);
 		}
 		
       // Add our default Room list in Core Data
@@ -106,9 +105,9 @@
       //NSArray *listOfRooms = [[self managedObjectContext] executeFetchRequest:request error:nil];
       //List out contents of each project
       //if([listOfRooms count] == 0)
-      //   DebugLog(@"There are no Rooms in the data store yet");
+      //   NSLog(@"There are no Rooms in the data store yet");
       //else {
-      //   DebugLog(@"Rooms contents:");
+      //   NSLog(@"Rooms contents:");
       //   [listOfRooms enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
       //      NSLog(@"   room.name = %@", [obj name]);
       //   }];
@@ -116,7 +115,7 @@
       
       // Commit to core data
       if (![self.managedObjectContext save:&error])
-         ReleaseLog(@"ERROR: save default Rooms: error: %@", [error localizedDescription]);
+         NSLog(@"ERROR: save default Rooms: error: %@", [error localizedDescription]);
    }
 	else
 	{
@@ -135,7 +134,7 @@
 			
 			if( error != nil)
 			{
-				ReleaseLog(@"ERROR: removeItemAtPath failed, error: %@", [error localizedDescription] );
+				NSLog(@"ERROR: removeItemAtPath failed, error: %@", [error localizedDescription] );
 			}
 		}
 	}
@@ -178,7 +177,7 @@
       if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         ReleaseLog(@"ERROR: [managedObjectContext save] failed: %@", [error localizedDescription]);
+         NSLog(@"ERROR: [managedObjectContext save] failed: %@", [error localizedDescription]);
          abort();
       }
    }
@@ -255,7 +254,7 @@
        Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
        
        */
-      ReleaseLog(@"ERROR: [persistentStoreCoordinator addPersistentStoreWithType] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [persistentStoreCoordinator addPersistentStoreWithType] failed: %@", [error localizedDescription]);
       abort();
    }
    return _persistentStoreCoordinator;

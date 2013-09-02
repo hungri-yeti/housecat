@@ -69,15 +69,15 @@ NSString *kCellID = @"uicollection_cell";
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
    }
 }
 
 
 - (void)updateSortOrder
 {
-	// Set sortOrder for all the photos. Assume that either a new image (sortOrder = 255) was
-	// added or an image was deleted from the view (hole in sort order).
+	// Set sortOrder for all the photos. Assume that either a new image (sortOrder = NSIntegerMax)
+	// was added or an image was deleted from the view (hole in sort order).
 	// Obtain all remaining images based on sortOrder, reset sortOrder starting at 0.
 	NSManagedObjectContext *context = [self managedObjectContext]; 
 	NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
@@ -106,7 +106,7 @@ NSString *kCellID = @"uicollection_cell";
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
    }
 }
 
@@ -255,16 +255,15 @@ NSString *kCellID = @"uicollection_cell";
 	
    [imageObj setValue:imagePath forKey:@"imagePath"];
    [imageObj setValue:thumbPath forKey:@"thumbPath"];
-	// I assume that there will never be more than 254 images, so the new image
-	// is always inserted at the end.
-	[imageObj setValue:[NSNumber numberWithInt:255] forKey:@"sortOrder"];
+	// New image is always inserted at the end:
+	[imageObj setValue:[NSNumber numberWithInt:NSIntegerMax] forKey:@"sortOrder"];
    
    [self.item addImagesObject:imageObj];
    if (![self.managedObjectContext save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
    }
    [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -349,7 +348,7 @@ NSString *kCellID = @"uicollection_cell";
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
       abort();
 	}
    

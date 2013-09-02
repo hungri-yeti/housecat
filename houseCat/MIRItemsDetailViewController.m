@@ -133,7 +133,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 		{
 			// Replace this implementation with code to handle the error appropriately.
 			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-			ReleaseLog(@"ERROR: [self.managedObjectContext] failed: %@", [error localizedDescription]);
+			NSLog(@"ERROR: [self.managedObjectContext] failed: %@", [error localizedDescription]);
 		}
       // this is a new item so date isn't set yet:
       [datePicker setDate:currentDate];
@@ -370,7 +370,7 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      ReleaseLog(@"ERROR: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
    }
 	activeField = nil;
 }
