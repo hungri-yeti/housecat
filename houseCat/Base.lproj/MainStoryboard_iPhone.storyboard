@@ -300,8 +300,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QqW-Uq-xz7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Price" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kgv-KP-btj">
-                                        <rect key="frame" x="172" y="194" width="128" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Price" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kgv-KP-btj">
+                                        <rect key="frame" x="172" y="258" width="128" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="iIm-2j-S3h"/>
                                         </constraints>
@@ -311,16 +311,16 @@
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="k5J-iQ-lSE"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Serial Number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mBG-7R-x5g">
-                                        <rect key="frame" x="20" y="232" width="280" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Serial Number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mBG-7R-x5g">
+                                        <rect key="frame" x="20" y="296" width="280" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="ZJg-8u-jXq"/>
                                         </connections>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaW-CY-eiB">
-                                        <rect key="frame" x="20" y="270" width="280" height="126"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaW-CY-eiB">
+                                        <rect key="frame" x="20" y="334" width="280" height="126"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="126" id="P9x-jg-osO"/>
@@ -331,16 +331,16 @@
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="9dx-qs-Sfp"/>
                                         </connections>
                                     </textView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Description (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BXE-OC-s8t">
-                                        <rect key="frame" x="20" y="156" width="280" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Description (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BXE-OC-s8t">
+                                        <rect key="frame" x="20" y="220" width="280" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="W4h-uP-NVw"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJS-ZE-5A9">
-                                        <rect key="frame" x="20" y="194" width="128" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJS-ZE-5A9">
+                                        <rect key="frame" x="20" y="258" width="128" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="g86-0k-ybI"/>
                                         </constraints>
@@ -350,8 +350,8 @@
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="w3U-AQ-eGu"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPZ-fX-JMJ">
-                                        <rect key="frame" x="20" y="20" width="100" height="99"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPZ-fX-JMJ">
+                                        <rect key="frame" x="20" y="84" width="100" height="99"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="SKy-rO-uBJ"/>
                                             <constraint firstAttribute="height" constant="99" id="mwS-ag-boh"/>

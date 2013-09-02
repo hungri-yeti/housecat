@@ -113,22 +113,18 @@ NSString *kCellID = @"uicollection_cell";
 
 - (NSString*)uniqueImagePath
 {
-   NSMutableString *imageName = [[NSMutableString alloc] initWithCapacity:0];
 	// all images (thumbs & full-size) will be stored in this dir:
-	[imageName appendString:@"img/" ];
+	NSString *imgDir = @"/img/";
 	
    CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
-   if (theUUID)
-   {
-      [imageName appendString:CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, theUUID))];
-      CFRelease(theUUID);
-   }
-   [imageName appendString:@".png"];
+	NSString *imgName = CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, theUUID));
+	CFRelease(theUUID);
+	NSString *imgSuffix =@".png";
    
    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
-   NSString *documentsPath = [paths objectAtIndex:0];
-   NSString *filePath = [documentsPath stringByAppendingPathComponent:imageName];
-   
+   NSString *documentsDir = [paths objectAtIndex:0];   
+	
+	NSString *filePath = [NSString stringWithFormat:@"%@%@%@%@", documentsDir, imgDir, imgName, imgSuffix];
    return filePath;
 }
 
@@ -185,6 +181,7 @@ NSString *kCellID = @"uicollection_cell";
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+	NSError *error;
    //[picker dismissViewControllerAnimated:YES completion:nil];
    
    UIImage* image = nil;
@@ -210,19 +207,28 @@ NSString *kCellID = @"uicollection_cell";
 	// immediately, it can take some time for the actual img to show up.
 
 	// how we stop refresh from freezing the main UI thread
-	dispatch_queue_t resizeBigImage = dispatch_queue_create("resize", NULL);
-	dispatch_async(resizeBigImage, ^{
-		// do our long running process here:
-		// new image size should be the same as what will be rendered in MIRGeneratePDF.
-		CGSize newSize = CGSizeMake( (kPageWidth/2)-(3*kBorderInset), (kPageHeight/2)-(2*kBorderInset) );   
-		UIImage* mainImage = [self imageWithImage:image scaledToSize:newSize];	
-		NSData *pngBigData = UIImagePNGRepresentation(mainImage);
-		[pngBigData writeToFile:imagePath atomically:YES];
-		// do any UI stuff on the main UI thread
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[spinner stopAnimating];
-		});
-	});
+	// The block makes &error produce the following:
+	// Sending 'NSError *const __strong *' to parameter of type 'NSError *__autoreleasing *' changes retain/release properties of pointer
+	// I disabled the block for now.
+	// TODO verify performance, verify activity spinner not needed
+	//	dispatch_queue_t resizeBigImage = dispatch_queue_create("resize", NULL);
+	//	dispatch_async(resizeBigImage, ^{
+	// do our long running process here:
+	// new image size should be the same as what will be rendered in MIRGeneratePDF.
+	CGSize newSize = CGSizeMake( (kPageWidth/2)-(3*kBorderInset), (kPageHeight/2)-(2*kBorderInset) );   
+	UIImage* mainImage = [self imageWithImage:image scaledToSize:newSize];	
+	NSData *pngBigData = UIImagePNGRepresentation(mainImage);
+	if( ![pngBigData writeToFile:imagePath
+						options:NSDataWritingAtomic
+						  error:&error])
+	{
+		NSLog(@"ERROR when trying to write pngBigData to %@: %@", imagePath, error);
+	}
+	// do any UI stuff on the main UI thread
+	//		dispatch_async(dispatch_get_main_queue(), ^{
+	//			[spinner stopAnimating];
+	//		});
+	//	});
    
    // generate & save the thumb. Base the thumb's size on the frame
 	// of the UIImageView that it will be inserted into.
@@ -254,7 +260,6 @@ NSString *kCellID = @"uicollection_cell";
 	[imageObj setValue:[NSNumber numberWithInt:255] forKey:@"sortOrder"];
    
    [self.item addImagesObject:imageObj];
-   NSError *error;
    if (![self.managedObjectContext save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.

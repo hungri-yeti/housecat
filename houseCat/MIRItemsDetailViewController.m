@@ -87,23 +87,23 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 {
 	// take care of the button's thumbnail image here instead of viewDidLoad
 	// as we might be returning from a newly selected photo via MIRPhotosViewController
-	NSString *imgPath = [self.item thumbPath];
-	UIImage *image = nil;
+	NSString *thumbPath = [self.item thumbPath];
+	UIImage *thumbImage = nil;
 	
-	if( nil != imgPath )
+	if( nil != thumbPath )
 	{
-		image = [UIImage imageWithContentsOfFile:imgPath];
-		if( nil == image )
+		thumbImage = [UIImage imageWithContentsOfFile:thumbPath];
+		if( nil == thumbImage )
 		{
+			// thumbPath is set but there is no corresponding img file. Shouldn't this be an error?
 			[self.photoButton setTitle:NSLocalizedString(@"Click to set photo", @"Click to set photo") forState:(UIControlStateNormal && UIControlStateHighlighted)];			
 		}
 	}
 	else
 	{
-		image = nil;
 		[self.photoButton setTitle:NSLocalizedString(@"Click to set photo", @"Click to set photo") forState:(UIControlStateNormal && UIControlStateHighlighted)];
 	}
-	[self.photoButton setImage:image forState:(UIControlStateNormal && UIControlStateHighlighted)];
+	[self.photoButton setImage:thumbImage forState:(UIControlStateNormal && UIControlStateHighlighted)];
 }
 
 
