@@ -15,7 +15,12 @@
    NSDate *purchaseDate;
 	
 	NSString *placeHolderText;
+
+	CGSize kbSize;
+	BOOL kbVisible;
 }
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
+
 @end
 
 
@@ -42,16 +47,6 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    UIDatePicker *picker = (UIDatePicker*)self.itemPurchaseDate.inputView;
    self.itemPurchaseDate.text = [dateFormatter stringFromDate:picker.date];
    purchaseDate = picker.date;
-}
-
-
--(void)setupKeyboardDoneButton:(id)sender
-{
-   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Item detail bar done button")
-																					style:0 
-																				  target:nil 
-																				  action:@selector(doneButtonPressed:)];
-   self.navigationItem.rightBarButtonItem = btnDone;
 }
 
 
@@ -187,17 +182,18 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 	}
    [datePicker addTarget:self action:@selector(updatePurchaseDateField:) forControlEvents:UIControlEventValueChanged];
 
-	[self.itemName addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
-   [self.itemPurchaseDate addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
-   [self.itemCost addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
-   [self.itemSerialNumber addTarget:self action:@selector(setupKeyboardDoneButton:) forControlEvents:UIControlEventEditingDidBegin];
-   
-   [self.itemPurchaseDate setInputView:datePicker];
-   
+   [self.itemPurchaseDate setInputView:datePicker];   
    [self registerForKeyboardNotifications];
 	
 	// This seems like the 'right' thing to do but it looks odd when implemented:
 	//[self.itemName becomeFirstResponder];
+	
+	// setup keyboard:
+	NSArray *fields = @[ self.itemName, self.itemCost,
+								self.itemSerialNumber, self.itemNotes];
+	
+	[self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
+	[self.keyboardControls setDelegate:self];
 }
 
 
@@ -256,16 +252,6 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 }
 
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-   UIBarButtonItem* btnDone = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Item detail bar done button") 
-																					style:0 
-																				  target:nil 
-																				  action:@selector(doneButtonPressed:)];
-   self.navigationItem.rightBarButtonItem = btnDone;
-}
-
-
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
    [textView resignFirstResponder];
@@ -284,8 +270,10 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+   NSLog(@"textFieldDidBeginEditing\n");
    activeField = textField;
-	
+   [self.keyboardControls setActiveField:textField];
+   [self scrollToField];
 }
 
 
@@ -381,10 +369,60 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-   float kToolBarHeight = 44;
-   
    NSDictionary* info = [aNotification userInfo];
-   CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+   kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;	
+   kbVisible = TRUE;
+   [self scrollToField];
+	
+}
+
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+   UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+   self.scrollView.contentInset = contentInsets;
+   self.scrollView.scrollIndicatorInsets = contentInsets;
+	
+   kbVisible = FALSE;
+}
+
+
+
+#pragma mark -
+#pragma mark Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+	activeField = textView;
+	[self.keyboardControls setActiveField:textView];
+	[self scrollToField];
+}
+
+
+
+#pragma mark -
+#pragma mark Keyboard Controls Delegate
+
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
+{
+//	UIView *view = keyboardControls.activeField.superview.superview;
+//	[self.tableView scrollRectToVisible:view.frame animated:YES];
+}
+
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
+{
+	[keyboardControls.activeField resignFirstResponder];
+}
+
+
+#pragma mark - scrolling
+-(void)scrollToField
+{
+	if(!kbVisible)
+		return;
+	
+	float kToolBarHeight = 44;
    
    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
    self.scrollView.contentInset = contentInsets;
@@ -406,15 +444,5 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 }
 
 
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-   UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-   self.scrollView.contentInset = contentInsets;
-   self.scrollView.scrollIndicatorInsets = contentInsets;
-	
-	// remove the Done button:
-   self.navigationItem.rightBarButtonItem = nil;	
-}
 
 @end

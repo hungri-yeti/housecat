@@ -56,6 +56,10 @@
 		3BDDEBB11665EF69001783E6 /* MIRChangeRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDDEBB01665EF69001783E6 /* MIRChangeRoomViewController.m */; };
 		3BDEDE9D1630496400C8DECB /* MIRAddRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */; };
 		3BE3855316379F6F0023747A /* MIRItemsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */; };
+		3BE3A06017D42E230006A470 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3A04117D42E230006A470 /* BSKeyboardControls.m */; };
+		3BE3A06117D42E230006A470 /* BSKeyboardControls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BE3A04217D42E230006A470 /* BSKeyboardControls.strings */; };
+		3BE3A06E17D42E230006A470 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3BE3A05D17D42E230006A470 /* License.txt */; };
+		3BE3A06F17D42E230006A470 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3BE3A05E17D42E230006A470 /* README.md */; };
 		3BF0BA70164B5AE800269D1A /* MIRLossReportListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */; };
 		3BF89CDA1682B1AA008D7BD3 /* 0400.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CD71682B1AA008D7BD3 /* 0400.png */; };
 		3BF89CDB1682B1AA008D7BD3 /* 0401.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BF89CD81682B1AA008D7BD3 /* 0401.png */; };
@@ -148,6 +152,13 @@
 		3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRAddRoomViewController.m; sourceTree = "<group>"; };
 		3BE3855116379F6F0023747A /* MIRItemsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRItemsDetailViewController.h; sourceTree = "<group>"; };
 		3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsDetailViewController.m; sourceTree = "<group>"; };
+		3BE3A04017D42E230006A470 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
+		3BE3A04117D42E230006A470 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
+		3BE3A04317D42E230006A470 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		3BE3A04417D42E230006A470 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		3BE3A04517D42E230006A470 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		3BE3A05D17D42E230006A470 /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
+		3BE3A05E17D42E230006A470 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		3BF0BA6E164B5AE800269D1A /* MIRLossReportListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRLossReportListViewController.h; sourceTree = "<group>"; };
 		3BF0BA6F164B5AE800269D1A /* MIRLossReportListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossReportListViewController.m; sourceTree = "<group>"; };
 		3BF89CD71682B1AA008D7BD3 /* 0400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0400.png; sourceTree = "<group>"; };
@@ -346,6 +357,7 @@
 				3B082454165578DC000221B6 /* loss reporting */,
 				3B702FF2162D18C400EE6C36 /* CoreData */,
 				3BAF8B93161E8D5900B23848 /* Supporting Files */,
+				3BE3A03D17D42E230006A470 /* BSKeyboardControls */,
 			);
 			path = houseCat;
 			sourceTree = "<group>";
@@ -371,6 +383,26 @@
 				3BAF8BA7161E8D5900B23848 /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		3BE3A03D17D42E230006A470 /* BSKeyboardControls */ = {
+			isa = PBXGroup;
+			children = (
+				3BE3A03F17D42E230006A470 /* BSKeyboardControls */,
+				3BE3A05D17D42E230006A470 /* License.txt */,
+				3BE3A05E17D42E230006A470 /* README.md */,
+			);
+			path = BSKeyboardControls;
+			sourceTree = "<group>";
+		};
+		3BE3A03F17D42E230006A470 /* BSKeyboardControls */ = {
+			isa = PBXGroup;
+			children = (
+				3BE3A04017D42E230006A470 /* BSKeyboardControls.h */,
+				3BE3A04117D42E230006A470 /* BSKeyboardControls.m */,
+				3BE3A04217D42E230006A470 /* BSKeyboardControls.strings */,
+			);
+			path = BSKeyboardControls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +462,8 @@
 				en,
 				Base,
 				ru,
+				da,
+				sv,
 			);
 			mainGroup = 3BAF8B7D161E8D5900B23848;
 			productRefGroup = 3BAF8B89161E8D5900B23848 /* Products */;
@@ -455,6 +489,7 @@
 				3B8C0019166413EF0074EB4B /* 0017@2x.png in Resources */,
 				3B213F4D16648A6900BF2114 /* 0100.png in Resources */,
 				3B213F5016648DEF00BF2114 /* 0101.png in Resources */,
+				3BE3A06117D42E230006A470 /* BSKeyboardControls.strings in Resources */,
 				3B213F5116648DEF00BF2114 /* 0102.png in Resources */,
 				3B213F5316648F7D00BF2114 /* 0200.png in Resources */,
 				3B213F551664904B00BF2114 /* 0300.png in Resources */,
@@ -466,8 +501,10 @@
 				3B213F611664A0EF00BF2114 /* 0704.png in Resources */,
 				3BF89CDA1682B1AA008D7BD3 /* 0400.png in Resources */,
 				3BF89CDB1682B1AA008D7BD3 /* 0401.png in Resources */,
+				3BE3A06F17D42E230006A470 /* README.md in Resources */,
 				3BF89CDC1682B1AA008D7BD3 /* 0402.png in Resources */,
 				3BF89CDE1682B32F008D7BD3 /* 0403.png in Resources */,
+				3BE3A06E17D42E230006A470 /* License.txt in Resources */,
 				3BF89CE01682BE39008D7BD3 /* 0600.png in Resources */,
 				3BCC8E67168D789300EC902C /* Localizable.strings in Resources */,
 				3B0FE9F516F7EDB0004E1D0D /* scroll_pip.caf in Resources */,
@@ -516,6 +553,7 @@
 				3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */,
 				3BADA7371648C3630094D4B7 /* MIRPhotoDetailViewController.m in Sources */,
 				3BF0BA70164B5AE800269D1A /* MIRLossReportListViewController.m in Sources */,
+				3BE3A06017D42E230006A470 /* BSKeyboardControls.m in Sources */,
 				3B5CB41B164CB611005B19FC /* Images.m in Sources */,
 				3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */,
 				3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */,
@@ -570,6 +608,16 @@
 				3BCC8E68168D78A300EC902C /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3BE3A04217D42E230006A470 /* BSKeyboardControls.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BE3A04317D42E230006A470 /* da */,
+				3BE3A04417D42E230006A470 /* en */,
+				3BE3A04517D42E230006A470 /* sv */,
+			);
+			name = BSKeyboardControls.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

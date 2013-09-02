@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Items.h"
 #import "Rooms.h"
+#import "BSKeyboardControls.h"
 
 
-@interface MIRItemsDetailViewController : UIViewController
+
+@interface MIRItemsDetailViewController : UIViewController <BSKeyboardControlsDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
