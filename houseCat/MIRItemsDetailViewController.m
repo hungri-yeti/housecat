@@ -385,6 +385,11 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    self.scrollView.scrollIndicatorInsets = contentInsets;
 	
    kbVisible = FALSE;
+   
+   // scroll to the top of the view:
+   CGPoint scrollPoint = CGPointMake(0.0, 0.0);
+   [self.scrollView setContentOffset:scrollPoint animated:YES];
+
 }
 
 
