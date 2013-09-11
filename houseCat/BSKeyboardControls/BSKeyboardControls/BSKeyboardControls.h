@@ -34,7 +34,7 @@ typedef enum
 /**
  *  Delegate to send callbacks to.
  */
-@property (nonatomic, weak) id <BSKeyboardControlsDelegate> delegate;
+@property (nonatomic, strong) id <BSKeyboardControlsDelegate> delegate;
 
 /**
  *  Visible controls. Use a bitmask to show multiple controls.
