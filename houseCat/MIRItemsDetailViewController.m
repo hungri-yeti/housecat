@@ -189,8 +189,11 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 	//[self.itemName becomeFirstResponder];
 	
 	// setup keyboard:
-	NSArray *fields = @[ self.itemName, self.itemCost,
-								self.itemSerialNumber, self.itemNotes];
+	NSArray *fields = @[ self.itemName,
+                        self.itemPurchaseDate,
+                        self.itemCost,
+								self.itemSerialNumber, 
+                        self.itemNotes];
 	
 	[self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
 	[self.keyboardControls setDelegate:self];
