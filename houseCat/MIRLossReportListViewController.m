@@ -174,7 +174,19 @@
 	[fetchRequest setEntity:entity];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected=1"];
 	[fetchRequest setPredicate:predicate];
-	NSArray *items = [context executeFetchRequest:fetchRequest error:nil];
+   NSError* error;
+	NSArray *items = [context executeFetchRequest:fetchRequest error:&error];
+   if (error!=nil)
+   {
+      NSLog(@"ERROR: readLossInfo:executeFetchRequest failed, error: %@\n", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+   }
 
 	// debug: iterate through each checked item and all its child images:
 	//for( Items* item in items )
@@ -230,7 +242,14 @@
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [context save] failed: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
    }
 }
 
@@ -282,7 +301,15 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed:%@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.fetchedResultsController performFetch:error] failed:%@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+
       abort();
 	}
    

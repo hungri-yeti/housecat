@@ -57,6 +57,13 @@
 		if( NO == results )
 		{
 			NSLog(@"ERROR: unable to create pdf directory, error: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
 		}
 		
 		error = nil;
@@ -69,6 +76,13 @@
 		if( NO == results )
 		{
 			NSLog(@"ERROR: unable to create img directory, error: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
 		}
 		
       // Add our default Room list in Core Data
@@ -104,8 +118,18 @@
       //}
       
       // Commit to core data
+      error = nil;
       if (![self.managedObjectContext save:&error])
+      {
          NSLog(@"ERROR: save default Rooms: error: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
+      }
    }
 	else
 	{
@@ -115,16 +139,35 @@
 		// List the files in the sandbox Documents/pdf folder
 		NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/pdf"]; 
 		fileManager = [NSFileManager defaultManager];
-		NSArray* files = [fileManager contentsOfDirectoryAtPath:path error:nil];
+		NSArray* files = [fileManager contentsOfDirectoryAtPath:path error:&error];
+      if (error != nil) 
+      {
+         NSLog(@"ERROR: contentsOfDirectoryAtPath failed, error: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
+      }
 
 		for( NSString* file in files )
 		{
+         error = nil;
 			NSString* pdfPath = [NSString stringWithFormat:@"%@/%@", path, file];
 			[fileManager removeItemAtPath:pdfPath error:&error];
 			
 			if( error != nil)
 			{
 				NSLog(@"ERROR: removeItemAtPath failed, error: %@", [error localizedDescription] );
+            // Notify the user
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                            message:[error localizedFailureReason]
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:nil];
+            [alert show];
 			}
 		}
 	}
@@ -168,6 +211,14 @@
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
          NSLog(@"ERROR: [managedObjectContext save] failed: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
+
          abort();
       }
    }
@@ -245,6 +296,14 @@
        
        */
       NSLog(@"ERROR: [persistentStoreCoordinator addPersistentStoreWithType] failed: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+
       abort();
    }
    return _persistentStoreCoordinator;

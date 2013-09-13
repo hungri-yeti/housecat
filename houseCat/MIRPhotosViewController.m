@@ -52,7 +52,19 @@ NSString *kCellID = @"uicollection_cell";
                                        ascending:YES];
    NSArray *sortDescriptors = @[sortDescriptor];
    [request setSortDescriptors:sortDescriptors];
-	NSArray *results = [context executeFetchRequest:request error:nil];
+   NSError* error;
+	NSArray *results = [context executeFetchRequest:request error:&error];
+   if (error!=nil)
+   {
+      NSLog(@"ERROR: executeFetchRequest failed, error: %@\n", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+   }
 
 	if ([results count]) 
 	{
@@ -64,12 +76,19 @@ NSString *kCellID = @"uicollection_cell";
 		[self.item setThumbPath:@""];
 	}
 
-   NSError *error;
+   error = nil;
    if (![context save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [context save:error] failed, error: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
    }
 }
 
@@ -93,7 +112,19 @@ NSString *kCellID = @"uicollection_cell";
    NSArray *sortDescriptors = @[sortDescriptor];
    [request setSortDescriptors:sortDescriptors];
 	
-	NSArray *results = [context executeFetchRequest:request error:nil];
+   NSError *error;
+	NSArray *results = [context executeFetchRequest:request error:&error];
+   if (error != nil)
+   {
+      NSLog(@"ERROR: executeFetchRequest failed, error: %@\n", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+   }
 	UInt16 sortOrder = 0;
 	for (NSManagedObject *object in results)
 	{
@@ -101,12 +132,19 @@ NSString *kCellID = @"uicollection_cell";
 		sortOrder++;
 	}
 	
-   NSError *error;
+   error = nil;
    if (![context save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [context save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [context save:error] failed, error: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
    }
 }
 
@@ -223,6 +261,13 @@ NSString *kCellID = @"uicollection_cell";
 						  error:&error])
 	{
 		NSLog(@"ERROR when trying to write pngBigData to %@: %@", imagePath, error);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
 	}
 	// do any UI stuff on the main UI thread
 	//		dispatch_async(dispatch_get_main_queue(), ^{
@@ -259,11 +304,19 @@ NSString *kCellID = @"uicollection_cell";
 	[imageObj setValue:[NSNumber numberWithInt:NSIntegerMax] forKey:@"sortOrder"];
    
    [self.item addImagesObject:imageObj];
+   error = nil;
    if (![self.managedObjectContext save:&error])
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [self.managedObjectContext save:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.managedObjectContext save:error] failed, error: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
    }
    [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -348,7 +401,15 @@ NSString *kCellID = @"uicollection_cell";
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed, error: %@", [error localizedDescription]);
+      NSLog(@"ERROR: [self.fetchedResultsController performFetch:error] failed, error: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+
       abort();
 	}
    

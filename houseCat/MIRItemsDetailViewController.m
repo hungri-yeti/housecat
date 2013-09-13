@@ -128,7 +128,14 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 		{
 			// Replace this implementation with code to handle the error appropriately.
 			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-			NSLog(@"ERROR: [self.managedObjectContext] failed: %@", [error localizedDescription]);
+			NSLog(@"ERROR: viewDidLoad:[self.managedObjectContext] failed: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
 		}
       // this is a new item so date isn't set yet:
       [datePicker setDate:currentDate];
@@ -274,7 +281,14 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: textViewDidEndEditing: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
    }
 	activeField = nil;
 }
@@ -368,7 +382,14 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: textFieldDidEndEditing:[self.managedObjectContext save] failed: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
    }
 	activeField = nil;
 }

@@ -215,7 +215,15 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      NSLog(@"ERROR: [self.fetchedResultsController performFetch:&error] failed: %@", [error localizedDescription]);
+      NSLog(@"ERROR: fetchedResultsController:[self.fetchedResultsController performFetch:error] failed: %@", [error localizedDescription]);
+      // Notify the user
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                      message:[error localizedFailureReason]
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+      [alert show];
+
       abort();
 	}
    
@@ -289,9 +297,20 @@
 		[fetchRequest setEntity:[NSEntityDescription entityForName:@"Images"
 												 inManagedObjectContext:self.managedObjectContext]];
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"parentItem == %@", item];
-		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-		
 		NSError* error;
+		NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+      if (error!=nil)
+      {
+         NSLog(@"commitEditingStyle: executeFetchRequest failed, error: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
+      }
+		
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		for (Images *image in results)
 		{
@@ -300,12 +319,26 @@
 			if ( NO == [fileManager removeItemAtPath:[image thumbPath] error:&error])
 			{
 				NSLog(@"ERROR: unable to delete file thumbPath=%@: error: %@", image.thumbPath, [error localizedDescription]);
+            // Notify the user
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                            message:[error localizedFailureReason]
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:nil];
+            [alert show];
 			}
 			
 			error = nil;
 			if ( NO == [fileManager removeItemAtPath:[image imagePath] error:&error])
 			{
 				NSLog(@"ERROR: unable to delete file imagePath=%@: error: %@", image.imagePath, [error localizedDescription]);
+            // Notify the user
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                            message:[error localizedFailureReason]
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:nil];
+            [alert show];
 			}
 		}
 		
@@ -317,7 +350,15 @@
 		{
          // Replace this implementation with code to handle the error appropriately.
          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         NSLog(@"ERROR: [context save:&error] failed: %@", [error localizedDescription]);
+         NSLog(@"ERROR: [context save:error] failed: %@", [error localizedDescription]);
+         // Notify the user
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:nil];
+         [alert show];
+
          abort();
       }
    }
