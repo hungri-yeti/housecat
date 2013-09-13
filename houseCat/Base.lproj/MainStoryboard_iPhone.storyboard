@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7AN-Ko-20e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7AN-Ko-20e">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
@@ -31,7 +31,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem image="0017.png" style="plain" id="oii-GU-SmE">
+                        <barButtonItem title="Info" style="plain" id="oii-GU-SmE">
                             <connections>
                                 <segue destination="365-um-9Bf" kind="modal" identifier="showInfo" id="c4e-EN-X00"/>
                             </connections>
@@ -317,10 +317,10 @@
                                         </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaW-CY-eiB">
-                                        <rect key="frame" x="20" y="270" width="280" height="126"/>
+                                        <rect key="frame" x="20" y="299" width="280" height="97"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="126" id="z5I-uX-Wjd"/>
+                                            <constraint firstAttribute="height" constant="97" id="z5I-uX-Wjd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -366,10 +366,17 @@
                                             <segue destination="lO3-Fv-6p1" kind="push" identifier="showPhotos" id="p41-Ef-ff2"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORl-Al-Odr">
+                                        <rect key="frame" x="20" y="270" width="46" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="mBG-7R-x5g" firstAttribute="top" secondItem="oJS-ZE-5A9" secondAttribute="bottom" constant="8" symbolic="YES" id="0kV-EV-psK"/>
-                                    <constraint firstItem="MaW-CY-eiB" firstAttribute="top" secondItem="mBG-7R-x5g" secondAttribute="bottom" constant="8" symbolic="YES" id="4gs-uh-FP9"/>
+                                    <constraint firstItem="MaW-CY-eiB" firstAttribute="top" secondItem="mBG-7R-x5g" secondAttribute="bottom" constant="37" id="4gs-uh-FP9"/>
                                     <constraint firstItem="oJS-ZE-5A9" firstAttribute="top" secondItem="BXE-OC-s8t" secondAttribute="bottom" constant="8" symbolic="YES" id="59j-bV-eTF"/>
                                     <constraint firstItem="BXE-OC-s8t" firstAttribute="top" secondItem="JPZ-fX-JMJ" secondAttribute="bottom" constant="37" id="8Y7-ma-KTt"/>
                                     <constraint firstItem="oJS-ZE-5A9" firstAttribute="leading" secondItem="mBG-7R-x5g" secondAttribute="leading" id="QUD-Wd-Z3e"/>
@@ -378,7 +385,7 @@
                                     <constraint firstAttribute="trailing" secondItem="BXE-OC-s8t" secondAttribute="trailing" constant="20" symbolic="YES" id="cte-Hd-tYr"/>
                                     <constraint firstItem="kgv-KP-btj" firstAttribute="leading" secondItem="oJS-ZE-5A9" secondAttribute="trailing" constant="24" id="fqE-xt-Bx0"/>
                                     <constraint firstItem="BXE-OC-s8t" firstAttribute="leading" secondItem="oJS-ZE-5A9" secondAttribute="leading" id="jxR-ag-9uH"/>
-                                    <constraint firstAttribute="bottom" secondItem="MaW-CY-eiB" secondAttribute="bottom" constant="84" id="mpD-D0-f3N"/>
+                                    <constraint firstAttribute="bottom" secondItem="MaW-CY-eiB" secondAttribute="bottom" constant="20" id="mpD-D0-f3N"/>
                                     <constraint firstItem="JPZ-fX-JMJ" firstAttribute="leading" secondItem="QqW-Uq-xz7" secondAttribute="leading" constant="20" symbolic="YES" id="mq6-g0-WQl"/>
                                     <constraint firstItem="BXE-OC-s8t" firstAttribute="leading" secondItem="JPZ-fX-JMJ" secondAttribute="leading" id="p7h-sC-P1R"/>
                                     <constraint firstItem="JPZ-fX-JMJ" firstAttribute="top" secondItem="QqW-Uq-xz7" secondAttribute="top" constant="20" symbolic="YES" id="ulI-Tb-KB4"/>
@@ -389,7 +396,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="QqW-Uq-xz7" secondAttribute="bottom" id="H0g-Ae-Rna"/>
                             <constraint firstItem="QqW-Uq-xz7" firstAttribute="leading" secondItem="EeP-gP-uuk" secondAttribute="leading" id="N57-ev-P6r"/>
@@ -697,9 +704,6 @@
             <point key="canvasLocation" x="517" y="-1211"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="0017.png" width="35" height="35"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

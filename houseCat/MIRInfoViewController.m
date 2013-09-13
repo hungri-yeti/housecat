@@ -32,8 +32,6 @@
 	if (UIWebViewNavigationTypeLinkClicked == navigationType)
 	{
 		[[UIApplication sharedApplication] openURL:[request URL]];
-		
-		NSLog(@"url: %@", [[request URL] absoluteString]);
 	}
 	return YES; 
 }

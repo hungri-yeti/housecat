@@ -268,12 +268,20 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 	{
 		[self.item setValue:self.itemNotes.text forKey:@"notes"];
 	}
+   
+   NSError *error;
+   if (![self.managedObjectContext save:&error])
+   {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"ERROR: [self.managedObjectContext save] failed: %@", [error localizedDescription]);
+   }
+	activeField = nil;
 }
 
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-   NSLog(@"textFieldDidBeginEditing\n");
    activeField = textField;
    [self.keyboardControls setActiveField:textField];
    [self scrollToField];
@@ -295,7 +303,6 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
    {
 		// If the user just typed the number in, e.g. 12.34 or 42, prepend the currency symbol:
 		NSString *currencySymbol = [currentUserLocale objectForKey:NSLocaleCurrencySymbol];
-		NSLog(@"currencySymbol: %@\n", currencySymbol);	// in the simulator this is null, causes crash
 		
 		BOOL hasCurrencyPrefix = [textField.text hasPrefix:currencySymbol];
 		if( !hasCurrencyPrefix )

@@ -48,7 +48,6 @@
 {
 	if([self.roomNameField.text length]<=0)
    {
-		NSLog(@"empty roomNameField.text");
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error:", @"Error alert")
 																		message:NSLocalizedString(@"Room Name can not be empty", @"Empty Room name message")
 																	  delegate:self
@@ -70,7 +69,6 @@
 
 	if([self.roomNameField.text length]<=0)
    {
-		NSLog(@"empty roomNameField.text");
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error:", @"Error alert")
 																		message:NSLocalizedString(@"Room Name can not be empty", @"Empty Room name message")
 																	  delegate:self

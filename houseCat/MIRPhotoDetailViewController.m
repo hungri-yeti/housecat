@@ -22,8 +22,6 @@
 	NSError* error;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 
-	NSLog(@"thumbPath: %@, imagePath: %@", [self.image thumbPath], [self.image imagePath] );
-		
 	// delete the image files so we don't fill up the file system:
 	if ([fileManager removeItemAtPath:[self.image thumbPath] error:&error])
 	{

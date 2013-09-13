@@ -308,15 +308,15 @@
 		3BAEAF8C16AF4AE3001917BB /* launch images */ = {
 			isa = PBXGroup;
 			children = (
+				3B875E7F17E0228F00A35500 /* Default-568h@2x.png */,
 			);
 			name = "launch images";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		3BAF8B7D161E8D5900B23848 = {
 			isa = PBXGroup;
 			children = (
-				3B875E7F17E0228F00A35500 /* Default-568h@2x.png */,
-				3BAEAF8C16AF4AE3001917BB /* launch images */,
 				3BAF8B92161E8D5900B23848 /* houseCat */,
 				3BAF8B8B161E8D5900B23848 /* Frameworks */,
 				3BAF8B89161E8D5900B23848 /* Products */,
@@ -373,6 +373,7 @@
 				3B8C000C16640F540074EB4B /* info */,
 				3B8C0015166413EF0074EB4B /* icons */,
 				3BAF8B94161E8D5900B23848 /* houseCat-Info.plist */,
+				3BAEAF8C16AF4AE3001917BB /* launch images */,
 				3BAF8B98161E8D5900B23848 /* main.m */,
 				3BAF8B9A161E8D5900B23848 /* houseCat-Prefix.pch */,
 			);

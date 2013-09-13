@@ -25,17 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// FIXME: UIColor results in memory leak
-	// TODO: @synthesize isn't necessary?
-	// TODO: add action sounds (will also need a preference for muting them?)
-	// TODO: password protection
-	// TODO: iPad storyboard
-	// TODO: implement Contact the developer in info.html
-	// TODO: implement Report a problem in info.html
-	// TODO: all error logging should use [error localizedDescription]
-	// TODO: add error number back into all ERROR messages
-	
-	NSLog(@"houseCat dir: %@", NSHomeDirectory() );
+	//NSLog(@"houseCat dir: %@", NSHomeDirectory() );
 	
    // Override point for customization after application launch.
    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;

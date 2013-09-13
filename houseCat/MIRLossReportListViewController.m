@@ -161,8 +161,6 @@
 #pragma mark - loss info delegate
 -(void)readLossInfo:(NSArray*)results
 {
-	NSLog(@"policy number: %@, loss date: %@", [results objectAtIndex:0], [results objectAtIndex:1]);
-	
 	self.resultsString = [[NSString alloc] initWithFormat:NSLocalizedString(@"Policy: %@, Date of Loss: %@", @"PDF header"), 
 								 [results objectAtIndex:0], 
 								 [results objectAtIndex:1]];
@@ -202,7 +200,7 @@
 		self.pdfFilePath = pdfPath;
 	[spinner stopAnimating];
 	
-	NSLog(@"pdfPath: %@", pdfPath );
+	//NSLog(@"pdfPath: %@", pdfPath );
 	
 	[self showActionSheet];
 }
