@@ -61,7 +61,7 @@
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                          message:[error localizedFailureReason]
                                                         delegate:nil
-                                               cancelButtonTitle:nil
+                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                                otherButtonTitles:nil];
          [alert show];
 		}
@@ -80,7 +80,7 @@
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                          message:[error localizedFailureReason]
                                                         delegate:nil
-                                               cancelButtonTitle:nil
+                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                                otherButtonTitles:nil];
          [alert show];
 		}
@@ -126,7 +126,7 @@
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                          message:[error localizedFailureReason]
                                                         delegate:nil
-                                               cancelButtonTitle:nil
+                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                                otherButtonTitles:nil];
          [alert show];
       }
@@ -147,7 +147,7 @@
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                          message:[error localizedFailureReason]
                                                         delegate:nil
-                                               cancelButtonTitle:nil
+                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                                otherButtonTitles:nil];
          [alert show];
       }
@@ -165,7 +165,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                             message:[error localizedFailureReason]
                                                            delegate:nil
-                                                  cancelButtonTitle:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                                   otherButtonTitles:nil];
             [alert show];
 			}
@@ -215,7 +215,7 @@
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                          message:[error localizedFailureReason]
                                                         delegate:nil
-                                               cancelButtonTitle:nil
+                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                                otherButtonTitles:nil];
          [alert show];
 
@@ -300,7 +300,7 @@
       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
                                                       message:[error localizedFailureReason]
                                                      delegate:nil
-                                            cancelButtonTitle:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK",@"Alert 'OK' (Cancel) button.")
                                             otherButtonTitles:nil];
       [alert show];
 

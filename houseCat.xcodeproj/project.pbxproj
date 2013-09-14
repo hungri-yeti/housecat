@@ -139,7 +139,7 @@
 		3BAF8B98161E8D5900B23848 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BAF8B9A161E8D5900B23848 /* houseCat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "houseCat-Prefix.pch"; sourceTree = "<group>"; };
 		3BAF8B9B161E8D5900B23848 /* MIRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIRAppDelegate.h; sourceTree = "<group>"; };
-		3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIRAppDelegate.m; sourceTree = "<group>"; };
+		3BAF8B9C161E8D5900B23848 /* MIRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MIRAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3BAF8BB2161E8D5900B23848 /* houseCatTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = houseCatTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8BB3161E8D5900B23848 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3BAF8BCA161E8D8800B23848 /* MIRRoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRRoomsViewController.h; sourceTree = "<group>"; };
@@ -149,11 +149,11 @@
 		3BCC8E66168D789300EC902C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3BCC8E68168D78A300EC902C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3BDDEBAF1665EF69001783E6 /* MIRChangeRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRChangeRoomViewController.h; sourceTree = "<group>"; };
-		3BDDEBB01665EF69001783E6 /* MIRChangeRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRChangeRoomViewController.m; sourceTree = "<group>"; };
+		3BDDEBB01665EF69001783E6 /* MIRChangeRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MIRChangeRoomViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3BDEDE9B1630496400C8DECB /* MIRAddRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRAddRoomViewController.h; sourceTree = "<group>"; };
-		3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRAddRoomViewController.m; sourceTree = "<group>"; };
+		3BDEDE9C1630496400C8DECB /* MIRAddRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MIRAddRoomViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3BE3855116379F6F0023747A /* MIRItemsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRItemsDetailViewController.h; sourceTree = "<group>"; };
-		3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRItemsDetailViewController.m; sourceTree = "<group>"; };
+		3BE3855216379F6F0023747A /* MIRItemsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MIRItemsDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3BE3A04017D42E230006A470 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		3BE3A04117D42E230006A470 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		3BE3A04317D42E230006A470 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
