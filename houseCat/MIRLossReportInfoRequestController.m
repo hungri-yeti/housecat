@@ -51,15 +51,24 @@
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
-	// Do any additional setup after loading the view.
+   [super viewDidLoad];
+   // Do any additional setup after loading the view.
 
-	
-	UIDatePicker *datePicker = [[UIDatePicker alloc]init];
-	datePicker.datePickerMode = UIDatePickerModeDate;
-	[datePicker setDate:[NSDate date]];
-	[datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];       
-	[self.lossDate setInputView:datePicker];
+   // setup datepicker:
+   UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+   datePicker.datePickerMode = UIDatePickerModeDate;
+   [datePicker setDate:[NSDate date]];
+   [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];       
+   [self.lossDate setInputView:datePicker];
+
+   // automatically fill in the date with current:
+   NSDate* currentDate = [NSDate date];
+   [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
+   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+   [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+   [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+
+   self.lossDate.text = [dateFormatter stringFromDate:currentDate];
 }
 
 
