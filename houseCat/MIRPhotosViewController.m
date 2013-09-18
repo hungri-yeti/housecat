@@ -209,13 +209,25 @@ NSString *kCellID = @"uicollection_cell";
    imagePickController.delegate=self;
    imagePickController.allowsEditing=NO;
 
-   //This method inherit from UIView,show imagePicker with animation
+   // Apple's camera picker doesn't resize for the status bar, let's just hide it:
+   [[UIApplication sharedApplication] setStatusBarHidden:YES];
+   [self setNeedsStatusBarAppearanceUpdate];
+
+   //This method inherit from UIView, show imagePicker with animation
    [self presentViewController:imagePickController animated:YES completion:nil];      
 }
 
 
 
 #pragma mark - image picker
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+   [picker dismissViewControllerAnimated:YES completion:^{
+      [[UIApplication sharedApplication] setStatusBarHidden:NO];
+   }];
+}
+
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -318,7 +330,9 @@ NSString *kCellID = @"uicollection_cell";
                                             otherButtonTitles:nil];
       [alert show];
    }
-   [picker dismissViewControllerAnimated:YES completion:nil];
+   [picker dismissViewControllerAnimated:YES completion:^{
+   [[UIApplication sharedApplication] setStatusBarHidden:NO];
+   }];
 }
 
 
