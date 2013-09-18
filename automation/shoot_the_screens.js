@@ -128,6 +128,10 @@ captureLocalizedScreenshot("itemsList");
 
 
 
+// TODO: also need a screen of an empty (new) item (itemEmpty).
+
+
+
 // Items Detail View Controller
 var itemsTable = window.tableViews()[0];
 var itemCell = itemsTable.cells()[0];
