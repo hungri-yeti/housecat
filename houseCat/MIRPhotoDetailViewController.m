@@ -23,7 +23,7 @@
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 
 	// delete the image files so we don't fill up the file system:
-	if ([fileManager removeItemAtPath:[self.image thumbPath] error:&error])
+	if (NO == [fileManager removeItemAtPath:[self.image thumbPath] error:&error])
 	{
 		NSLog(@"ERROR: unable to delete thumbPath %@: error: %@", [self.image thumbPath], [error localizedDescription]);
       // Notify the user
@@ -36,7 +36,7 @@
 	}
 	
 	error = nil;
-	if ([fileManager removeItemAtPath:[self.image imagePath] error:&error])
+	if (NO == [fileManager removeItemAtPath:[self.image imagePath] error:&error])
 	{
 		NSLog(@"ERROR: unable to delete imagePath %@: error: %@", [self.image imagePath], [error localizedDescription]);
       // Notify the user

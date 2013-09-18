@@ -27,7 +27,9 @@ set -e
 destination="$1"
 
 # The locale identifiers for the languages you want to shoot
-languages="en ru"
+#languages="en ru"
+# english for now, Russian after localization is complete
+languages="en"
 
 function main {
   _check_destination
@@ -46,8 +48,8 @@ function main {
   # the parts that don't matter for you.
   _xcode clean build TARGETED_DEVICE_FAMILY=1
 
-  bin/choose_sim_device "iPhone Retina (3.5-inch)"
-  _shoot_screens_for_all_languages
+  #bin/choose_sim_device "iPhone Retina (3.5-inch)"
+  #_shoot_screens_for_all_languages
 
   bin/choose_sim_device "iPhone Retina (4-inch)"
   _shoot_screens_for_all_languages

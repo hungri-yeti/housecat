@@ -316,7 +316,7 @@
 		{
 			// delete the image files so we don't fill up the file system:
 			error = nil;
-			if ( NO == [fileManager removeItemAtPath:[image thumbPath] error:&error])
+			if (NO == [fileManager removeItemAtPath:[image thumbPath] error:&error])
 			{
 				NSLog(@"ERROR: unable to delete file thumbPath=%@: error: %@", image.thumbPath, [error localizedDescription]);
             // Notify the user
@@ -329,7 +329,7 @@
 			}
 			
 			error = nil;
-			if ( NO == [fileManager removeItemAtPath:[image imagePath] error:&error])
+			if (NO == [fileManager removeItemAtPath:[image imagePath] error:&error])
 			{
 				NSLog(@"ERROR: unable to delete file imagePath=%@: error: %@", image.imagePath, [error localizedDescription]);
             // Notify the user
