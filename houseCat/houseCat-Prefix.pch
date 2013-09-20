@@ -13,3 +13,6 @@
    #import <Foundation/Foundation.h>
    #import <CoreData/CoreData.h>
 #endif
+
+// with this define the UI gets ready for capturing the default screen
+//#define SCREENSHOT

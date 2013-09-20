@@ -10,6 +10,11 @@
 #import "MIRAppDelegate.h"
 #import "MIRRoomsViewController.h"
 #import "Rooms.h"
+// these are only used when generating the launch images, not necessary for release.
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
+
 
 @implementation MIRAppDelegate
 {
@@ -84,7 +89,11 @@
                                                otherButtonTitles:nil];
          [alert show];
 		}
-		
+
+
+//#ifdef SCREENSHOT
+//#warning Screenshot Mode enabled!
+//#else
       // Add our default Room list in Core Data
       NSArray *defaultRooms = [NSArray arrayWithObjects:
 										 NSLocalizedString(@"Kitchen",@"default kitch room name"),
@@ -100,6 +109,8 @@
          Rooms *room = (Rooms *)[NSEntityDescription insertNewObjectForEntityForName:@"Rooms" inManagedObjectContext:self.managedObjectContext];
          [room setName:roomName];
       }
+//#endif
+
       
 		// debug: list out all rooms to log
       //NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -171,8 +182,49 @@
 			}
 		}
 	}
+
+// from cocanetics:
+//#ifdef SCREENSHOT
+//	NSString *defaultImageName = @"Default.png";
+//	CGSize imageSize = [[UIScreen mainScreen] applicationFrame].size;
+//	CGFloat imageScale = [[UIScreen mainScreen] scale];
+//
+//	if (imageScale>1)
+//	{
+//		if (imageSize.height<500)
+//		{
+//			defaultImageName = @"Default@2x.png";
+//		}
+//		else
+//		{
+//			defaultImageName = @"Default-568h@2x.png";
+//		}
+//	}
+//
+//	UIGraphicsBeginImageContextWithOptions(imageSize, YES, imageScale);
+//
+//	[self.window.rootViewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//
+//	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//	UIGraphicsEndImageContext();
+//
+//	// thanks Cédric Luthi!
+//	NSString *logname = [NSString stringWithCString:getenv("LOGNAME") encoding:NSUTF8StringEncoding];
+//	struct passwd *pw = getpwnam([logname UTF8String]);
+//	NSString *homeDir = pw ? [NSString stringWithCString:pw->pw_dir encoding:NSUTF8StringEncoding] : [@"/Users" stringByAppendingPathComponent:logname];
+//
+//	homeDir = [homeDir stringByAppendingPathComponent:@"Downloads"];
+//
+//	NSString *path = [homeDir stringByAppendingPathComponent:defaultImageName];
+//	NSData *imageData = UIImagePNGRepresentation(image);
+//	[imageData writeToFile:path atomically:NO];
+//
+//	NSLog(@"Image saved at %@", path);
+//#endif
+  
    return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

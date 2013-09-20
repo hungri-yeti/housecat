@@ -12,6 +12,8 @@
 		3B08245C1658937C000221B6 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B08245B1658937C000221B6 /* QuickLook.framework */; };
 		3B0FE9F816F7EE49004E1D0D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B0FE9F716F7EE49004E1D0D /* AudioToolbox.framework */; };
 		3B145B4B17EBFE8E00376303 /* scroll_pip.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3B145B4A17EBFB3200376303 /* scroll_pip.caf */; };
+		3B145B4E17EC868F00376303 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B145B4C17EC868F00376303 /* Default-568h@2x.png */; };
+		3B145B4F17EC868F00376303 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B145B4D17EC868F00376303 /* Default@2x.png */; };
 		3B1BFD0E16480D3B00CEE99A /* MIRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BFD0D16480D3B00CEE99A /* MIRCell.m */; };
 		3B213F4D16648A6900BF2114 /* 0100.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F4C16648A6900BF2114 /* 0100.png */; };
 		3B213F5016648DEF00BF2114 /* 0101.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B213F4E16648DEF00BF2114 /* 0101.png */; };
@@ -34,7 +36,6 @@
 		3B702FFA162D192100EE6C36 /* Rooms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B702FF9162D192100EE6C36 /* Rooms.m */; };
 		3B83C6171651D7CC006C7D50 /* MIRLossReportInfoRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */; };
 		3B83C61A16536E1F006C7D50 /* MIRGeneratePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */; };
-		3B875E8017E0228F00A35500 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B875E7F17E0228F00A35500 /* Default-568h@2x.png */; };
 		3B8C000E16640F540074EB4B /* help.html in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C000D16640F540074EB4B /* help.html */; };
 		3B8C001016640FB40074EB4B /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C000F16640FB40074EB4B /* info.html */; };
 		3B8C0018166413EF0074EB4B /* 0017.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C0016166413EF0074EB4B /* 0017.png */; };
@@ -88,6 +89,8 @@
 		3B08245B1658937C000221B6 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		3B0FE9F716F7EE49004E1D0D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3B145B4A17EBFB3200376303 /* scroll_pip.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = scroll_pip.caf; sourceTree = "<group>"; };
+		3B145B4C17EC868F00376303 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3B145B4D17EC868F00376303 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3B1BFD0C16480D3B00CEE99A /* MIRCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRCell.h; sourceTree = "<group>"; };
 		3B1BFD0D16480D3B00CEE99A /* MIRCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRCell.m; sourceTree = "<group>"; };
 		3B213F4C16648A6900BF2114 /* 0100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0100.png; sourceTree = "<group>"; };
@@ -116,7 +119,6 @@
 		3B83C6161651D7CC006C7D50 /* MIRLossReportInfoRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRLossReportInfoRequestController.m; sourceTree = "<group>"; };
 		3B83C61816536E1E006C7D50 /* MIRGeneratePDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRGeneratePDF.h; sourceTree = "<group>"; };
 		3B83C61916536E1F006C7D50 /* MIRGeneratePDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRGeneratePDF.m; sourceTree = "<group>"; };
-		3B875E7F17E0228F00A35500 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3B8C000D16640F540074EB4B /* help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help.html; sourceTree = "<group>"; };
 		3B8C000F16640FB40074EB4B /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 		3B8C0016166413EF0074EB4B /* 0017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0017.png; sourceTree = "<group>"; };
@@ -308,7 +310,8 @@
 		3BAEAF8C16AF4AE3001917BB /* launch images */ = {
 			isa = PBXGroup;
 			children = (
-				3B875E7F17E0228F00A35500 /* Default-568h@2x.png */,
+				3B145B4C17EC868F00376303 /* Default-568h@2x.png */,
+				3B145B4D17EC868F00376303 /* Default@2x.png */,
 			);
 			name = "launch images";
 			path = ..;
@@ -490,8 +493,8 @@
 				3BAF8BA9161E8D5900B23848 /* MainStoryboard_iPad.storyboard in Resources */,
 				3B8C000E16640F540074EB4B /* help.html in Resources */,
 				3B8C001016640FB40074EB4B /* info.html in Resources */,
+				3B145B4E17EC868F00376303 /* Default-568h@2x.png in Resources */,
 				3B8C0018166413EF0074EB4B /* 0017.png in Resources */,
-				3B875E8017E0228F00A35500 /* Default-568h@2x.png in Resources */,
 				3B8C0019166413EF0074EB4B /* 0017@2x.png in Resources */,
 				3B213F4D16648A6900BF2114 /* 0100.png in Resources */,
 				3B213F5016648DEF00BF2114 /* 0101.png in Resources */,
@@ -511,6 +514,7 @@
 				3BF89CDC1682B1AA008D7BD3 /* 0402.png in Resources */,
 				3BF89CDE1682B32F008D7BD3 /* 0403.png in Resources */,
 				3BE3A06E17D42E230006A470 /* License.txt in Resources */,
+				3B145B4F17EC868F00376303 /* Default@2x.png in Resources */,
 				3BF89CE01682BE39008D7BD3 /* 0600.png in Resources */,
 				3BCC8E67168D789300EC902C /* Localizable.strings in Resources */,
 			);
