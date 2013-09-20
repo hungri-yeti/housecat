@@ -60,15 +60,10 @@ function _change_language
 
 		# Create the language array with just the given language
 		# Special case for US locale != language:
-		if [[ $1 == "en" ]]; then
-			locale="en_US"
-		else
-			locale = $1
-		fi
 		_plistbuddy "$file" \
 		-c "Add :AppleLanguages array" \
 		-c "Add :AppleLanguages:0 string '$1'" \
-		-c "Add :AppleLocale string '$locale'"
+		-c "Add :AppleLocale string '$1'"
 	done
 }
 

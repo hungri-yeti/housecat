@@ -27,9 +27,9 @@ set -e
 destination="$1"
 
 # The locale identifiers for the languages you want to shoot
-#languages="en ru"
+#languages="en_US ru"
 # english for now, Russian after localization is complete
-languages="en"
+languages="en_US"
 
 function main {
   _check_destination

@@ -16,8 +16,11 @@
 
 @interface MIRItemsViewController ()
 {
-	SystemSoundID scrollSound;
-	BOOL scrolling;
+   // disabled this for now. I'd like to revisit it later but it's not
+   //    quite working the way I'd like. Since this isn't a critical
+   //    requirement I'll just comment it out for shipping v1.
+	//SystemSoundID scrollSound;
+	//BOOL scrolling;
 }
 
 
@@ -43,10 +46,10 @@
 	[self setTitle:[[self.parent valueForKey:@"name"] description]];
 	
 
-	NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"scroll_pip"
-																	withExtension:@"caf"];
-	AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &scrollSound);
-	scrolling = FALSE;
+//	NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"scroll_pip"
+//																	withExtension:@"caf"];
+//	AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &scrollSound);
+//	scrolling = FALSE;
 	
    // Uncomment the following line to preserve selection between presentations.
    // self.clearsSelectionOnViewWillAppear = NO;
@@ -66,7 +69,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	scrolling = TRUE;
+//	scrolling = TRUE;
 }
 
 
@@ -87,7 +90,7 @@
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	scrolling = FALSE;
+//	scrolling = FALSE;
 	
    MIRItemsDetailViewController *vc = [segue destinationViewController];
    if ([segue.identifier isEqualToString:@"itemEdit"])
@@ -155,10 +158,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if( scrolling )
-	{
-		AudioServicesPlaySystemSound(scrollSound);		
-	}
+//	if( scrolling )
+//	{
+//		AudioServicesPlaySystemSound(scrollSound);		
+//	}
 	
    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemsCell" forIndexPath:indexPath];
    [self configureCell:cell atIndexPath:indexPath];
