@@ -231,7 +231,10 @@
                                 <rect key="frame" x="20" y="196" width="280" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="PolicyNumber"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="userDoneEnteringText:" destination="v7r-4t-m8w" eventType="editingDidEndOnExit" id="92c-oU-L4v"/>
+                                </connections>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKi-FJ-vKW">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

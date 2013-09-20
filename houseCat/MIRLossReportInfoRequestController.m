@@ -46,6 +46,11 @@
 }
 
 
+-(IBAction)userDoneEnteringText:(id)sender
+{
+   [sender resignFirstResponder];
+}
+
 
 #pragma mark - init
 

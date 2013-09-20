@@ -118,6 +118,8 @@
 	Images* image;
 	while (image = [e nextObject])
 	{
+      //NSLog(@"drawImages: x: %f, y: %d, width: %f, height: %f\n", kBorderInset + kMarginInset, 150, (pageSize.width/2)-(3*kBorderInset), (pageSize.height/2)-(2*kBorderInset) );
+
 		if( 0 == [image.sortOrder intValue])
 		{
 			// left img:
@@ -126,6 +128,7 @@
 												 (pageSize.width/2)-(3*kBorderInset), 
 												 (pageSize.height/2)-(2*kBorderInset))
 			 ];
+         //NSLog(@"img1.width: %f, .height: %f\n", img1.size.width, img1.size.height );
 		}
 		if( 1 == [image.sortOrder intValue])
 		{
@@ -136,6 +139,7 @@
 												 (pageSize.width/2)-(3*kBorderInset), 
 												 (pageSize.height/2)-(2*kBorderInset) )
 			 ];
+         //NSLog(@"img2.width: %f, .height: %f\n", img2.size.width, img2.size.height );
 		}
 	}
 }

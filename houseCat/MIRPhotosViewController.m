@@ -169,6 +169,7 @@ NSString *kCellID = @"uicollection_cell";
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
 {
+   //NSLog(@"imageWithImage: newSize: width: %f, height: %f\n", newSize.width, newSize.height);
    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();    
