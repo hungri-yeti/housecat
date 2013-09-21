@@ -186,7 +186,9 @@
 // from cocanetics:
 //#ifdef SCREENSHOT
 //	NSString *defaultImageName = @"Default.png";
-//	CGSize imageSize = [[UIScreen mainScreen] applicationFrame].size;
+//	//CGSize imageSize = [[UIScreen mainScreen] applicationFrame].size; // this doesn't include the status bar, which apparently xcode isists on.
+//   CGSize imageSize = self.window.bounds.size;
+//   NSLog(@"imageSize.width: %f, .height: %f\n", imageSize.width, imageSize.height);
 //	CGFloat imageScale = [[UIScreen mainScreen] scale];
 //
 //	if (imageScale>1)
