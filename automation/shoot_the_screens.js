@@ -200,7 +200,7 @@ textField = window.elements()[3];
 textField.tap();
 target.delay(4.0);
 captureLocalizedScreenshot("claim03b");	// is this screen necessary?
-if( language == 'en' )
+if( language == 'en_US' )
 {
 	app.keyboard().typeString("123ABC456DEF");
 }
@@ -211,4 +211,16 @@ var saveButton = navBar.rightButton();
 saveButton.tap();
 target.delay(1.0);
 captureLocalizedScreenshot("claim05");
+
+// tap cancel button:
+target.frontMostApp().actionSheet().cancelButton().tap();
+// deselect eveything we selected (otherwise the subsequent run will unselect and not work correctly)
+target.delay(1.0);
+itemsTable = window.tableViews()[0];
+itemCell0 = itemsTable.cells()[0];
+itemCell1 = itemsTable.cells()[1];
+itemCell0.tap();
+itemCell1.tap()
+
+
 
