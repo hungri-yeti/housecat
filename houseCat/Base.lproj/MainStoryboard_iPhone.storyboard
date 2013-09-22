@@ -343,7 +343,7 @@
                                         <rect key="frame" x="20" y="156" width="280" height="30"/>
                                         <accessibility key="accessibilityConfiguration" label="Item Description"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="OtP-iz-ePn" id="W4h-uP-NVw"/>
                                         </connections>
