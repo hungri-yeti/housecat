@@ -318,31 +318,30 @@ NSDateFormatterStyle kDateFormatStyle = NSDateFormatterShortStyle;
 		// If the user just typed the number in, e.g. 12.34 or 42, prepend the currency symbol:
 		NSString *currencySymbol = [currentUserLocale objectForKey:NSLocaleCurrencySymbol];
 		
-		BOOL hasCurrencyPrefix = [textField.text hasPrefix:currencySymbol];
-		if( !hasCurrencyPrefix )
+		NSRange strRange = [textField.text rangeOfString:currencySymbol];
+		if (strRange.location == NSNotFound)
 		{
 			NSString *numberStr = [NSNumberFormatter localizedStringFromNumber:[NSDecimalNumber numberWithFloat:[textField.text floatValue]]
 																					 numberStyle:NSNumberFormatterCurrencyStyle];
-			self.itemCost.text = numberStr;
 			textField.text = numberStr;
 		}
 		else
 		{
-			// begins with a currency symbol, but we don't know if it's in the form $xx.nn or just $xx.
+			// contains a currency symbol, but we don't know if it's in the form $xx.nn or just $xx.
 			// If it's $xx, we want to change it to $xx.00:
-			NSRange rangeToSearch = [textField.text rangeOfString:textField.text];
 			NSString *decimalSeparator = [currentUserLocale objectForKey:NSLocaleDecimalSeparator];			
 			NSRange resultsRange = [textField.text rangeOfString:decimalSeparator
-																		options:NSCaseInsensitiveSearch
-																		  range:rangeToSearch];
+																		options:NSCaseInsensitiveSearch];
 			if(resultsRange.location == NSNotFound)
 			{
 				// number is in form $XX, change it to $XX.00:
 				NSNumberFormatter *costFmt = [[NSNumberFormatter alloc] init];
 				[costFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
-				NSNumber *costNum=[NSNumber numberWithFloat:[[costFmt numberFromString:textField.text] floatValue]];
 				
-				NSString* costStr = [NSString stringWithFormat:@"%@%@.00", currencySymbol, costNum];
+				NSNumber* floatNum = [costFmt numberFromString:textField.text];
+				NSNumber *costNum=[NSNumber numberWithFloat:[floatNum floatValue]];
+				NSString* costStr = [costFmt stringFromNumber:costNum];
+				
 				textField.text = costStr;
 			}
 		}
